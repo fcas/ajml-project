@@ -70,7 +70,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 	public void apagarFuncionario(String  rg) {
 		
 		String remove_funcionario = "DELETE FROM funcionario WHERE rg = "
-				+ rg + ";";
+				+ rg + 	 ";";
 		try {	
 			conectar();
 			comando.executeUpdate(remove_funcionario);
