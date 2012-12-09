@@ -1,0 +1,17 @@
+Coisas Feitas:
+
+Modelos:
+	-Venda
+	-Mercadoria
+	-Funcionario
+	
+DAOs:
+	-DAOVenda
+	-DAOFuncionario
+	-DAOMercadoria
+	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Coisas a Fazer:
+
+[] User Interface;

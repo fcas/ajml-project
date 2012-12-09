@@ -6,20 +6,26 @@ import models.funcionario.Funcionario;
 import models.funcionario.IFuncionario;
 import models.mercadoria.IMercadoria;
 import models.mercadoria.Mercadoria;
-import dao.DAOFuncionario;
-import dao.DAOMercadoria;
+import models.venda.IVenda;
+import dao.DAOFactory;
 import dao.IDaoFuncionario;
 import dao.IDaoMercadoria;
+import dao.IDaoVendas;
 
 public class Facade {
  
 	private IDaoFuncionario iDaoFuncionario;
 	private IDaoMercadoria iDaoMercadoria;
+	private IDaoVendas iDaoVendas;
+	private DAOFactory DaoFactory;
 	
-	public Facade() {
-		this.iDaoMercadoria = new DAOMercadoria();
-		this.iDaoFuncionario = new DAOFuncionario();
+	public Facade(int whichFactory) {
+		this.DaoFactory = DAOFactory.createDAOFactory(whichFactory);
+		this.iDaoMercadoria = this.DaoFactory.createDAOMercadoria();
+		this.iDaoFuncionario = this.DaoFactory.createDAOFuncionario();
+		this.iDaoVendas = this.DaoFactory.createDAOVendas();
 	}
+	
 	
 	//Metodos CRUD Funcionarios
 	public void criarFuncionario(Funcionario funcionario){
@@ -46,6 +52,7 @@ public class Facade {
 		return iDaoFuncionario.buscarFuncionario(rg);
 	}
 	
+	
 	//Metodos CRUD Mercadorias
 	public void criarMercadoria(Mercadoria mercadoria){
 		iDaoMercadoria.criarMercadoria(mercadoria);
@@ -63,12 +70,40 @@ public class Facade {
 		iDaoMercadoria.apagarMercadoria(mercadoria.getID());
 	}
 	
-	public List<IMercadoria> listarMercadoria(){
+	public List<IMercadoria> listarMercadorias(){
 		return iDaoMercadoria.listarMercadorias();
 	}
 	
 	public IMercadoria buscarMercadoria(String ID){
 		return iDaoMercadoria.buscarMercadoria_ID(ID);
 	}
+	
+	
+	//Metodos CRUD Vendas
+	public void criarVenda (IVenda venda) {
+		iDaoVendas.criarVenda(venda);
+	}
+	
+	public void editarVenda(IVenda venda) {
+		iDaoVendas.editarVenda(venda);
+	}
+	
+	public void apagarVenda(int  id) {
+		iDaoVendas.apagarVenda(id);
+	}
+	
+	public void apagarVenda(IVenda venda) {
+		iDaoVendas.apagarVenda(venda.getID());
+	}
+	
+	public List<IVenda> listarVendas() {
+		return iDaoVendas.listarVendas();
+	}
+	
+	public IVenda buscarVenda(int ID) {
+		return iDaoVendas.buscarVenda(ID);
+	}
+
+
 }
  

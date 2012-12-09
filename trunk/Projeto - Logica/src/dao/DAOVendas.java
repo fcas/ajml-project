@@ -7,12 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.funcionario.Funcionario;
-import models.funcionario.IFuncionario;
 import models.venda.IVenda;
 import models.venda.Venda;
 
-public class DAOVendas implements IDAOVendas {
+public class DAOVendas implements IDaoVendas {
 	
 	private static Connection con;
 	private static Statement comando;
@@ -32,10 +30,11 @@ public class DAOVendas implements IDAOVendas {
 
 	public void criarVenda (IVenda venda) {
 	
-			String insert_venda = "INSERT INTO vendas VALUES ("
-				+ venda.getSubtotal() + "," 
-				+ "'" + venda.getVendedor().getRg() + "'," 
-				+ venda.getVendedor().getQuantidadeVendas() + ");";
+			String insert_venda = "INSERT INTO vendas (subtotal, vendedorRg, dataVenda, qtdVendas) VALUES ("
+				+ "" + venda.getSubtotal() + "," 
+				+ "'" + venda.getVendedorRG() + "'," 
+				+ "'" + venda.getDataVenda() + "'," 
+				+ "" + venda.getQtdVendas() + ");";
 		try {
 					
 			conectar();
@@ -50,11 +49,12 @@ public class DAOVendas implements IDAOVendas {
 	
 	public void editarVenda(IVenda venda) {
 		
-		String insert_venda = "UPDATE funcionario SET "
+		String insert_venda = "UPDATE vendas SET "
 				+ "subtotal=" + venda.getSubtotal()
-				+ "',vendedor='" + venda.getVendedor()
-				+ ",qtdVendas=" + venda.getVendedor().getQuantidadeVendas()
-				+ " WHERE rg=" + venda.getVendedor().getRg();
+				+ ",vendedorRg='" + venda.getVendedorRG()
+				+ "',dataVenda='" + venda.getDataVenda()
+				+ "',qtdVendas=" + venda.getQtdVendas()
+				+ " WHERE ID=" + venda.getID() + ";";
 		try {	
 			conectar();
 			comando.executeUpdate(insert_venda);
@@ -63,7 +63,7 @@ public class DAOVendas implements IDAOVendas {
 		}
 	}
 	
-	public void apagarFuncionario(int  id) {
+	public void apagarVenda(int  id) {
 		
 		String remove_venda = "DELETE FROM funcionario WHERE id = "
 				+ id + 	 ";";
@@ -83,16 +83,15 @@ public class DAOVendas implements IDAOVendas {
 
 		try {
 			result = comando
-					.executeQuery("SELECT * FROM funcionario ORDER BY cargo");
+					.executeQuery("SELECT * FROM vendas");
 			
 			while (result.next()) {
 				IVenda le = new Venda();
 				le.setID((result.getInt("id")));
 				le.setSubtotal(result.getDouble("subtotal"));
-				le.setVendedor(result.getString("vendedor"));
-				le.set(result.getString("dataNascimento"));
-				le.setCargo(result.getString("cargo"));
-				le.setSalario(result.getDouble("salario"));
+				le.setVendedorRG(result.getString("vendedorRg"));
+				le.setDataVenda(result.getString("dataVenda"));
+				le.setQtdVendas(result.getInt("qtdVendas"));
 				list_vendas.add(le);
 			}
 
@@ -104,22 +103,21 @@ public class DAOVendas implements IDAOVendas {
 
 	}
 	
-	public IFuncionario buscarFuncionario(String rg) {
+	public IVenda buscarVenda(int ID) {
 		ResultSet result = null;
-		IFuncionario le = new Funcionario();
+		IVenda le = new Venda();
 		
 		try {
 			conectar();
 			result = comando
-					.executeQuery("SELECT * FROM funcionario WHERE rg = "
-							+ rg + ";");
+					.executeQuery("SELECT * FROM vendas WHERE id = "
+							+ ID + ";");
 			if (result.next()) {
-				le.setNome(result.getString("nome"));
-				le.setRg(result.getString("rg"));
-				le.setCpf(result.getString("cpf"));
-				le.setDataNascimento(result.getString("dataNascimento"));
-				le.setCargo(result.getString("cargo"));
-				le.setSalario(result.getDouble("salario"));
+				le.setID((result.getInt("id")));
+				le.setSubtotal(result.getDouble("subtotal"));
+				le.setVendedorRG(result.getString("vendedorRg"));
+				le.setDataVenda(result.getString("dataVenda"));
+				le.setQtdVendas(result.getInt("qtdVendas"));
 			} else {
 				return null;
 			}

@@ -32,7 +32,7 @@ public class DAOMercadoria implements IDaoMercadoria{
 		//TESTAR NO BANCO
 		public void criarMercadoria (IMercadoria mercadoria) {
 		
-				String insert_mercadoria = "INSERT INTO mercadoria VALUES (" 
+				String insert_mercadoria = "INSERT INTO mercadoria (nome, preco, cor, tamanho, produto) VALUES (" 
 					+ "'" + mercadoria.getNome() + "'," 
 					+ "" + mercadoria.getPreco() + ","
 					+ "'" + mercadoria.getCor() + "',"
