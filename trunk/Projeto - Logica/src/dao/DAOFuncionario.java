@@ -24,9 +24,9 @@ public class DAOFuncionario implements IDaoFuncionario {
 		}
 	}
 
-	public void criarExame (Funcionario funcionario) {
+	public void criarFuncionario (Funcionario funcionario) {
 	
-			String insert_exame = "INSERT INTO funcionario VALUES ("
+			String insert_funcionario = "INSERT INTO funcionario VALUES ("
 				+ "'" + funcionario.getNome() + "'," 
 				+ "'" + funcionario.getRg() + "'," 
 				+ "'" + funcionario.getCpf() + "',"
@@ -35,7 +35,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 		try {
 					
 			conectar();
-			comando.executeUpdate(insert_exame);
+			comando.executeUpdate(insert_funcionario);
 	
 		} catch (SQLException e) {
 			e.printStackTrace();
