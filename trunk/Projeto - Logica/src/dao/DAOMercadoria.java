@@ -32,8 +32,7 @@ public class DAOMercadoria implements IDaoMercadoria{
 		//TESTAR NO BANCO
 		public void criarMercadoria (IMercadoria mercadoria) {
 		
-				String insert_mercadoria = "INSERT INTO mercadoria VALUES ("
-					+ "'" + mercadoria.getID() + "'," 
+				String insert_mercadoria = "INSERT INTO mercadoria VALUES (" 
 					+ "'" + mercadoria.getNome() + "'," 
 					+ "" + mercadoria.getPreco() + ","
 					+ "'" + mercadoria.getCor() + "',"
@@ -54,7 +53,6 @@ public class DAOMercadoria implements IDaoMercadoria{
 		public void editarMercadoria(IMercadoria mercadoria) {
 			
 			String update_mercadoria = "UPDATE mercadoria SET "
-					+ "id='" + mercadoria.getID()
 					+ "',nome='" + mercadoria.getNome()
 					+ "',preco=" + mercadoria.getPreco()
 					+ ",cor='" + mercadoria.getCor()
@@ -94,7 +92,6 @@ public class DAOMercadoria implements IDaoMercadoria{
 								+ ID+ "';");
 				if (result.next()) {
 					le.setPreco(result.getDouble("preco"));
-					le.setID(result.getString("ID"));
 					le.setNome(result.getString("nome"));
 					le.setCor(result.getString("cor"));
 					le.setTamanho(result.getString("tamanho"));
@@ -124,7 +121,6 @@ public class DAOMercadoria implements IDaoMercadoria{
 				while (result.next()) {
 					Mercadoria le = new Mercadoria();
 					le.setPreco(result.getDouble("preco"));
-					le.setID(result.getString("ID"));
 					le.setNome(result.getString("nome"));
 					le.setCor(result.getString("cor"));
 					le.setTamanho(result.getString("tamanho"));
