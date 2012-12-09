@@ -2,31 +2,47 @@ package models.mercadoria;
 
 public abstract class AbstractMercadoria implements InterfaceMercadoria {
  
-	private double preco;
-	private String ID;
-	private String nome;
+	private double preco; //@ in ipreco;
+	/*@ protected represents
+	 @ ipreco = preco; @*/
+
+	private String ID; //@ in iID;
+	/*@ protected represents
+	 @ iID = ID; @*/
+
+	private String nome; //@ in inome;
+	/*@ protected represents
+	 @ inome = nome; @*/
 	
 	
-	public double getPreco() {
+	//@ ensures \result == preco;
+	public /*@ pure @*/ double getPreco() {
 		return preco;
 	}
 
+	//@ ensures \result == ID;
 	public String getID() {
 		return ID;
 	}
 	
+	//@ ensures \result == nome;
 	public String getNome() {
 		return nome;
 	}
 	
-	public void setID(String ID) {
-		this.ID = ID;
+	//@ ensures ID == novoID;
+	public void setID(String novoID) {
+		this.ID = novoID;
 	}
-	public void setPreco(double preco) {
-		this.preco = preco;
+	
+	//@ ensures preco == novoPreco;
+	public void setPreco(double novoPreco) {
+		this.preco = novoPreco;	
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	
+	//@ ensures nome == novoNome
+	public void setNome(String novoNome) {
+		this.nome = novoNome;
 	}
 	
 	
