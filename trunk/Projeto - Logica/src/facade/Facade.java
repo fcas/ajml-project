@@ -1,10 +1,10 @@
 package facade;
 
-import dao.CRUD;
+import dao.IDaoFuncionario;
 
 public class Facade {
  
-	private CRUD cRUD;
+	private IDaoFuncionario iDaoFuncionario;
 	 
 }
  
