@@ -1,5 +1,7 @@
 package ui;
 
+import java.util.ArrayList;
+
 import dao.DAOFactory;
 import dao.DAOFuncionario;
 import models.funcionario.Funcionario;
@@ -20,9 +22,11 @@ public class Main {
 		 DAOFactory mysqlFactory = DAOFactory.createDAOFactory(0);
 		 DAOFuncionario daoF = mysqlFactory.createDAOFuncionario();
 		
-//		 daoF.criarFuncionario(funcionario);
+		 daoF.criarFuncionario(funcionario);
+		 funcionario.setNome("Rodrigo"); 
 		 
-		 daoF.apagarFuncionario("null");
+
+		 System.out.println(daoF.listarFuncionario());
 		
 	}
  
