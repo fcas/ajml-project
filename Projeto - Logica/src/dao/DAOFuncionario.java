@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import models.funcionario.Funcionario;
+import models.funcionario.InterfaceFuncionario;
 
 public class DAOFuncionario implements IDaoFuncionario {
 	
@@ -24,7 +24,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 		}
 	}
 
-	public void criarFuncionario (Funcionario funcionario) {
+	public void criarFuncionario (InterfaceFuncionario funcionario) {
 	
 			String insert_funcionario = "INSERT INTO funcionario VALUES ("
 				+ "'" + funcionario.getNome() + "'," 
