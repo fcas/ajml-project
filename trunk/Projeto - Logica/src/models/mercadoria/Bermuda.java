@@ -1,6 +1,6 @@
-package mercadoria;
+package models.mercadoria;
 
-public class Calca extends AbstractMercadoria {
+public class Bermuda extends AbstractMercadoria {
 
 	private String cor;
 	private int tamanho;
@@ -19,8 +19,6 @@ public class Calca extends AbstractMercadoria {
 	public void setNome(String nome) {
 		super.setNome(nome);
 	}
-	
-	
  
 }
  

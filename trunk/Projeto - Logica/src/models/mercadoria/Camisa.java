@@ -1,6 +1,6 @@
-package mercadoria;
+package models.mercadoria;
 
-public class Blusa extends AbstractMercadoria {
+public class Camisa extends AbstractMercadoria {
 
 	private String cor;
 	private String tamanho;

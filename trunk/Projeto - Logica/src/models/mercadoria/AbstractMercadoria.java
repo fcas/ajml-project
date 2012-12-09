@@ -1,4 +1,4 @@
-package mercadoria;
+package models.mercadoria;
 
 public abstract class AbstractMercadoria implements InterfaceMercadoria {
  

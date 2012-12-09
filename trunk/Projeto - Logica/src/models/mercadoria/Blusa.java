@@ -1,10 +1,10 @@
-package mercadoria;
+package models.mercadoria;
 
-public class Saia extends AbstractMercadoria {
-	
+public class Blusa extends AbstractMercadoria {
+
 	private String cor;
-	private int tamanho;
-
+	private String tamanho;
+	
 	@Override
 	public void setID(String ID) {
 		super.setID(ID);
