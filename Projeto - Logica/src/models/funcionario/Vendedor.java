@@ -3,6 +3,20 @@ package models.funcionario;
 
 public class Vendedor extends Funcionario {
 	 
+		private int quantidadeVendas = 0; 
+		
+		public int getQuantidadeVendas() {
+			return quantidadeVendas;
+		}
+		
+		public void setQuantidadeVendas(int quantidadeVendas) {
+			this.quantidadeVendas = quantidadeVendas;
+		}
+		
+		public void incrementarQtdVendas(){
+			quantidadeVendas++;
+		}
+	
 		@Override
 		public void setNome(String nome) {
 			super.setNome(nome);
@@ -30,15 +44,10 @@ public class Vendedor extends Funcionario {
 
 		@Override
 		public void setSalario(double salario) {
-			// TODO Auto-generated method stub
-			
+			super.setSalario(salario);
 		}
-
-		@Override
-		public double getSalario() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
+		
+		
 	 
 }
  

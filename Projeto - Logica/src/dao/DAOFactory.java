@@ -6,6 +6,7 @@ public abstract class DAOFactory {
 	
 	public abstract DAOFuncionario createDAOFuncionario (); 
 	public abstract DAOMercadoria createDAOMercadoria ();
+	public abstract DAOVendas createDAOVendas();
 	
 	public static DAOFactory createDAOFactory(int whichFactory) {
 	
