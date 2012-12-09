@@ -1,6 +1,5 @@
 package models.funcionario;
 
-import dao.Funcionario;
 
 public class Gerente extends Funcionario {
 	 

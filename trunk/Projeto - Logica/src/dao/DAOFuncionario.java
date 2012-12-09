@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.funcionario.Funcionario;
 import models.funcionario.InterfaceFuncionario;
 
 public class DAOFuncionario implements IDaoFuncionario {
@@ -44,6 +45,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println(insert_funcionario);
 		
 	}
 	
