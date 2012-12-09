@@ -11,7 +11,7 @@ public class ConnectMySql {
 
 	public static Connection conexao(String url, String nome, String senha,
 			int banco) throws ClassNotFoundException, SQLException {
-		
+
 		switch (banco) {
 			case MYSQL:
 				Class.forName(MySQLDriver);

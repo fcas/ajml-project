@@ -6,12 +6,14 @@ import java.util.List;
 import dao.DAOFactory;
 import dao.DAOFuncionario;
 import models.funcionario.Funcionario;
-import models.funcionario.InterfaceFuncionario;
+import models.funcionario.IFuncionario;
 
 public class Main {
 	
 	public static void main(String[] args) {
-		InterfaceFuncionario funcionario = new Funcionario();
+		IFuncionario funcionario = new Funcionario();
+		
+//		Face
 		
 		funcionario.setNome("Felipe");
 		funcionario.setRg("495024399");
@@ -26,7 +28,7 @@ public class Main {
 		 daoF.criarFuncionario(funcionario);
 		 funcionario.setNome("Rodrigo"); 
 		 
-		 List<InterfaceFuncionario> l = new ArrayList<InterfaceFuncionario>();
+		 List<IFuncionario> l = new ArrayList<IFuncionario>();
 		 
 
 		 l = daoF.listarFuncionario();
