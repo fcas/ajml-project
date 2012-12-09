@@ -1,6 +1,6 @@
 package models.funcionario;
 
-public abstract class AbstractFuncionario implements InterfaceFuncionario {
+public abstract class AbstractFuncionario implements IFuncionario {
  
 	private String nome;
 	private String rg; 

@@ -1,6 +1,6 @@
 package models.funcionario;
 
-public interface InterfaceFuncionario {
+public interface IFuncionario {
  
 	public String getNome();
 	

@@ -1,6 +1,6 @@
 package models.mercadoria;
 
-public interface InterfaceMercadoria {
+public interface IMercadoria {
 	// @ public model instance double ipreco;
 	// @ public model instance String iID;
 	// @ public model instance String inome;

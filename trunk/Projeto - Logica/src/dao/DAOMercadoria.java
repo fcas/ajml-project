@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.mercadoria.Mercadoria;
-import models.mercadoria.InterfaceMercadoria;
+import models.mercadoria.IMercadoria;
 
 public class DAOMercadoria implements IDaoMercadoria{
 			
@@ -30,7 +30,7 @@ public class DAOMercadoria implements IDaoMercadoria{
 		}
 
 		//TESTAR NO BANCO
-		public void criarMercadoria (InterfaceMercadoria mercadoria) {
+		public void criarMercadoria (IMercadoria mercadoria) {
 		
 				String insert_mercadoria = "INSERT INTO mercadoria VALUES ("
 					+ "'" + mercadoria.getID() + "'," 
@@ -51,7 +51,7 @@ public class DAOMercadoria implements IDaoMercadoria{
 		}
 		
 		//TESTAR NO BANCO
-		public void editarMercadoria(InterfaceMercadoria mercadoria) {
+		public void editarMercadoria(IMercadoria mercadoria) {
 			
 			String update_mercadoria = "UPDATE mercadoria SET "
 					+ "id='" + mercadoria.getID()
@@ -83,7 +83,7 @@ public class DAOMercadoria implements IDaoMercadoria{
 		}
 		
 		//TESTAR NO BANCO
-		public InterfaceMercadoria buscarMercadoria_ID(String ID) {
+		public IMercadoria buscarMercadoria_ID(String ID) {
 			ResultSet result = null;
 			Mercadoria le = new Mercadoria();
 			
@@ -111,10 +111,10 @@ public class DAOMercadoria implements IDaoMercadoria{
 		}
 		
 		//TESTAR NO BANCO
-		public List<InterfaceMercadoria> listarMercadorias(){
+		public List<IMercadoria> listarMercadorias(){
 
 			conectar();
-			List<InterfaceMercadoria> list_mercadorias = new ArrayList<InterfaceMercadoria>();
+			List<IMercadoria> list_mercadorias = new ArrayList<IMercadoria>();
 			ResultSet result;
 
 			try {

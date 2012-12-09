@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.funcionario.Funcionario;
-import models.funcionario.InterfaceFuncionario;
+import models.funcionario.IFuncionario;
 
 public class DAOFuncionario implements IDaoFuncionario {
 	
@@ -28,7 +28,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 		}
 	}
 
-	public void criarFuncionario (InterfaceFuncionario funcionario) {
+	public void criarFuncionario (IFuncionario funcionario) {
 	
 			String insert_funcionario = "INSERT INTO funcionario VALUES ("
 				+ "'" + funcionario.getNome() + "'," 
@@ -49,7 +49,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 		
 	}
 	
-	public void editarFuncionario(InterfaceFuncionario funcionario) {
+	public void editarFuncionario(IFuncionario funcionario) {
 		
 		String insert_funcionario = "UPDATE funcionario SET "
 				+ "nome='" + funcionario.getNome()
@@ -79,10 +79,10 @@ public class DAOFuncionario implements IDaoFuncionario {
 		}
 	}
 	
-	public List<InterfaceFuncionario> listarFuncionario() {
+	public List<IFuncionario> listarFuncionario() {
 
 		conectar();
-		List<InterfaceFuncionario> list_funcionario = new ArrayList<InterfaceFuncionario>();
+		List<IFuncionario> list_funcionario = new ArrayList<IFuncionario>();
 		ResultSet result;
 
 		try {
@@ -90,7 +90,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 					.executeQuery("SELECT * FROM funcionario ORDER BY cargo");
 			
 			while (result.next()) {
-				InterfaceFuncionario le = new Funcionario();
+				IFuncionario le = new Funcionario();
 				le.setNome(result.getString("nome"));
 				le.setRg(result.getString("rg"));
 				le.setCpf(result.getString("cpf"));
@@ -108,9 +108,9 @@ public class DAOFuncionario implements IDaoFuncionario {
 
 	}
 	
-	public InterfaceFuncionario buscarFuncionario(String rg) {
+	public IFuncionario buscarFuncionario(String rg) {
 		ResultSet result = null;
-		InterfaceFuncionario le = new Funcionario();
+		IFuncionario le = new Funcionario();
 		
 		try {
 			conectar();

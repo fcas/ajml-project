@@ -1,6 +1,6 @@
 package models.mercadoria;
 
-public class Mercadoria implements InterfaceMercadoria {
+public class Mercadoria implements IMercadoria {
  
 	private double preco; //@ in ipreco;
 	/*@ protected represents
