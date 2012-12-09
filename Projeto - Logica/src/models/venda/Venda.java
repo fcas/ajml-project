@@ -4,8 +4,9 @@ public class Venda implements IVenda {
 
 	private int ID; 
 	private double subtotal;
-	private String vendedor;
+	private String vendedorRG;
 	private String dataVenda;
+	private int QtdVendas;
 
 	public int getID() {
 		return ID;
@@ -23,12 +24,12 @@ public class Venda implements IVenda {
 		this.subtotal = subtotal;
 	}
 
-	public String getVendedor() {
-		return vendedor;
+	public String getVendedorRG() {
+		return vendedorRG;
 	}
 
-	public void setVendedor(String vendedor) {
-		this.vendedor = vendedor;
+	public void setVendedorRG(String vendedorRG) {
+		this.vendedorRG = vendedorRG;
 	}
 
 	public String getDataVenda() {
@@ -37,6 +38,14 @@ public class Venda implements IVenda {
 
 	public void setDataVenda(String dataVenda) {
 		this.dataVenda = dataVenda;
+	}
+	
+	public int getQtdVendas() {
+		return QtdVendas;
+	}
+	
+	public void setQtdVendas(int qtdVendas) {
+		QtdVendas = qtdVendas;
 	}
 
 }
