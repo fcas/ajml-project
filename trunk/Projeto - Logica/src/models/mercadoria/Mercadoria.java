@@ -1,6 +1,6 @@
 package models.mercadoria;
 
-public abstract class AbstractMercadoria implements InterfaceMercadoria {
+public class Mercadoria implements InterfaceMercadoria {
  
 	private double preco; //@ in ipreco;
 	/*@ protected represents
@@ -14,7 +14,22 @@ public abstract class AbstractMercadoria implements InterfaceMercadoria {
 	/*@ protected represents
 	 @ inome = nome; @*/
 	
+	private String cor; //@ in icor;
+	/*@ protected represents
+	 @ icor = nome; @*/
 	
+	
+	private String tamanho; //@ in itamanho;
+	/*@ protected represents
+	 @ itamanho = nome; @*/
+	
+	private String produto;
+	
+	
+	public String getProduto() {
+		return produto;
+	}
+
 	//@ ensures \result == preco;
 	public /*@ pure @*/ double getPreco() {
 		return preco;
@@ -30,6 +45,14 @@ public abstract class AbstractMercadoria implements InterfaceMercadoria {
 		return nome;
 	}
 	
+	public String getCor() {
+		return cor;
+	}
+
+	public String getTamanho() {
+		return tamanho;
+	}
+
 	//@ ensures ID == novoID;
 	public void setID(String novoID) {
 		this.ID = novoID;
@@ -44,7 +67,19 @@ public abstract class AbstractMercadoria implements InterfaceMercadoria {
 	public void setNome(String novoNome) {
 		this.nome = novoNome;
 	}
-	
-	
+
+	//@ ensures cor == novaCor
+	public void setCor(String novaCor) {
+		this.cor = novaCor;
+	}
+
+	//@ ensures tamanho == novoTamanho
+	public void setTamanho(String novoTamanho) {
+		this.tamanho = novoTamanho;
+	}
+
+	public void setProduto(String produto) {
+		this.produto = produto;
+	}
 }
  
