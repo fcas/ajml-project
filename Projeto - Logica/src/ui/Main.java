@@ -2,13 +2,14 @@ package ui;
 
 import dao.DAOFactory;
 import dao.DAOFuncionario;
+import dao.Funcionario;
 import models.funcionario.AbstractFuncionario;
 import models.funcionario.InterfaceFuncionario;
 
 public class Main {
 	
 	public static void main(String[] args) {
-		InterfaceFuncionario funcionario = new AbstractFuncionario();
+		InterfaceFuncionario funcionario = new Funcionario();
 		
 		funcionario.setNome("Felipe");
 		funcionario.setRg("495024399");

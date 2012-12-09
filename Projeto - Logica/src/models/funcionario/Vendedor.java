@@ -1,6 +1,8 @@
 package models.funcionario;
 
-public class Vendedor extends AbstractFuncionario {
+import dao.Funcionario;
+
+public class Vendedor extends Funcionario {
 	 
 		@Override
 		public void setNome(String nome) {
@@ -25,6 +27,18 @@ public class Vendedor extends AbstractFuncionario {
 		@Override
 		public void setCargo(String cargo) {
 			super.setCargo(cargo);
+		}
+
+		@Override
+		public void setSalario(double salario) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public double getSalario() {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 	 
 }

@@ -22,5 +22,9 @@ public interface InterfaceFuncionario {
 
 	public void setCargo(String cargo);
 	
+	public void setSalario(double salario); 
+	
+	public double getSalario();
+	
 }
  
