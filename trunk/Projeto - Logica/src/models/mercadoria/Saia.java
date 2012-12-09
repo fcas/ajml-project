@@ -3,7 +3,7 @@ package models.mercadoria;
 public class Saia extends AbstractMercadoria {
 	
 	private String cor;
-	private int tamanho;
+	private String tamanho;
 
 	@Override
 	public void setID(String ID) {
