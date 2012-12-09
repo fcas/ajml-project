@@ -3,6 +3,7 @@ package funcionario;
 public interface Funcionario {
  
 	public String getNome();
+	
 	public void setNome(String nome);
 
 	public String getRg();

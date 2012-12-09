@@ -47,14 +47,6 @@ public class AbstractFuncionario implements Funcionario {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-
-	private Estoquista estoquista;
-	 
-	private Vendedor vendedor;
-	 
-	private Gerente gerente;
-	 
-	private Caixa caixa;
 	 
 }
  
