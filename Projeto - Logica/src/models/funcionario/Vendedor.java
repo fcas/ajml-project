@@ -1,6 +1,6 @@
-package funcionario;
+package models.funcionario;
 
-public class Gerente extends AbstractFuncionario {
+public class Vendedor extends AbstractFuncionario {
 	 
 		@Override
 		public void setNome(String nome) {

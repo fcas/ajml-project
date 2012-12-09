@@ -1,4 +1,4 @@
-package mercadoria;
+package models.mercadoria;
 
 public interface InterfaceMercadoria {
  

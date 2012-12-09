@@ -1,4 +1,4 @@
-package funcionario;
+package models.funcionario;
 
 public class Caixa extends AbstractFuncionario {
 	

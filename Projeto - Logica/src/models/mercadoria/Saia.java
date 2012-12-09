@@ -1,10 +1,10 @@
-package mercadoria;
+package models.mercadoria;
 
-public class Bermuda extends AbstractMercadoria {
-
+public class Saia extends AbstractMercadoria {
+	
 	private String cor;
 	private int tamanho;
-	
+
 	@Override
 	public void setID(String ID) {
 		super.setID(ID);
