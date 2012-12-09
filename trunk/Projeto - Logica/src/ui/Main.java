@@ -1,30 +1,39 @@
 package ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.DAOFactory;
-import dao.DAOMercadoria;
-import models.mercadoria.InterfaceMercadoria;
+import dao.DAOFuncionario;
+import models.funcionario.Funcionario;
+import models.funcionario.InterfaceFuncionario;
 
 public class Main {
 	
 	public static void main(String[] args) {
-		System.out.println("iniciando.");
-//		InterfaceMercadoria mercadoria = new Mercadoria();
-//		
-//		mercadoria.setPreco(10.5);
-//		mercadoria.setID("CE001");
-//		mercadoria.setNome("Camisa Estampa");
-//		mercadoria.setCor("Verde");
-//		mercadoria.setTamanho("GG");
-//		mercadoria.setProduto("Camisa");
+		InterfaceFuncionario funcionario = new Funcionario();
+		
+		funcionario.setNome("Felipe");
+		funcionario.setRg("495024399");
+		funcionario.setCpf("38584881867");
+		funcionario.setDataNascimento("04/02/1991");
+		funcionario.setCargo("Caixa");
+		funcionario.setSalario(25);
 		
 		 DAOFactory mysqlFactory = DAOFactory.createDAOFactory(0);
-		 DAOMercadoria daoF = mysqlFactory.createDAOMercadoria();
+		 DAOFuncionario daoF = mysqlFactory.createDAOFuncionario();
 		
-		 daoF.apagarMercadoria("SE001");
+		 daoF.criarFuncionario(funcionario);
+		 funcionario.setNome("Rodrigo"); 
 		 
-		 System.out.println("ok");
+		 List<InterfaceFuncionario> l = new ArrayList<InterfaceFuncionario>();
+		 
+
+		 l = daoF.listarFuncionario();
+		 
+		 for (int i = 0; i < l.size(); i++) {
+			System.out.println(l.get(i).getNome());
+		}
 		
 	}
  
