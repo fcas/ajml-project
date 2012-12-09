@@ -1,68 +1,31 @@
 package funcionario;
 
-public class Vendedor implements Funcionario {
- 
-	private AbstractFuncionario abstractFuncionario;
+public class Vendedor extends AbstractFuncionario {
+	 
+		@Override
+		public void setNome(String nome) {
+			super.setNome(nome);
+		}
 
-	@Override
-	public String getNome() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		@Override
+		public void setRg(String rg) {
+			super.setRg(rg);
+		}
 
-	@Override
-	public void setNome(String nome) {
-		// TODO Auto-generated method stub
-		
-	}
+		@Override
+		public void setCpf(String cpf) {
+			super.setCpf(cpf);
+		}
 
-	@Override
-	public String getRg() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		@Override
+		public void setDataNascimento(String dataNascimento) {
+			super.setDataNascimento(dataNascimento);
+		}
 
-	@Override
-	public void setRg(String rg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getCpf() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setCpf(String cpf) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getDataNascimento() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setDataNascimento(String dataNascimento) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getCargo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setCargo(String cargo) {
-		// TODO Auto-generated method stub
-		
-	}
+		@Override
+		public void setCargo(String cargo) {
+			super.setCargo(cargo);
+		}
 	 
 }
  
