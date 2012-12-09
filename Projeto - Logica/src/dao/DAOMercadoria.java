@@ -35,7 +35,10 @@ public class DAOMercadoria implements IDaoMercadoria{
 				String insert_mercadoria = "INSERT INTO mercadoria VALUES ("
 					+ "'" + mercadoria.getID() + "'," 
 					+ "'" + mercadoria.getNome() + "'," 
-					+ "" + mercadoria.getPreco() + ");";
+					+ "" + mercadoria.getPreco() + ","
+					+ "'" + mercadoria.getCor() + "',"
+					+ "'" + mercadoria.getTamanho() + "',"
+					+ "'" + mercadoria.getProduto() + "');";
 			try {
 						
 				conectar();
@@ -56,6 +59,7 @@ public class DAOMercadoria implements IDaoMercadoria{
 					+ "',preco=" + mercadoria.getPreco()
 					+ ",cor='" + mercadoria.getCor()
 					+ "',tamanho='" + mercadoria.getTamanho()
+					+ "',produto='" + mercadoria.getProduto()
 					+ "' WHERE ID='" + mercadoria.getID() + "';";
 			try {	
 				conectar();
@@ -66,10 +70,10 @@ public class DAOMercadoria implements IDaoMercadoria{
 		}
 		
 		//TESTAR NO BANCO
-		public void apagarMercadoria(InterfaceMercadoria mercadoria) {
+		public void apagarMercadoria(String ID) {
 			
 			String remove_mercadoria = "DELETE FROM mercadoria WHERE ID = '"
-					+ mercadoria.getID() + "';";
+					+ ID + "';";
 			try {
 				conectar();
 				comando.executeUpdate(remove_mercadoria);
@@ -79,15 +83,15 @@ public class DAOMercadoria implements IDaoMercadoria{
 		}
 		
 		//TESTAR NO BANCO
-		public InterfaceMercadoria buscarMercadoria_ID(int ID) {
+		public InterfaceMercadoria buscarMercadoria_ID(String ID) {
 			ResultSet result = null;
 			Mercadoria le = new Mercadoria();
 			
 			try {
 				conectar();
 				result = comando
-						.executeQuery("SELECT * FROM ExameLaudo WHERE ID = "
-								+ ID+ ";");
+						.executeQuery("SELECT * FROM mercadoria WHERE ID = '"
+								+ ID+ "';");
 				if (result.next()) {
 					le.setPreco(result.getDouble("preco"));
 					le.setID(result.getString("ID"));
@@ -115,7 +119,7 @@ public class DAOMercadoria implements IDaoMercadoria{
 
 			try {
 				result = comando
-						.executeQuery("SELECT * FROM ExameLaudo ORDER BY dataentrega");
+						.executeQuery("SELECT * FROM mercadoria");
 				
 				while (result.next()) {
 					Mercadoria le = new Mercadoria();
