@@ -2,8 +2,7 @@ package ui;
 
 import dao.DAOFactory;
 import dao.DAOFuncionario;
-import dao.Funcionario;
-import models.funcionario.AbstractFuncionario;
+import models.funcionario.Funcionario;
 import models.funcionario.InterfaceFuncionario;
 
 public class Main {
@@ -16,6 +15,7 @@ public class Main {
 		funcionario.setCpf("38584881867");
 		funcionario.setDataNascimento("04/02/1991");
 		funcionario.setCargo("Caixa");
+		funcionario.setSalario(25);
 		
 		 DAOFactory mysqlFactory = DAOFactory.createDAOFactory(0);
 		 DAOFuncionario daoF = mysqlFactory.createDAOFuncionario();
