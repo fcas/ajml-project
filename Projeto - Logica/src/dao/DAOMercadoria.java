@@ -1,6 +1,6 @@
 package dao;
 
-public class DAOMercadoria implements CRUD {
+public class DAOMercadoria implements IDaoMercadoria{
  
 }
  

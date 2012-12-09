@@ -1,6 +1,6 @@
 package dao;
 
-public interface CRUD {
+public interface IDaoFuncionario {
  
 //	public Facade facade;
 	 
