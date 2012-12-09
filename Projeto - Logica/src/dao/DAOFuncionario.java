@@ -14,7 +14,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 	private void conectar() {
 		
 		try {
-			con = ConnectMySql.conexao("jdbc:mysql://localhost/eplay", "eplay",
+			con = ConnectMySql.conexao("jdbc:mysql://localhost/projetologica", "eplay",
 					"eplay", MySQLDAOFactory.MYSQL);
 			comando = con.createStatement();
 		} catch (ClassNotFoundException e1) {
