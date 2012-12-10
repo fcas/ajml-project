@@ -10,6 +10,7 @@ public class Funcionario extends AbstractFuncionario {
 	private String cargo; 
 	private double salario;
 	
+	
 	public String getNome() {
 		return nome;
 	}
