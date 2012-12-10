@@ -2,7 +2,6 @@ package ui;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import models.mercadoria.IMercadoria;
 import models.mercadoria.Mercadoria;
 import models.venda.IVenda;
@@ -14,6 +13,56 @@ import facade.Facade;
 public class Main {
 	
 	public static void main(String[] args) {
+		
+		/*
+		
+		IFuncionario funcionario;
+        DAOFactory mysqlFactory;
+        Facade facade;
+   
+		Construtor Cadastrar funcionario
+		
+		initComponents();
+        funcionario = new Funcionario();
+        mysqlFactory = DAOFactory.createDAOFactory(0);
+        facade = new Facade(0);
+		 
+		Método Cadastrar funcionário 
+		
+		funcionario.setRg(jTextField3.getText().toString());
+        funcionario.setNome(jTextField5.getText().toString());
+        funcionario.setCpf(jTextField4.getText().toString());
+        funcionario.setCargo(jTextField9.getText().toString());
+        funcionario.setSalario(Double.parseDouble(jTextField11.getText().toString()));
+        funcionario.setDataNascimento(jTextField7.getText().toString());
+        facade.criarFuncionario(funcionario);
+        
+		 * 
+		
+		Mercadoria mercadoria;
+        DAOFactory mysqlFactory;
+        Facade facade;
+		
+		Construtor Mercadoria
+		
+		mercadoria = new Mercadoria();
+        mysqlFactory = DAOFactory.createDAOFactory(0);
+        facade = new Facade(0);
+        
+		
+		Método Cadastrar Mercadoria
+		
+		mercadoria.setPreco(Double.parseDouble(jTextField1.getText().toString()));
+	    mercadoria.setNome(jTextField5.getText().toString());
+	    mercadoria.setTamanho(jTextField2.getText().toString());
+        mercadoria.setProduto(jTextField4.getText().toString());
+	    mercadoria.setCor(jTextField3.getText().toString());
+        facade.criarMercadoria(mercadoria);
+         
+		 * */
+		
+		
+		
 		System.out.println("iniciando.");
 		
 		DAOFactory mysqlFactory = DAOFactory.createDAOFactory(0);
