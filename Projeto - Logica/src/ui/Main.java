@@ -3,15 +3,11 @@ package ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.funcionario.Funcionario;
-import models.funcionario.IFuncionario;
 import models.mercadoria.IMercadoria;
 import models.mercadoria.Mercadoria;
 import models.venda.IVenda;
 import models.venda.Venda;
 import dao.DAOFactory;
-import dao.DAOFuncionario;
-import dao.DAOMercadoria;
 import dao.DAOVendas;
 import facade.Facade;
 
@@ -26,21 +22,21 @@ public class Main {
 		
 		
 		Facade facade = new Facade(0); //tem q ter o facade
-		List<IMercadoria> listaMercadoria = new ArrayList<IMercadoria>(); //essa lista já tinha que estar criada antes do botão ser apertado
+		List<IMercadoria> listaMercadoria = new ArrayList<IMercadoria>(); //essa lista jï¿½ tinha que estar criada antes do botï¿½o ser apertado
 		double subtotal = 0; //auxiliar
 		
-		//botão Adicionar: -> a cada vez que clicar, busca uma mercadoria e atualiza a lista e o subtotal
+		//botï¿½o Adicionar: -> a cada vez que clicar, busca uma mercadoria e atualiza a lista e o subtotal
 		IMercadoria mercadoria = new Mercadoria();
-		mercadoria = facade.buscarMercadoria("a"/*id passado no formulário*/);
+		mercadoria = facade.buscarMercadoria("a"/*id passado no formulï¿½rio*/);
 		listaMercadoria.add(mercadoria);
 		subtotal += mercadoria.getPreco();
 		/*
-		 * atualiza a exibição da lista e do subtotal.
+		 * atualiza a exibiï¿½ï¿½o da lista e do subtotal.
 		 */
 		
-		IVenda venda = new Venda(); //é bom isso estar criado antes de apertar o botão OK
-		//botão OK(pode mudar o nome)
-		venda.setVendedorRG("a"/*vendedor passado no formulário*/);
+		IVenda venda = new Venda(); //ï¿½ bom isso estar criado antes de apertar o botï¿½o OK
+		//botï¿½o OK(pode mudar o nome)
+		venda.setVendedorRG("a"/*vendedor passado no formulï¿½rio*/);
 		venda.setDataVenda("10/12/2012");
 		venda.setSubtotal(subtotal);
 		venda.setQtdVendas(listaMercadoria.size());
@@ -51,7 +47,7 @@ public class Main {
 			
 		}
 		/*
-		 * Se não tiver nenhuma exceção levantada na criação da venda,
+		 * Se nï¿½o tiver nenhuma exceï¿½ï¿½o levantada na criaï¿½ï¿½o da venda,
 		 * tela de sucesso.
 		 */
 		
