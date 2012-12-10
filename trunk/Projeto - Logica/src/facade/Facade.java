@@ -1,16 +1,13 @@
 package facade;
 
-import java.util.List;
-
-import models.funcionario.Funcionario;
-import models.funcionario.IFuncionario;
-import models.mercadoria.IMercadoria;
-import models.mercadoria.Mercadoria;
-import models.venda.IVenda;
 import dao.DAOFactory;
 import dao.IDaoFuncionario;
 import dao.IDaoMercadoria;
 import dao.IDaoVendas;
+import java.util.List;
+import models.funcionario.IFuncionario;
+import models.mercadoria.IMercadoria;
+import models.venda.IVenda;
 
 public class Facade {
  
@@ -28,11 +25,11 @@ public class Facade {
 	
 	
 	//Metodos CRUD Funcionarios
-	public void criarFuncionario(Funcionario funcionario){
+	public void criarFuncionario(IFuncionario funcionario){
 		iDaoFuncionario.criarFuncionario(funcionario);
 	}
 	
-	public void editarFuncionario(Funcionario funcionario){
+	public void editarFuncionario(IFuncionario funcionario){
 		iDaoFuncionario.editarFuncionario(funcionario);
 	}
 	
@@ -40,7 +37,7 @@ public class Facade {
 		iDaoFuncionario.apagarFuncionario(rg);
 	}
 	
-	public void apagarFuncionario(Funcionario funcionario){
+	public void apagarFuncionario(IFuncionario funcionario){
 		iDaoFuncionario.apagarFuncionario(funcionario.getRg());
 	}
 	
@@ -54,11 +51,11 @@ public class Facade {
 	
 	
 	//Metodos CRUD Mercadorias
-	public void criarMercadoria(Mercadoria mercadoria){
+	public void criarMercadoria(IMercadoria mercadoria){
 		iDaoMercadoria.criarMercadoria(mercadoria);
 	}
 	
-	public void editarMercadoria(Mercadoria mercadoria){
+	public void editarMercadoria(IMercadoria mercadoria){
 		iDaoMercadoria.editarMercadoria(mercadoria);
 	}
 	
@@ -66,7 +63,7 @@ public class Facade {
 		iDaoMercadoria.apagarMercadoria(ID);
 	}
 	
-	public void apagarMercadoria(Mercadoria mercadoria){
+	public void apagarMercadoria(IMercadoria mercadoria){
 		iDaoMercadoria.apagarMercadoria(mercadoria.getID());
 	}
 	
@@ -103,7 +100,6 @@ public class Facade {
 	public IVenda buscarVenda(int ID) {
 		return iDaoVendas.buscarVenda(ID);
 	}
-
 
 }
  
