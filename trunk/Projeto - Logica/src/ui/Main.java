@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.funcionario.Funcionario;
@@ -7,42 +8,59 @@ import models.funcionario.IFuncionario;
 import models.mercadoria.IMercadoria;
 import models.mercadoria.Mercadoria;
 import models.venda.IVenda;
+import models.venda.Venda;
 import dao.DAOFactory;
 import dao.DAOFuncionario;
 import dao.DAOMercadoria;
+import dao.DAOVendas;
 import facade.Facade;
 
 public class Main {
 	
 	public static void main(String[] args) {
 		System.out.println("iniciando.");
-		IMercadoria mercadoria = new Mercadoria();
-		
-		mercadoria.setPreco(25);
-		mercadoria.setNome("nome2");
-		mercadoria.setTamanho("G");
-		mercadoria.setProduto("produto");
-		mercadoria.setCor("novaCor");
-		
-		IFuncionario funcionario = new Funcionario();
-		
-		funcionario.setRg("4");
-		funcionario.setCargo("1cargo");
-		funcionario.setCpf("1cpf");
-		funcionario.setDataNascimento("01/01/2001");
-		funcionario.setNome("1nome");
-		funcionario.setSalario(210);
 		
 		DAOFactory mysqlFactory = DAOFactory.createDAOFactory(0);
-		DAOMercadoria daoM = mysqlFactory.createDAOMercadoria();
-		DAOFuncionario daoF = mysqlFactory.createDAOFuncionario();
-		
-		daoM.criarMercadoria(mercadoria);
-		daoF.criarFuncionario(funcionario);
+		DAOVendas daoV = mysqlFactory.createDAOVendas();
 		
 		
 		
-		Facade facade = new Facade(0);
+		Facade facade = new Facade(0); //tem q ter o facade
+		List<IMercadoria> listaMercadoria = new ArrayList<IMercadoria>(); //essa lista já tinha que estar criada antes do botão ser apertado
+		double subtotal = 0; //auxiliar
+		
+		//botão Adicionar: -> a cada vez que clicar, busca uma mercadoria e atualiza a lista e o subtotal
+		IMercadoria mercadoria = new Mercadoria();
+		mercadoria = facade.buscarMercadoria("a"/*id passado no formulário*/);
+		listaMercadoria.add(mercadoria);
+		subtotal += mercadoria.getPreco();
+		/*
+		 * atualiza a exibição da lista e do subtotal.
+		 */
+		
+		IVenda venda = new Venda(); //é bom isso estar criado antes de apertar o botão OK
+		//botão OK(pode mudar o nome)
+		venda.setVendedorRG("a"/*vendedor passado no formulário*/);
+		venda.setDataVenda("10/12/2012");
+		venda.setSubtotal(subtotal);
+		venda.setQtdVendas(listaMercadoria.size());
+
+		daoV.criarVenda(venda);
+		
+		if(true){
+			
+		}
+		/*
+		 * Se não tiver nenhuma exceção levantada na criação da venda,
+		 * tela de sucesso.
+		 */
+		
+		
+		
+
+		
+		
+		/*
 		List<IFuncionario> listF = facade.listarFuncionarios();
 		List<IMercadoria> listM = facade.listarMercadorias();
 		List<IVenda> listV = facade.listarVendas();
@@ -63,7 +81,7 @@ public class Main {
 		}
 		
 		 
-		 System.out.println("ok");
+		 System.out.println("ok");*/
 		
 	}
  
