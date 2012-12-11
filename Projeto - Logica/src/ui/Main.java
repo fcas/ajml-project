@@ -14,18 +14,18 @@ import facade.Facade;
 
 public class Main {
 
-	private/*@ nullable @*/Facade facade;
-	private/*@ nullable @*/Scanner in;
+	private/* @ nullable @ */Facade facade;
+	private/* @ nullable @ */Scanner in;
 
 	private Main() {
 		facade = new Facade(0);
 	}
 
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	/*
 	 * PARTE RELACIONADA A FUNCIONARIO
 	 */
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private void CadastrarFuncionario() {
 
 		System.out.println("Carregando tela Cadastro Funcionario:");
@@ -54,12 +54,12 @@ public class Main {
 	}
 
 	private void MenuFuncionarios() throws OpcaoIlegalException {
-	
+
 		int opcao = -1;
 		boolean voltar = false;
-	
+
 		in = new Scanner(System.in);
-	
+
 		while (!voltar) {
 			System.out.println("~~~~~ Menu Funcionarios ~~~~~");
 			System.out.println("O que gostaria de fazer?");
@@ -72,7 +72,7 @@ public class Main {
 			System.out.println("6 - Buscar Funcionario");
 			System.out.println("7 - Editar funcionario");
 			System.out.println("8 - Reajuste salarial");
-	
+
 			opcao = in.nextInt();
 			switch (opcao) {
 			case 0:
@@ -97,7 +97,7 @@ public class Main {
 				BuscarFuncionario();
 				break;
 			case 7:
-				EditarFuncionario(); 
+				EditarFuncionario();
 				break;
 			case 8:
 				ReajusteSalarial();
@@ -106,65 +106,80 @@ public class Main {
 				throw new OpcaoIlegalException();
 			}
 		}
-	
+
 		in.close();
 	}
 
 	private void ReajusteSalarial() {
-		
-		double pCaixa = 0.05; 
-		double pEstoquista = 0.05; 
+
+		double pCaixa = 0.05;
+		double pEstoquista = 0.05;
 		double pGerente = 0.09;
 		double pVendedor = 0.07;
 		double novoSalario;
-		
+
 		List listFuncionarios = new ArrayList();
 		Funcionario aux;
-	
+
 		listFuncionarios = facade.listarFuncionarios();
-	
+
 		for (int i = 0; i < listFuncionarios.size(); i++) {
 			aux = (Funcionario) listFuncionarios.get(i);
-			if (aux.getCargo().equals("Caixa")){
-				novoSalario = aux.getSalario() + aux.getSalario()*pCaixa;
+			if (aux.getCargo().equals("Caixa")) {
+				novoSalario = aux.getSalario() + aux.getSalario() * pCaixa;
 				aux.setSalario(novoSalario);
 				facade.atualizarSalario(aux);
-			} else 
-				
-			if(aux.getCargo().equals("Estoquista")){
-				novoSalario = aux.getSalario() + aux.getSalario()*pEstoquista;
+			} else
+
+			if (aux.getCargo().equals("Estoquista")) {
+				novoSalario = aux.getSalario() + aux.getSalario() * pEstoquista;
 				aux.setSalario(novoSalario);
 				facade.atualizarSalario(aux);
 			}
-			
+
 			else
-				
-			if(aux.getCargo().equals("Gerente")){
-				novoSalario = aux.getSalario() + aux.getSalario()*pGerente;
+
+			if (aux.getCargo().equals("Gerente")) {
+				novoSalario = aux.getSalario() + aux.getSalario() * pGerente;
 				aux.setSalario(novoSalario);
 				facade.atualizarSalario(aux);
 			} else {
-				novoSalario = aux.getSalario() + aux.getSalario()*pVendedor;
+				novoSalario = aux.getSalario() + aux.getSalario() * pVendedor;
 				aux.setSalario(novoSalario);
 				facade.atualizarSalario(aux);
 			}
 		}
-		
+
 	}
 
 	private void EditarFuncionario() {
-		
+
 		System.out.println("Carregando tela Editar Funcionario:");
 		IFuncionario funcionario = new Funcionario();
+		String buscaRg, nome = null, rg = null, cpf = null, cargo = null, dataNascimento = null;
+		double salario = -1;
 
-		// coleta dados
-		String nome = funcionarioNome();
-		System.out.println("O rg deve ser o mesmo cadastrado no sistema");
-		String rg = setRg();
-		String cpf = setCPF();
-		String dataNascimento = setData();
-		String cargo = funcionarioCargo();
-		double salario = funcionarioSalario();
+		System.out.println("Informe o rg do funcionario");
+		rg = setRg();
+		buscaRg = facade.buscarRg(rg);
+
+		if (buscaRg != null || buscaRg.equals("")) {
+			// coleta dados
+			System.out.println("Informe o novo nome");
+			nome = funcionarioNome();
+			System.out.println("Informe o novo rg");
+			rg = setRg();
+			System.out.println("Informe o novo cpf");
+			cpf = setCPF();
+			System.out.println("Informe a nova data de nascimento");
+			dataNascimento = setData();
+			System.out.println("Informe o novo cargo");
+			cargo = funcionarioCargo();
+			System.out.println("Informe o novo salário");
+			salario = funcionarioSalario();
+		} else {
+			System.out.println("Usuário não cadastrado no sistema");
+		}
 
 		// seta o funcionario
 		funcionario.setNome(nome);
@@ -177,40 +192,40 @@ public class Main {
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto editamos funcionario.");
 		facade.editarFuncionario(funcionario);
-		
+
 	}
 
 	private void BuscarFuncionario() {
-	
+
 		IFuncionario funcionario = new Funcionario();
 		Funcionario aux;
 		String rg = setRg();
-	
+
 		// seta o funcionario
 		funcionario.setRg(rg);
-	
+
 		aux = (Funcionario) facade.buscarFuncionario(rg);
-	
+
 		System.out.println("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
-	
+
 		System.out.print(aux.getNome() + "   ");
 		System.out.print(aux.getRg() + "   ");
 		System.out.print(aux.getCpf() + "   ");
 		System.out.print(aux.getDataNascimento() + "   ");
 		System.out.print(aux.getCargo() + "   ");
 		System.out.print(aux.getSalario() + "\n");
-	
+
 	}
 
 	private void ListarFuncionarios() {
-	
+
 		List listFuncionarios = new ArrayList();
 		Funcionario aux;
-	
+
 		listFuncionarios = facade.listarFuncionarios();
-	
+
 		System.out.println("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
-	
+
 		for (int i = 0; i < listFuncionarios.size(); i++) {
 			aux = (Funcionario) listFuncionarios.get(i);
 			System.out.print(aux.getNome() + "   ");
@@ -220,72 +235,72 @@ public class Main {
 			System.out.print(aux.getCargo() + "   ");
 			System.out.println(aux.getSalario() + "\n");
 		}
-	
+
 	}
 
 	private void RemoverFuncionario() {
-	
+
 		System.out.println("Carregando tela Remover Funcionario:");
-	
+
 		IFuncionario funcionario = new Funcionario();
-	
+
 		// coleta dados
 		String rg = setRg();
-	
+
 		// seta o funcionario
-	
+
 		funcionario.setRg(rg);
-	
+
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto removemos o usuario do sistema.");
 		facade.apagarFuncionario(funcionario);
-	
+
 	}
 
 	private double CalcularBonificacao() {
-	
+
 		double salario;
 		double bonificacao = -1;
-	
+
 		System.out.println("Carregando tela Calcular Bonificacao:");
-	
+
 		IFuncionario funcionario = new Funcionario();
-	
+
 		// coleta dados
 		String rg = setRg();
 		// seta o funcionario;
 		funcionario.setRg(rg);
-	
+
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto tentamos calcular a bonificacao.");
-	
+
 		salario = facade.buscarSalario(funcionario);
-	
+
 		bonificacao = salario + salario
 				* (0.01 * facade.quantidadeVendas(funcionario));
-	
+
 		return bonificacao;
-	
+
 	}
 
 	private void AtualizarSalario() {
-	
+
 		System.out.println("Carregando tela Atualizar Salario:");
-	
+
 		IFuncionario funcionario = new Funcionario();
-	
+
 		// coleta dados
 		String rg = setRg();
 		double salario = funcionarioSalario();
-	
+
 		// seta o funcionario;
 		funcionario.setRg(rg);
 		funcionario.setSalario(salario);
-	
+
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto tentamos atualizar o salario.");
 		facade.atualizarSalario(funcionario);
-	
+
 	}
 
 	private String funcionarioNome() {
@@ -463,7 +478,7 @@ public class Main {
 																			// bissexto
 				bissexto = true;
 			}
-			
+
 			if (mes >= 1 && mes <= 12) { // se for um mes valido
 
 				if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8
@@ -594,11 +609,11 @@ public class Main {
 		return salario;
 	}
 
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	/*
 	 * PARTE RELACIONADA A MERCADORIA
 	 */
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private void MenuMercadoria() throws OpcaoIlegalException {
 
 		int opcao = -1;
@@ -640,14 +655,14 @@ public class Main {
 	}
 
 	private void ListarMercadorias() {
-		
+
 		List listMercadorias = new ArrayList();
 		Mercadoria aux;
-	
+
 		listMercadorias = facade.listarMercadorias();
-	
+
 		System.out.println("ID|Nome|Preco|Cor|Tamanho|Produto \n \n");
-	
+
 		for (int i = 0; i < listMercadorias.size(); i++) {
 			aux = (Mercadoria) listMercadorias.get(i);
 			System.out.print(aux.getID() + "   ");
@@ -657,14 +672,14 @@ public class Main {
 			System.out.print(aux.getTamanho() + "   ");
 			System.out.println(aux.getProduto() + "\n");
 		}
-		
+
 	}
 
 	private void BuscarMercadoria() {
-		
+
 		Mercadoria aux;
 		in = new Scanner(System.in);
-		
+
 		System.out.println("Informe o id da mercadoria");
 		int id = in.nextInt();
 
@@ -677,7 +692,7 @@ public class Main {
 		System.out.print(aux.getPreco() + "   ");
 		System.out.print(aux.getCor() + "   ");
 		System.out.print(aux.getProduto() + "   ");
-		
+
 	}
 
 	private void ApagarMercadoria() {
@@ -691,9 +706,10 @@ public class Main {
 		int id = in.nextInt();
 
 		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto removemos a mercadoria do sistema.");
+		System.out
+				.println("Aguarde enquanto removemos a mercadoria do sistema.");
 		facade.apagarMercadoria(id);
-		
+
 	}
 
 	private void CadastrarMercadoria() {
@@ -913,25 +929,25 @@ public class Main {
 
 		return Nome;
 	}
-	
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	/*
 	 * PARTE RELACIONADA A VENDAS
 	 */
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private void MenuVendas() throws OpcaoIlegalException {
-	
+
 		int opcao = -1;
 		boolean voltar = false;
-	
+
 		in = new Scanner(System.in);
-	
+
 		while (!voltar) {
 			System.out.println("~~~~~ Menu Vendas ~~~~~");
 			System.out.println("O que gostaria de fazer?");
 			System.out.println("0 - Voltar");
 			System.out.println("1 - Efetuar Venda");
-	
+
 			opcao = in.nextInt();
 			switch (opcao) {
 			case 0:
@@ -944,43 +960,43 @@ public class Main {
 				throw new OpcaoIlegalException();
 			}
 		}
-	
+
 		in.close();
 	}
 
 	private void CadastrarVenda() {
-	
+
 		System.out.println("Carregando tela Cadastro Venda:");
-	
+
 		IVenda venda = new Venda();
-	
+
 		// coleta dados
 		double subtotal = mercadoriaSubtotal();
 		String vendedorRg = setRg();
 		String dataVenda = setData();
 		int qtdVenda = mercadoriaQtdVenda();
-	
+
 		// seta a mercadoria
 		venda.setSubtotal(subtotal);
 		venda.setVendedorRG(vendedorRg);
 		venda.setDataVenda(dataVenda);
 		venda.setQtdVendas(qtdVenda);
-	
+
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto tentamos cadastrar.");
 		facade.criarVenda(venda);
-	
+
 	}
 
 	private int mercadoriaQtdVenda() {
 		int qtdVenda = -1;
 		boolean confirma = false;
 		boolean valido = false;
-	
+
 		in = new Scanner(System.in);
-	
+
 		String resposta;
-	
+
 		while (!confirma) {
 			valido = false;
 			while (!valido) {
@@ -989,11 +1005,11 @@ public class Main {
 				if (qtdVenda > 0) {
 					valido = true;
 				}
-	
+
 				System.out.println("Quantidade = " + qtdVenda
 						+ "\nTem certeza? (s/n)");
 				resposta = in.next();
-	
+
 				if (resposta.equalsIgnoreCase("s")) {
 					confirma = true;
 					System.out.println("Quantidade confirmada.");
@@ -1003,23 +1019,23 @@ public class Main {
 				}
 			}
 		}
-	
+
 		in.close();
-	
+
 		return qtdVenda;
-	
+
 	}
 
 	private double mercadoriaSubtotal() {
-	
+
 		double subtotal = -1.0;
 		boolean confirma = false;
 		boolean valido = false;
-	
+
 		in = new Scanner(System.in);
-	
+
 		String resposta;
-	
+
 		while (!confirma) {
 			valido = false;
 			while (!valido) {
@@ -1028,11 +1044,11 @@ public class Main {
 				if (subtotal > 0.0) {
 					valido = true;
 				}
-	
+
 				System.out.println("Nome = " + subtotal
 						+ "\nTem certeza? (s/n)");
 				resposta = in.next();
-	
+
 				if (resposta.equalsIgnoreCase("s")) {
 					confirma = true;
 					System.out.println("Subtotal confirmado.");
@@ -1042,22 +1058,22 @@ public class Main {
 				}
 			}
 		}
-	
+
 		in.close();
-	
+
 		return subtotal;
 	}
 
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	/*
 	 * PARTE RELACIONADA AO MENU PRINCIPAL
 	 */
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private void MenuPrincipal() throws OpcaoIlegalException {
 		int opcao = -1;
 		boolean sair = false;
-		in = new Scanner (System.in);
-	
+		in = new Scanner(System.in);
+
 		while (!sair) {
 			System.out.println("~~~~~ Menu Principal ~~~~~");
 			System.out
@@ -1068,50 +1084,50 @@ public class Main {
 			System.out.println("3- Menu Vendas");
 			opcao = in.nextInt();
 			switch (opcao) {
-	
+
 			case 0:
 				sair = true;
 				System.out.println("At� a pr�xima ;)");
 				break;
-			case 1: //funcionario
+			case 1: // funcionario
 				boolean capturouFuncionario = false;
 				do {
 					try {
 						capturouFuncionario = false;
 						MenuFuncionarios();
-					} catch (OpcaoIlegalException e){
+					} catch (OpcaoIlegalException e) {
 						capturouFuncionario = true;
 						System.out.println("Opcao Invalida.");
-						
+
 					}
-				}while (capturouFuncionario);
+				} while (capturouFuncionario);
 				break;
-			case 2: //mercadoria
+			case 2: // mercadoria
 				boolean capturouMercadoria = false;
-				do{
-					try{
-						capturouMercadoria= false;
+				do {
+					try {
+						capturouMercadoria = false;
 						MenuMercadoria();
-					}catch (OpcaoIlegalException e){
+					} catch (OpcaoIlegalException e) {
 						capturouMercadoria = true;
 						System.out.println("Opcao Invalida.");
-						
+
 					}
-				}while (capturouMercadoria);
-				
+				} while (capturouMercadoria);
+
 				break;
-			case 3: //venda
+			case 3: // venda
 				boolean capturouVenda = false;
-				do{
-					try{
+				do {
+					try {
 						capturouVenda = false;
 						MenuVendas();
-					}catch (OpcaoIlegalException e){
+					} catch (OpcaoIlegalException e) {
 						capturouVenda = true;
 						System.out.println("Opcao Invalida.");
-						
+
 					}
-				}while (capturouVenda);
+				} while (capturouVenda);
 				break;
 			default:
 				throw new OpcaoIlegalException();
@@ -1119,25 +1135,27 @@ public class Main {
 		}
 		in.close();
 	}
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	/*
 	 * METODO MAIN
 	 */
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public static void main(String[] args) {
 		System.out.println("iniciando...");
 		Scanner local = new Scanner(System.in);
 		Main main = new Main();
 		boolean capturouPrincipal;
-		
-		do { //continua tentando rodar o menu enquanto alguma excecao for capturada
+
+		do { // continua tentando rodar o menu enquanto alguma excecao for
+				// capturada
 			try {
 				capturouPrincipal = false;
 				main.MenuPrincipal();
 			} catch (OpcaoIlegalException e) {
 				capturouPrincipal = true;
 				System.out.println("Opcao Invalida.");
-				
+
 			}
 		} while (capturouPrincipal);
 

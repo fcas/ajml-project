@@ -45,6 +45,10 @@ public class Facade {
 		iDaoFuncionario.atualizarSalario(funcionario);
 	}
 	
+	public String buscarRg (String rg){
+		return iDaoFuncionario.buscarRg(rg);
+	}
+	
 	public void apagarFuncionario(String rg){
 		iDaoFuncionario.apagarFuncionario(rg);
 	}
