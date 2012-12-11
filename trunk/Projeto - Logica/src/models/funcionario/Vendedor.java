@@ -3,7 +3,7 @@ package models.funcionario;
 
 public class Vendedor extends Funcionario {
 	 
-		private int quantidadeVendas = 0; 
+		private /*@ spec_public @*/ int quantidadeVendas = 0; 
 		
 		public int getQuantidadeVendas() {
 			return quantidadeVendas;

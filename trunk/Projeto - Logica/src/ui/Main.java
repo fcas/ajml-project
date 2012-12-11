@@ -14,8 +14,8 @@ import facade.Facade;
 
 public class Main {
 
-	private/* @ nullable @ */Facade facade;
-	private/* @ nullable @ */Scanner in;
+	private/*@ nullable @*/Facade facade;
+	private/*@ nullable @*/Scanner in;
 
 	private Main() {
 		facade = new Facade(0);
@@ -254,6 +254,7 @@ public class Main {
 
 		while (!confirma) {
 			while (!valido) {
+				valido = false;
 				System.out.println("Digite nome do funcionario:");
 				Nome = in.next();
 				if (!(Nome.equals(""))) {
@@ -289,6 +290,7 @@ public class Main {
 		in = new Scanner(System.in);
 
 		while (!confirma) { // enquanto o usuario nao confirmar
+			valido = false;
 			while (!valido) { // enquanto o RG nao for valido
 				System.out
 						.println("Digite RG do funcionario (nove digitos sem ponto):");
@@ -322,6 +324,7 @@ public class Main {
 		in = new Scanner(System.in);
 
 		while (!confirma) { // enquanto o usuario nao confirmar
+			valido = false;
 			while (!valido) { // enquanto o CPF nao for valido
 				System.out
 						.println("Digite CPF do funcionario (onze digitos sem ponto e sem hifen):");
@@ -356,6 +359,7 @@ public class Main {
 		in = new Scanner(System.in);
 
 		while (!confirma) { // enquanto o usuario nao confirmar
+			valido = false;
 			while (!valido) { // enquanto o CPF nao for valido
 				System.out.println("Informe a data (DD/MM/AAAA)");
 				dataString = in.next();
@@ -462,6 +466,7 @@ public class Main {
 		in = new Scanner(System.in);
 
 		while (!confirma) { // enquanto o usuario nao confirmar
+			valido = false;
 			System.out.println("Selecione cargo do funcionario:");
 			while (!valido) { // enquanto o Cargo nao for valido
 				System.out.println("1-Caixa");
@@ -519,6 +524,7 @@ public class Main {
 		in = new Scanner(System.in);
 
 		while (!confirma) { // enquanto o usuario nao confirmar
+			valido = false;
 			while (!valido) { // enquanto o Salario nao for valido
 				System.out.println("Digite salario do funcionario:");
 				salario = in.nextDouble();
@@ -657,6 +663,7 @@ public class Main {
 		String resposta;
 
 		while (!confirma) {
+			valido = false;
 			while (!valido) {
 				System.out.println("Digite nome do produto:");
 				produto = in.next();
@@ -694,6 +701,7 @@ public class Main {
 		String resposta;
 
 		while (!confirma) {
+			valido = false;
 			while (!valido) {
 				System.out.println("Digite o tamanho da mercadoria:");
 				tamanho = in.next();
@@ -735,6 +743,7 @@ public class Main {
 		String resposta;
 
 		while (!confirma) {
+			valido = false;
 			while (!valido) {
 				System.out.println("Informe a cor da mercadoria:");
 				cor = in.next();
@@ -771,6 +780,7 @@ public class Main {
 		String resposta;
 
 		while (!confirma) {
+			valido = false;
 			while (!valido) {
 				System.out.println("Digite o preco da mercadoria:");
 				preco = in.nextDouble();
@@ -808,6 +818,7 @@ public class Main {
 		String resposta;
 
 		while (!confirma) {
+			valido = false;
 			while (!valido) {
 				System.out.println("Digite o nome da mercadoria:");
 				Nome = in.next();
@@ -833,79 +844,6 @@ public class Main {
 		return Nome;
 	}
 	
-	private int mercadoriaQtdVenda() {
-		int qtdVenda = -1;
-		boolean confirma = false;
-		boolean valido = false;
-	
-		in = new Scanner(System.in);
-	
-		String resposta;
-	
-		while (!confirma) {
-			while (!valido) {
-				System.out.println("Digite a quantidade da venda:");
-				qtdVenda = in.nextInt();
-				if (qtdVenda > 0) {
-					valido = true;
-				}
-	
-				System.out.println("Quantidade = " + qtdVenda
-						+ "\nTem certeza? (s/n)");
-				resposta = in.next();
-	
-				if (resposta.equalsIgnoreCase("s")) {
-					confirma = true;
-					System.out.println("Quantidade confirmada.");
-					return qtdVenda;
-				} else {
-					break;
-				}
-			}
-		}
-	
-		in.close();
-	
-		return qtdVenda;
-	
-	}
-
-	private double mercadoriaSubtotal() {
-	
-		double subtotal = -1.0;
-		boolean confirma = false;
-		boolean valido = false;
-	
-		in = new Scanner(System.in);
-	
-		String resposta;
-	
-		while (!confirma) {
-			while (!valido) {
-				System.out.println("Digite o subtotal:");
-				subtotal = in.nextDouble();
-				if (subtotal > 0.0) {
-					valido = true;
-				}
-	
-				System.out.println("Nome = " + subtotal
-						+ "\nTem certeza? (s/n)");
-				resposta = in.next();
-	
-				if (resposta.equalsIgnoreCase("s")) {
-					confirma = true;
-					System.out.println("Subtotal confirmado.");
-					return subtotal;
-				} else {
-					break;
-				}
-			}
-		}
-	
-		in.close();
-	
-		return subtotal;
-	}
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	/*
 	 * PARTE RELACIONADA A VENDAS
@@ -962,6 +900,82 @@ public class Main {
 		System.out.println("Aguarde enquanto tentamos cadastrar.");
 		facade.criarVenda(venda);
 	
+	}
+
+	private int mercadoriaQtdVenda() {
+		int qtdVenda = -1;
+		boolean confirma = false;
+		boolean valido = false;
+	
+		in = new Scanner(System.in);
+	
+		String resposta;
+	
+		while (!confirma) {
+			valido = false;
+			while (!valido) {
+				System.out.println("Digite a quantidade da venda:");
+				qtdVenda = in.nextInt();
+				if (qtdVenda > 0) {
+					valido = true;
+				}
+	
+				System.out.println("Quantidade = " + qtdVenda
+						+ "\nTem certeza? (s/n)");
+				resposta = in.next();
+	
+				if (resposta.equalsIgnoreCase("s")) {
+					confirma = true;
+					System.out.println("Quantidade confirmada.");
+					return qtdVenda;
+				} else {
+					break;
+				}
+			}
+		}
+	
+		in.close();
+	
+		return qtdVenda;
+	
+	}
+
+	private double mercadoriaSubtotal() {
+	
+		double subtotal = -1.0;
+		boolean confirma = false;
+		boolean valido = false;
+	
+		in = new Scanner(System.in);
+	
+		String resposta;
+	
+		while (!confirma) {
+			valido = false;
+			while (!valido) {
+				System.out.println("Digite o subtotal:");
+				subtotal = in.nextDouble();
+				if (subtotal > 0.0) {
+					valido = true;
+				}
+	
+				System.out.println("Nome = " + subtotal
+						+ "\nTem certeza? (s/n)");
+				resposta = in.next();
+	
+				if (resposta.equalsIgnoreCase("s")) {
+					confirma = true;
+					System.out.println("Subtotal confirmado.");
+					return subtotal;
+				} else {
+					break;
+				}
+			}
+		}
+	
+		in.close();
+	
+		return subtotal;
 	}
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

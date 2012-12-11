@@ -30,13 +30,12 @@ public class Gerente extends Funcionario {
 
 		
 		public void setSalario(double salario) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		
 		public double getSalario() {
-			// TODO Auto-generated method stub
+			
 			return 0;
 		}
 	 
