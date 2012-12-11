@@ -365,6 +365,7 @@ public class Main {
 			System.out.println("0 - Voltar");
 			System.out.println("1 - Cadastrar novo Funcionario");
 			System.out.println("2 - Atualizar salário");
+			System.out.println("3 - Calcular bonificacao");
 
 			opcao = in.nextInt();
 			switch (opcao) {
@@ -376,6 +377,8 @@ public class Main {
 				break;
 			case 2: 
 				AtualizarSalario();
+			case 3:
+				CalcularBonificacao();
 			default:
 				System.out.println("Opcao nao reconhecida.");
 				break;
@@ -383,6 +386,26 @@ public class Main {
 		}
 
 		in.close();
+	}
+
+	private void CalcularBonificacao() {
+		
+		double bonificacao = -1;
+		
+		System.out.println("Carregando tela Calcular bonificacao:");
+		
+		IFuncionario funcionario = new Funcionario();
+
+		// coleta dados
+		String rg = setRg();
+		// seta o funcionario;
+		funcionario.setRg(rg);
+		
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto tentamos calcular a bonificacao.");
+		
+		System.out.println(facade.calcularBonificacao(funcionario));
+		
 	}
 
 	private void AtualizarSalario() {

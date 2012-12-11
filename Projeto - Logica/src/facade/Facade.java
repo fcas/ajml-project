@@ -33,6 +33,10 @@ public class Facade {
 		iDaoFuncionario.editarFuncionario(funcionario);
 	}
 	
+	public int calcularBonificacao(IFuncionario funcionario){
+		return iDaoFuncionario.calcularBonificacao(funcionario);
+	}
+	
 	public void atualizarSalario(IFuncionario funcionario){
 		iDaoFuncionario.atualizarSalario(funcionario);
 	}
