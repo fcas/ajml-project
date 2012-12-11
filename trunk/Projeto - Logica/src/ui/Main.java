@@ -320,7 +320,8 @@ public class Main {
 
 	// TODO Implementar
 	private double funcionarioSalario() {
-		double salario = 0;
+		
+		double salario = -1;
 		boolean confirma = false;
 		boolean valido = false;
 		String resposta;
@@ -348,7 +349,7 @@ public class Main {
 
 		in.close();
 
-		return 0;
+		return salario;
 	}
 
 	public void MenuFuncionarios() {
@@ -363,6 +364,7 @@ public class Main {
 			System.out.println("O que gostaria de fazer?");
 			System.out.println("0 - Voltar");
 			System.out.println("1 - Cadastrar novo Funcionario");
+			System.out.println("2 - Atualizar salário");
 
 			opcao = in.nextInt();
 			switch (opcao) {
@@ -372,6 +374,8 @@ public class Main {
 			case 1:
 				CadastrarFuncionario();
 				break;
+			case 2: 
+				AtualizarSalario();
 			default:
 				System.out.println("Opcao nao reconhecida.");
 				break;
@@ -379,6 +383,26 @@ public class Main {
 		}
 
 		in.close();
+	}
+
+	private void AtualizarSalario() {
+		
+		System.out.println("Carregando tela Atualizar salário:");
+
+		IFuncionario funcionario = new Funcionario();
+
+		// coleta dados
+		String rg = setRg();
+		double salario = funcionarioSalario();
+
+		// seta o funcionario;
+		funcionario.setRg(rg);
+		funcionario.setSalario(salario);
+
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto tentamos atualizar o salario.");
+		facade.atualizarSalario(funcionario);
+		
 	}
 
 	public void MenuMercadoria() {
