@@ -367,7 +367,8 @@ public class Main {
 			System.out.println("1 - Cadastrar novo Funcionario");
 			System.out.println("2 - Atualizar salário");
 			System.out.println("3 - Calcular bonificacao");
-
+			System.out.println("4 - Remover funcionario");
+			
 			opcao = in.nextInt();
 			switch (opcao) {
 			case 0:
@@ -382,6 +383,9 @@ public class Main {
 			case 3:
 				System.out.println(CalcularBonificacao());
 				break;
+			case 4:
+				RemoverFuncionario();
+				break;
 			default:
 				System.out.println("Opcao nao reconhecida.");
 				break;
@@ -389,6 +393,25 @@ public class Main {
 		}
 
 		in.close();
+	}
+
+	private void RemoverFuncionario() {
+		
+		System.out.println("Carregando tela Remover Funcionario:");
+
+		IFuncionario funcionario = new Funcionario();
+
+		// coleta dados
+		String rg = setRg();
+		
+		// seta o funcionario
+		
+		funcionario.setRg(rg);
+		
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto removemos o usuário do sistema.");
+		facade.apagarFuncionario(funcionario);
+		
 	}
 
 	private double CalcularBonificacao() {
