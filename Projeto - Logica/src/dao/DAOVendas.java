@@ -75,10 +75,10 @@ public class DAOVendas implements IDaoVendas {
 		}
 	}
 	
-	public List<IVenda> listarVendas() {
+	public List listarVendas() {
 
 		conectar();
-		List<IVenda> list_vendas = new ArrayList<IVenda>();
+		List list_vendas = new ArrayList();
 		ResultSet result;
 
 		try {

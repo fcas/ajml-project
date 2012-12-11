@@ -30,7 +30,7 @@
 	<property name="ajml.release.jar"     value="lib-ajml5.0/ajml-release5.0.jar" />
 	<property name="src.dir"              value="src" />
 	<property name="dest.dir"             value="classes" />
-	<property name="main.class"           value="my.package.name.ClassnameOfMain" />
+	<property name="main.class"           value="ui.Main" />
 	<property name="app.lib"              value="lib" />
 	<property name="ajml.lib"             value="lib-ajml5.0" />
 	<!-- NOTE: 'ajml.lib' MUST INCLUDE ASPECTJ WEAVERS, AJC AND ABC -->

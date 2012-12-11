@@ -108,10 +108,10 @@ public class DAOMercadoria implements IDaoMercadoria{
 		}
 		
 		//TESTAR NO BANCO
-		public List<IMercadoria> listarMercadorias(){
+		public List listarMercadorias(){
 
 			conectar();
-			List<IMercadoria> list_mercadorias = new ArrayList<IMercadoria>();
+			List list_mercadorias = new ArrayList();
 			ResultSet result;
 
 			try {

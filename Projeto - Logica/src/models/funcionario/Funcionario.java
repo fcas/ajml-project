@@ -51,12 +51,12 @@ public class Funcionario extends AbstractFuncionario {
 		this.cargo = cargo;
 	}
 
-	@Override
+	
 	public void setSalario(double salario) {
 		this.salario = salario;	
 	}
 
-	@Override
+	
 	public double getSalario() {
 		return salario;
 	}

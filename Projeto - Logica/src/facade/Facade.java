@@ -53,7 +53,7 @@ public class Facade {
 		iDaoFuncionario.apagarFuncionario(funcionario.getRg());
 	}
 	
-	public List<IFuncionario> listarFuncionarios(){
+	public List listarFuncionarios(){
 		return iDaoFuncionario.listarFuncionario();
 	}
 	
@@ -79,7 +79,7 @@ public class Facade {
 		iDaoMercadoria.apagarMercadoria(mercadoria.getID());
 	}
 	
-	public List<IMercadoria> listarMercadorias(){
+	public List listarMercadorias(){
 		return iDaoMercadoria.listarMercadorias();
 	}
 	
@@ -105,7 +105,7 @@ public class Facade {
 		iDaoVendas.apagarVenda(venda.getID());
 	}
 	
-	public List<IVenda> listarVendas() {
+	public List listarVendas() {
 		return iDaoVendas.listarVendas();
 	}
 	
