@@ -12,7 +12,8 @@ public interface IDaoFuncionario {
 	public List<IFuncionario> listarFuncionario();
 	public IFuncionario buscarFuncionario(String rg);
 	public void atualizarSalario(IFuncionario funcionario);
-	public int calcularBonificacao(IFuncionario funcionario);
+	public int quantidadeVendas(IFuncionario funcionario);
+	public double buscarSalario(IFuncionario funcionario);
 	 
 }
  
