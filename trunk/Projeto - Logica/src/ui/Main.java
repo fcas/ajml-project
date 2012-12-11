@@ -567,6 +567,7 @@ public class Main {
 			System.out.println("1 - Cadastrar Nova Mercadoria");
 			System.out.println("2 - Apagar mercadoria");
 			System.out.println("3 - Buscar mercadoria");
+			System.out.println("4 - Listar mercadorias");
 
 			opcao = in.nextInt();
 			switch (opcao) {
@@ -582,12 +583,35 @@ public class Main {
 			case 3:
 				BuscarMercadoria();
 				break;
+			case 4:
+				ListarMercadorias();
 			default:
 				throw new OpcaoIlegalException();
 			}
 		}
 
 		in.close();
+	}
+
+	private void ListarMercadorias() {
+		
+		List listMercadorias = new ArrayList();
+		Mercadoria aux;
+	
+		listMercadorias = facade.listarMercadorias();
+	
+		System.out.println("ID|Nome|Preco|Cor|Tamanho|Produto \n \n");
+	
+		for (int i = 0; i < listMercadorias.size(); i++) {
+			aux = (Mercadoria) listMercadorias.get(i);
+			System.out.print(aux.getID() + "   ");
+			System.out.print(aux.getNome() + "   ");
+			System.out.print(aux.getPreco() + "   ");
+			System.out.print(aux.getCor() + "   ");
+			System.out.print(aux.getTamanho() + "   ");
+			System.out.println(aux.getProduto() + "\n");
+		}
+		
 	}
 
 	private void BuscarMercadoria() {
