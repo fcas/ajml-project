@@ -59,7 +59,7 @@ public class Facade {
 		iDaoMercadoria.editarMercadoria(mercadoria);
 	}
 	
-	public void apagarMercadoria(String ID){
+	public void apagarMercadoria(int ID){
 		iDaoMercadoria.apagarMercadoria(ID);
 	}
 	

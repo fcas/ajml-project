@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import models.funcionario.Funcionario;
 import models.funcionario.IFuncionario;
+import models.mercadoria.IMercadoria;
+import models.mercadoria.Mercadoria;
 import facade.Facade;
 
 public class Main {
@@ -377,6 +379,246 @@ public class Main {
 		in.close();
 	}
 
+	public void MenuMercadoria() {
+
+		int opcao = -1;
+		boolean voltar = false;
+
+		in = new Scanner(System.in);
+
+		while (!voltar) {
+			System.out.println("~~~~~ Menu Mercadorias ~~~~~");
+			System.out.println("O que gostaria de fazer?");
+			System.out.println("0 - Voltar");
+			System.out.println("1 - Cadastrar nova Mercadoria");
+
+			opcao = in.nextInt();
+			switch (opcao) {
+			case 0:
+				Main.main(null);
+				break;
+			case 1:
+				CadastrarMercadoria();
+				break;
+			default:
+				System.out.println("Opcao nao reconhecida.");
+				break;
+			}
+		}
+
+		in.close();
+	}
+
+	private void CadastrarMercadoria() {
+
+		System.out.println("Carregando tela Cadastro Mercadoria:");
+
+		IMercadoria mercadoria = new Mercadoria();
+
+		// coleta dados
+		String nome = mercadoriaNome();
+		double preco = mercadoriaPreco();
+		String cor = mercadoriaCor();
+		String tamanho = mercadoriaTamanho();
+		String produto = mercadoriaProduto();
+
+		// seta a mercadoria
+		mercadoria.setNome(nome);
+		mercadoria.setPreco(preco);
+		mercadoria.setCor(cor);
+		mercadoria.setTamanho(tamanho);
+		mercadoria.setProduto(produto);
+
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto tentamos cadastrar.");
+		facade.criarMercadoria(mercadoria);
+
+	}
+
+	private String mercadoriaProduto() {
+
+		String produto = null;
+		boolean confirma = false;
+		boolean valido = false;
+
+		in = new Scanner(System.in);
+
+		String resposta;
+
+		while (!confirma) {
+			while (!valido) {
+				System.out.println("Digite nome do produto:");
+				produto = in.next();
+				if (!(produto.equals(""))) {
+					valido = true;
+				}
+
+				System.out.println("Produto = " + produto
+						+ "\nTem certeza? (s/n)");
+				resposta = in.next();
+
+				if (resposta.equalsIgnoreCase("s")) {
+					confirma = true;
+					System.out.println("Nome confirmado.");
+					return produto;
+				} else {
+					break;
+				}
+			}
+		}
+
+		in.close();
+
+		return produto;
+	}
+
+	private String mercadoriaTamanho() {
+
+		String tamanho = null;
+		boolean confirma = false;
+		boolean valido = false;
+
+		in = new Scanner(System.in);
+
+		String resposta;
+
+		while (!confirma) {
+			while (!valido) {
+				System.out.println("Digite o tamanho da mercadoria:");
+				tamanho = in.next();
+				if (!(tamanho.equals(""))) {
+					valido = true;
+				}
+
+				System.out.println("Tamanho = " + tamanho
+						+ "\nTem certeza? (s/n)");
+				resposta = in.next();
+
+				if (resposta.equalsIgnoreCase("s")) {
+					confirma = true;
+					System.out.println("Tamanho confirmado.");
+					return tamanho;
+				} else {
+					break;
+				}
+			}
+		}
+
+		in.close();
+
+		return tamanho;
+
+	}
+
+	private String mercadoriaCor() {
+
+		String cor = null;
+		boolean confirma = false;
+		boolean valido = false;
+
+		in = new Scanner(System.in);
+
+		String resposta;
+
+		while (!confirma) {
+			while (!valido) {
+				System.out.println("Informe a cor da mercadoria:");
+				cor = in.next();
+				if (!(cor.equals(""))) {
+					valido = true;
+				}
+
+				System.out.println("Cor = " + cor + "\nTem certeza? (s/n)");
+				resposta = in.next();
+
+				if (resposta.equalsIgnoreCase("s")) {
+					confirma = true;
+					System.out.println("Cor confirmada.");
+					return cor;
+				} else {
+					break;
+				}
+			}
+		}
+
+		in.close();
+
+		return cor;
+	}
+
+	private double mercadoriaPreco() {
+
+		double preco = -1.0;
+		boolean confirma = false;
+		boolean valido = false;
+
+		in = new Scanner(System.in);
+
+		String resposta;
+
+		while (!confirma) {
+			while (!valido) {
+				System.out.println("Digite o preco da mercadoria:");
+				preco = in.nextDouble();
+				if (!(preco > 0.0)) {
+					valido = true;
+				}
+
+				System.out.println("Preco = " + preco + "\nTem certeza? (s/n)");
+				resposta = in.next();
+
+				if (resposta.equalsIgnoreCase("s")) {
+					confirma = true;
+					System.out.println("Preco confirmado.");
+					return preco;
+				} else {
+					break;
+				}
+			}
+		}
+
+		in.close();
+
+		return preco;
+
+	}
+
+	private String mercadoriaNome() {
+
+		String Nome = null;
+		boolean confirma = false;
+		boolean valido = false;
+
+		in = new Scanner(System.in);
+
+		String resposta;
+
+		while (!confirma) {
+			while (!valido) {
+				System.out.println("Digite o nome da mercadoria:");
+				Nome = in.next();
+				if (!(Nome.equals(""))) {
+					valido = true;
+				}
+
+				System.out.println("Nome = " + Nome + "\nTem certeza? (s/n)");
+				resposta = in.next();
+
+				if (resposta.equalsIgnoreCase("s")) {
+					confirma = true;
+					System.out.println("Nome confirmado.");
+					return Nome;
+				} else {
+					break;
+				}
+			}
+		}
+
+		in.close();
+
+		return Nome;
+	}
+
 	public static void main(String[] args) {
 		System.out.println("iniciando...");
 		Scanner local = new Scanner(System.in);
@@ -389,11 +631,15 @@ public class Main {
 			System.out
 					.println("Digite o numero correspondente a opcao desejada.");
 			System.out.println("1- Menu Funcionarios");
+			System.out.println("2- Menu Mercadorias");
 			opcao = local.nextInt();
 			switch (opcao) {
-			
+
 			case 1:
 				main.MenuFuncionarios();
+				break;
+			case 2:
+				main.MenuMercadoria();
 				break;
 			default:
 				System.out
