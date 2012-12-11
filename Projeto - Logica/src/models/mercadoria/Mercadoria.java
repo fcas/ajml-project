@@ -103,7 +103,7 @@ public class Mercadoria implements IMercadoria {
 	  @ assignable produto;
 	  @ ensures produto == novoProduto; @*/
 	public void setProduto(String novoProduto) {
-		this.produto = produto;
+		this.produto = novoProduto;
 	}
 }
  

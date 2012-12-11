@@ -87,7 +87,6 @@ public class Facade {
 		return iDaoMercadoria.buscarMercadoria_ID(ID);
 	}
 	
-	
 	//Metodos CRUD Vendas
 	public void criarVenda (IVenda venda) {
 		iDaoVendas.criarVenda(venda);
