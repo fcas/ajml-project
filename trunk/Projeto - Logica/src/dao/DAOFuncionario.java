@@ -181,7 +181,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 			buscarRg = comando
 					.executeQuery("SELECT rg" 
 							+ " FROM funcionario" 
-							+ " WHERE" + buscarRg);
+							+ " WHERE rg=" + rg);
 			if (buscarRg.next()) {
 				return buscarRg.getString("rg");
 			}
