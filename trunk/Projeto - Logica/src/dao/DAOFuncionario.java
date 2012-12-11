@@ -148,6 +148,29 @@ public class DAOFuncionario implements IDaoFuncionario {
 
 		return le;
 	}
+
+	@Override
+	public int calcularBonificacao(IFuncionario funcionario) {
+		
+		ResultSet qtdVenda = null;
+		
+		try {
+			conectar();
+			qtdVenda = comando
+					.executeQuery("SELECT vendedorRg," 
+							+ "COUNT(" + funcionario.getRg() 
+							+ ") as vendas from vendas GROUP BY vendedorRg" + ";");
+			if (qtdVenda.next()) {
+				return Integer.parseInt(qtdVenda.getString("vendas"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return -1;
+		
+	}
 	
 }
  
