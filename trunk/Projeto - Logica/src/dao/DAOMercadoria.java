@@ -81,7 +81,7 @@ public class DAOMercadoria implements IDaoMercadoria{
 		}
 		
 		//TESTAR NO BANCO
-		public IMercadoria buscarMercadoria_ID(String ID) {
+		public IMercadoria buscarMercadoria_ID(int ID) {
 			ResultSet result = null;
 			Mercadoria le = new Mercadoria();
 			
