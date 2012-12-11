@@ -4,27 +4,27 @@ public class Mercadoria implements IMercadoria {
  
 	private /*@ spec_public @*/ double preco; //@ in ipreco;
 	/*@ protected represents
-	 @ ipreco = preco; @*/
+	  @ ipreco = preco; @*/
 
 	private /*@ spec_public @*/ int ID; //@ in iID;
 	/*@ protected represents
-	 @ iID = ID; @*/
+	  @ iID = ID; @*/
 
 	private /*@ spec_public @*/ String nome; //@ in inome;
 	/*@ protected represents
-	 @ inome = nome; @*/
+	  @ inome = nome; @*/
 	
 	private /*@ spec_public @*/ String cor; //@ in icor;
 	/*@ protected represents
-	 @ icor = cor; @*/
+	  @ icor = cor; @*/
 	
 	private /*@ spec_public @*/ String tamanho; //@ in itamanho;
 	/*@ protected represents
-	 @ itamanho = tamanho; @*/
+	  @ itamanho = tamanho; @*/
 	
 	private /*@ spec_public @*/ String produto;//@ in iproduto;
 	/*@ protected represents
-	 @ iproduto = produto; @*/
+	  @ iproduto = produto; @*/
 
 	/*@ also
 	  @ ensures \result == preco; @*/

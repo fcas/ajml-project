@@ -24,7 +24,7 @@ public class Facade {
 	}
 	
 	
-	//Metodos CRUD Funcionarios
+	//Metodos CRUD Funcionario:
 	public void criarFuncionario(IFuncionario funcionario){
 		iDaoFuncionario.criarFuncionario(funcionario);
 	}
@@ -83,7 +83,7 @@ public class Facade {
 		return iDaoMercadoria.listarMercadorias();
 	}
 	
-	public IMercadoria buscarMercadoria(String ID){
+	public IMercadoria buscarMercadoria(int ID){
 		return iDaoMercadoria.buscarMercadoria_ID(ID);
 	}
 	
