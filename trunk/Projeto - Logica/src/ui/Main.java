@@ -14,8 +14,8 @@ import facade.Facade;
 
 public class Main {
 
-	private /*@ nullable @*/ Facade facade;
-	private /*@ nullable @*/ Scanner in;
+	private/* @ nullable @ */Facade facade;
+	private/* @ nullable @ */Scanner in;
 
 	private Main() {
 		facade = new Facade(0);
@@ -527,6 +527,8 @@ public class Main {
 			System.out.println("O que gostaria de fazer?");
 			System.out.println("0 - Voltar");
 			System.out.println("1 - Cadastrar Nova Mercadoria");
+			System.out.println("2 - Apagar mercadoria");
+			System.out.println("3 - Buscar mercadoria");
 
 			opcao = in.nextInt();
 			switch (opcao) {
@@ -536,12 +538,54 @@ public class Main {
 			case 1:
 				CadastrarMercadoria();
 				break;
+			case 2:
+				ApagarMercadoria();
+				break;
+			case 3:
+				BuscarMercadoria();
+				break;
 			default:
 				throw new OpcaoIlegalException();
 			}
 		}
 
 		in.close();
+	}
+
+	private void BuscarMercadoria() {
+		
+		Mercadoria aux;
+		in = new Scanner(System.in);
+		
+		System.out.println("Informe o id da mercadoria");
+		int id = in.nextInt();
+
+		aux = (Mercadoria) facade.buscarMercadoria(id);
+
+		System.out.println("ID|Nome|Preco|Cor|Tamanho|Produto \n");
+
+		System.out.print(aux.getID() + "   ");
+		System.out.print(aux.getNome() + "   ");
+		System.out.print(aux.getPreco() + "   ");
+		System.out.print(aux.getCor() + "   ");
+		System.out.print(aux.getProduto() + "   ");
+		
+	}
+
+	private void ApagarMercadoria() {
+
+		System.out.println("Carregando tela Apagar mercadoria:");
+
+		in = new Scanner(System.in);
+
+		// coleta dados
+		System.out.println("Informe o id da mercadoria");
+		int id = in.nextInt();
+
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto removemos a mercadoria do sistema.");
+		facade.apagarMercadoria(id);
+		
 	}
 
 	private void CadastrarMercadoria() {
