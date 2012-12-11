@@ -1,7 +1,7 @@
 package models.funcionario;
 
 
-public class Funcionario extends AbstractFuncionario {
+public class Funcionario implements IFuncionario {
 
 	private /*@ spec_public @*/ String nome;//@ in inome;
 	/*@ protected represents
