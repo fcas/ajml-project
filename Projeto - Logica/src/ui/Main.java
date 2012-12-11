@@ -14,8 +14,8 @@ import facade.Facade;
 
 public class Main {
 
-	private Facade facade;
-	private Scanner in;
+	private /*@ nullable @*/ Facade facade;
+	private /*@ nullable @*/ Scanner in;
 
 	public Main() {
 		facade = new Facade(0);

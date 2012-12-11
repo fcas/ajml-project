@@ -26,52 +26,52 @@ public class Mercadoria implements IMercadoria {
 	/*@ protected represents
 	 @ iproduto = produto; @*/
 
-	/*@ \also
+	/*@ also
 	  @ ensures \result == preco; @*/
 	public /*@ pure @*/ double getPreco() {
 		return preco;
 	}
 
-	/*@ \also
+	/*@ also
   	  @ ensures \result == ID;@*/
 	public int getID() {
 		return ID;
 	}
 	
-	/*@ \also
+	/*@ also
 	  @ ensures \result == nome;@*/
 	public String getNome() {
 		return nome;
 	}
 	
-	/*@ \also
+	/*@ also
 	  @ ensures \result == cor;@*/
 	public String getCor() {
 		return cor;
 	}
 
-	/*@ \also
+	/*@ also
 	  @ ensures \result == tamanho;@*/
 	public String getTamanho() {
 		return tamanho;
 	}
 	
-	/*@ \also
+	/*@  also
 	  @ ensures \result == produto;@*/
 	public String getProduto() {
 		return produto;
 	}
 	
 	
-	/*@ \also
-	  @ requires novoPreco != null;
+	/*@  also
+	  @ requires novoPreco > 0;
 	  @ assignable preco;
 	  @ ensures preco == novoPreco; @*/
 	public void setPreco(double novoPreco) {
 		this.preco = novoPreco;	
 	}
 	
-	/*@ \also
+	/*@  also
 	  @ requires novoNome != null;
 	  @ assignable nome;
 	  @ ensures nome == novoNome; @*/
@@ -79,7 +79,7 @@ public class Mercadoria implements IMercadoria {
 		this.nome = novoNome;
 	}
 
-	/*@ \also
+	/*@  also
 	  @ requires novaCor != null;
 	  @ assignable cor;
 	  @ ensures cor == novaCor; @*/
@@ -87,7 +87,7 @@ public class Mercadoria implements IMercadoria {
 		this.cor = novaCor;
 	}
 
-	/*@ \also
+	/*@  also
 	  @ requires novoTamanho.equalsIgnoreCase("P")
 	  @           || novoTamanho.equalsIgnoreCase("M")
 	  @           || novoTamanho.equalsIgnoreCase("G")
@@ -98,11 +98,11 @@ public class Mercadoria implements IMercadoria {
 		this.tamanho = novoTamanho;
 	}
 
-	/*@ \also
+	/*@  also
 	  @ requires novoProduto != null;
 	  @ assignable produto;
 	  @ ensures produto == novoProduto; @*/
-	public void setProduto(String produto) {
+	public void setProduto(String novoProduto) {
 		this.produto = produto;
 	}
 }

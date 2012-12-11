@@ -2,9 +2,9 @@ package dao;
 
 public class MySQLDAOFactory extends DAOFactory {
 
-	DAOFuncionario daoFuncionario;
-	DAOMercadoria daoMercadoria;
-	DAOVendas daoVendas;
+	/*@ nullable @*/DAOFuncionario daoFuncionario;
+	/*@ nullable @*/DAOMercadoria daoMercadoria;
+	/*@ nullable @*/DAOVendas daoVendas;
 	
 	public DAOFuncionario createDAOFuncionario() {
 		daoFuncionario = new DAOFuncionario();

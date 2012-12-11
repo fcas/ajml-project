@@ -13,8 +13,8 @@ import models.mercadoria.IMercadoria;
 
 public class DAOMercadoria implements IDaoMercadoria{
 			
-		private static Connection con;
-		private static Statement comando;
+		private /*@ nullable @*/ static Connection con;
+		private /*@ nullable @*/ static Statement comando;
 
 		private void conectar() {
 			

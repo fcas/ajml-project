@@ -2,7 +2,7 @@ package models.mercadoria;
 
 public interface IMercadoria {
 	//@ public model instance double ipreco;
-	//@ public model instance String iID;
+	//@ public model instance int iID;
 	//@ public model instance String inome;
 	//@ public model instance String icor;
 	//@ public model instance String itamanho;
