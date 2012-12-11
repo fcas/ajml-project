@@ -6,6 +6,8 @@ import models.funcionario.Funcionario;
 import models.funcionario.IFuncionario;
 import models.mercadoria.IMercadoria;
 import models.mercadoria.Mercadoria;
+import models.venda.IVenda;
+import models.venda.Venda;
 import facade.Facade;
 
 public class Main {
@@ -25,9 +27,9 @@ public class Main {
 
 		// coleta dados
 		String nome = funcionarioNome();
-		String rg = funcionarioRG();
-		String cpf = funcionarioCPF();
-		String dataNascimento = funcionarioData();
+		String rg = setRg();
+		String cpf = setCPF();
+		String dataNascimento = setarData();
 		String cargo = funcionarioCargo();
 		double salario = funcionarioSalario();
 
@@ -83,7 +85,7 @@ public class Main {
 	}
 
 	// TODO TESTAR
-	private String funcionarioRG() {
+	private String setRg() {
 		String RG = null;
 		boolean confirma = false;
 		boolean valido = false;
@@ -118,7 +120,7 @@ public class Main {
 	}
 
 	// TODO TESTAR
-	private String funcionarioCPF() {
+	private String setCPF() {
 		String CPF = null;
 		boolean confirma = false;
 		boolean valido = false;
@@ -152,7 +154,7 @@ public class Main {
 	}
 
 	// TODO TESTAR
-	private String funcionarioData() {
+	private String setarData() {
 		String dataString = null;
 		boolean confirma = false;
 		boolean valido = false;
@@ -163,7 +165,7 @@ public class Main {
 
 		while (!confirma) { // enquanto o usuario nao confirmar
 			while (!valido) { // enquanto o CPF nao for valido
-				System.out.println("Digite Data de Nascimento (DD/MM/AAAA)");
+				System.out.println("Informe a data (DD/MM/AAAA)");
 				dataString = in.next();
 				if (dataString.length() == 10) { // se tem o tamanho certo
 					int[] dataInt = quebraData(dataString); // quebra a linha
@@ -213,7 +215,7 @@ public class Main {
 		int mes = dataInt[1];
 		int ano = dataInt[2];
 		boolean bissexto = false;
-		if (ano >= 1896 && ano <= 2002) { // se for um ano v�lido
+		if (ano >= 1896 && ano <= 2020) { // se for um ano v�lido
 			if (((ano % 4 == 0) && (ano % 100 != 0)) || (ano % 400 == 0)) { // se
 																			// for
 																			// bissexto
@@ -632,6 +634,7 @@ public class Main {
 					.println("Digite o numero correspondente a opcao desejada.");
 			System.out.println("1- Menu Funcionarios");
 			System.out.println("2- Menu Mercadorias");
+			System.out.println("3- Menu Vendas");
 			opcao = local.nextInt();
 			switch (opcao) {
 
@@ -640,6 +643,9 @@ public class Main {
 				break;
 			case 2:
 				main.MenuMercadoria();
+				break;
+			case 3: 
+				main.MenuVendas();
 				break;
 			default:
 				System.out
@@ -651,6 +657,132 @@ public class Main {
 
 		local.close();
 
+	}
+
+	private void MenuVendas() {
+		
+		int opcao = -1;
+		boolean voltar = false;
+
+		in = new Scanner(System.in);
+
+		while (!voltar) {
+			System.out.println("~~~~~ Menu Vendas ~~~~~");
+			System.out.println("O que gostaria de fazer?");
+			System.out.println("0 - Voltar");
+			System.out.println("1 - Efetuar venda");
+
+			opcao = in.nextInt();
+			switch (opcao) {
+			case 0:
+				Main.main(null);
+				break;
+			case 1:
+				CadastrarVenda();
+				break;
+			default:
+				System.out.println("Opcao nao reconhecida.");
+				break;
+			}
+		}
+
+		in.close();
+	}
+
+	private void CadastrarVenda() {
+		
+		System.out.println("Carregando tela Cadastro Venda:");
+
+		IVenda venda = new Venda();
+
+		// coleta dados
+		double subtotal = mercadoriaSubtotal();
+		String vendedorRg = setRg();
+		String dataVenda = setarData();
+		int qtdVenda = mercadoriaQtdVenda();
+
+		// seta a mercadoria
+		venda.setSubtotal(subtotal);
+		venda.setVendedorRG(vendedorRg);
+		venda.setDataVenda(dataVenda);
+		venda.setQtdVendas(qtdVenda);
+
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto tentamos cadastrar.");
+		facade.criarVenda(venda);
+		
+	}
+
+	private int mercadoriaQtdVenda() {
+		int qtdVenda = -1;
+		boolean confirma = false;
+		boolean valido = false;
+
+		in = new Scanner(System.in);
+
+		String resposta;
+
+		while (!confirma) {
+			while (!valido) {
+				System.out.println("Digite a quantidade da venda:");
+				qtdVenda = in.nextInt();
+				if (qtdVenda > 0) {
+					valido = true;
+				}
+
+				System.out.println("Quantidade = " + qtdVenda + "\nTem certeza? (s/n)");
+				resposta = in.next();
+
+				if (resposta.equalsIgnoreCase("s")) {
+					confirma = true;
+					System.out.println("Quantidade confirmads.");
+					return qtdVenda;
+				} else {
+					break;
+				}
+			}
+		}
+
+		in.close();
+
+		return qtdVenda;
+		
+	}
+
+	private double mercadoriaSubtotal() {
+		
+		double subtotal = -1.0;
+		boolean confirma = false;
+		boolean valido = false;
+
+		in = new Scanner(System.in);
+
+		String resposta;
+
+		while (!confirma) {
+			while (!valido) {
+				System.out.println("Digite o subtotal:");
+				subtotal = in.nextDouble();
+				if ( subtotal > 0.0) {
+					valido = true;
+				}
+
+				System.out.println("Nome = " + subtotal + "\nTem certeza? (s/n)");
+				resposta = in.next();
+
+				if (resposta.equalsIgnoreCase("s")) {
+					confirma = true;
+					System.out.println("Subtotal confirmado.");
+					return subtotal;
+				} else {
+					break;
+				}
+			}
+		}
+
+		in.close();
+
+		return subtotal;
 	}
 
 }
