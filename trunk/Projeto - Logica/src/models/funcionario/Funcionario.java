@@ -17,7 +17,7 @@ public class Funcionario implements IFuncionario {
 	
 	private /*@ spec_public @*/ String dataNascimento; //@ in idataNascimento;
 	/*@ protected represents
-	  @ icargo = dataNascimento; @*/
+	  @ idataNascimento = dataNascimento; @*/
 	
 	private /*@ spec_public @*/ String cargo; //@ in icargo;
 	/*@ protected represents
@@ -28,7 +28,12 @@ public class Funcionario implements IFuncionario {
 	  @ isalario = salario; @*/
 	
 	//TODO AJEITAR INVARIANTE!!!
-	/*@ public invariant true;
+	/*@ public invariant nome != null;
+	  @ public invariant rg != null;
+	  @ public invariant cpf != null;
+	  @ public invariant dataNascimento != null;
+	  @ public invariant cargo != null;
+	  @ public invariant salario >= 0;
 	  @ public constraint
 	  @ \old(salario) <= salario; @*/
 	
@@ -81,7 +86,6 @@ public class Funcionario implements IFuncionario {
 		this.salario = novoSalario;	
 	}
 
-	
 	public double getSalario() {
 		return salario;
 	}
