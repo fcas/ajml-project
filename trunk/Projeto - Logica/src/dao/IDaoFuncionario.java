@@ -14,6 +14,8 @@ public interface IDaoFuncionario {
 	public void atualizarSalario(IFuncionario funcionario);
 	public int quantidadeVendas(IFuncionario funcionario);
 	public double buscarSalario(IFuncionario funcionario);
+	public String buscarRg (String rg);
+	
 	 
 }
  
