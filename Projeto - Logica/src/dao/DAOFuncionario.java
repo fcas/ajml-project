@@ -49,6 +49,20 @@ public class DAOFuncionario implements IDaoFuncionario {
 		
 	}
 	
+	public void atualizarSalario(IFuncionario funcionario) {
+		
+		String insert_novoSalario = "UPDATE funcionario SET "
+				+ "salario=" + funcionario.getSalario()
+				+ " WHERE rg='" + funcionario.getRg() + "'";
+		try {	
+			conectar();
+			comando.executeUpdate(insert_novoSalario);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void editarFuncionario(IFuncionario funcionario) {
 		
 		String insert_funcionario = "UPDATE funcionario SET "
