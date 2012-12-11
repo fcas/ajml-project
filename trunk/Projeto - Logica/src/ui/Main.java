@@ -371,7 +371,8 @@ public class Main {
 			System.out.println("3 - Calcular bonificacao");
 			System.out.println("4 - Remover funcionario");
 			System.out.println("5 - Listar funcionarios");
-			
+			System.out.println("6 - Buscar funcionario");
+
 			opcao = in.nextInt();
 			switch (opcao) {
 			case 0:
@@ -389,8 +390,11 @@ public class Main {
 			case 4:
 				RemoverFuncionario();
 				break;
-			case 5: 
+			case 5:
 				ListarFuncionarios();
+				break;
+			case 6:
+				BuscarFuncionario();
 				break;
 			default:
 				System.out.println("Opcao nao reconhecida.");
@@ -401,44 +405,66 @@ public class Main {
 		in.close();
 	}
 
+	private void BuscarFuncionario() {
+
+		IFuncionario funcionario = new Funcionario();
+		Funcionario aux;
+		String rg = setRg();
+
+		// seta o funcionario
+		funcionario.setRg(rg);
+
+		aux = (Funcionario) facade.buscarFuncionario(rg);
+
+		System.out.printf("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
+
+		System.out.printf(aux.getNome() + "   ");
+		System.out.printf(aux.getRg() + "   ");
+		System.out.printf(aux.getCpf() + "   ");
+		System.out.printf(aux.getDataNascimento() + "   ");
+		System.out.printf(aux.getCargo() + "   ");
+		System.out.printf("%f \n \n", aux.getSalario());
+
+	}
+
 	private void ListarFuncionarios() {
-		
+
 		List listFuncionarios = new ArrayList();
 		Funcionario aux;
-		
+
 		listFuncionarios = facade.listarFuncionarios();
-		
+
 		System.out.printf("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
-		
+
 		for (int i = 0; i < listFuncionarios.size(); i++) {
 			aux = (Funcionario) listFuncionarios.get(i);
 			System.out.printf(aux.getNome() + "   ");
-			System.out.printf(aux.getRg()+ "   ");
-			System.out.printf(aux.getCpf()+ "   ");
-			System.out.printf(aux.getDataNascimento()+ "   ");
-			System.out.printf(aux.getCargo()+ "   ");
-			System.out.printf("%f \n \n",aux.getSalario());
+			System.out.printf(aux.getRg() + "   ");
+			System.out.printf(aux.getCpf() + "   ");
+			System.out.printf(aux.getDataNascimento() + "   ");
+			System.out.printf(aux.getCargo() + "   ");
+			System.out.printf("%f \n \n", aux.getSalario());
 		}
-		
+
 	}
 
 	private void RemoverFuncionario() {
-		
+
 		System.out.println("Carregando tela Remover Funcionario:");
 
 		IFuncionario funcionario = new Funcionario();
 
 		// coleta dados
 		String rg = setRg();
-		
+
 		// seta o funcionario
-		
+
 		funcionario.setRg(rg);
-		
+
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto removemos o usuário do sistema.");
 		facade.apagarFuncionario(funcionario);
-		
+
 	}
 
 	private double CalcularBonificacao() {
@@ -459,7 +485,7 @@ public class Main {
 		System.out.println("Aguarde enquanto tentamos calcular a bonificacao.");
 
 		salario = facade.buscarSalario(funcionario);
-		
+
 		bonificacao = salario + salario
 				* (0.01 * facade.quantidadeVendas(funcionario));
 
@@ -594,7 +620,10 @@ public class Main {
 			while (!valido) {
 				System.out.println("Digite o tamanho da mercadoria:");
 				tamanho = in.next();
-				if ((tamanho.equalsIgnoreCase("P")) || (tamanho.equalsIgnoreCase("M")) || (tamanho.equalsIgnoreCase("G")) || (tamanho.equalsIgnoreCase("GG"))) {
+				if ((tamanho.equalsIgnoreCase("P"))
+						|| (tamanho.equalsIgnoreCase("M"))
+						|| (tamanho.equalsIgnoreCase("G"))
+						|| (tamanho.equalsIgnoreCase("GG"))) {
 					valido = true;
 				}
 
