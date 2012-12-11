@@ -6,7 +6,7 @@ public class Mercadoria implements IMercadoria {
 	/*@ protected represents
 	 @ ipreco = preco; @*/
 
-	private String ID; //@ in iID;
+	private int ID; //@ in iID;
 	/*@ protected represents
 	 @ iID = ID; @*/
 
@@ -36,7 +36,7 @@ public class Mercadoria implements IMercadoria {
 	}
 
 	//@ ensures \result == ID;
-	public String getID() {
+	public int getID() {
 		return ID;
 	}
 	
@@ -54,7 +54,7 @@ public class Mercadoria implements IMercadoria {
 	}
 
 	//@ ensures ID == novoID;
-	public void setID(String novoID) {
+	public void setID(int novoID) {
 		this.ID = novoID;
 	}
 	

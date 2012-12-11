@@ -11,7 +11,7 @@ create table funcionario (
 create table mercadoria (
 	id integer unsigned NOT NULL AUTO_INCREMENT,
 	nome VARCHAR(100),
-	preco VARCHAR(100),
+	preco double,
 	cor VARCHAR(100),
 	tamanho VARCHAR(10),
 	produto VARCHAR(100),

@@ -68,7 +68,7 @@ public class DAOMercadoria implements IDaoMercadoria{
 		}
 		
 		//TESTAR NO BANCO
-		public void apagarMercadoria(String ID) {
+		public void apagarMercadoria(int ID) {
 			
 			String remove_mercadoria = "DELETE FROM mercadoria WHERE ID = '"
 					+ ID + "';";

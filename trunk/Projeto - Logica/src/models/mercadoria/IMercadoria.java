@@ -15,9 +15,9 @@ public interface IMercadoria {
 
 	public double getPreco();
 
-	public void setID(String ID);
+	public void setID(int id);
 
-	public String getID();
+	public int getID();
 
 	public void setNome(String nome);
 
