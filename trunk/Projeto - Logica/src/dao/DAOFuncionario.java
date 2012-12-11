@@ -12,8 +12,8 @@ import models.funcionario.IFuncionario;
 
 public class DAOFuncionario implements IDaoFuncionario {
 	
-	private static Connection con;
-	private static Statement comando;
+	private /*@ nullable @*/ static Connection con;
+	private /*@ nullable @*/ static Statement comando;
 
 	private void conectar() {
 		
@@ -172,7 +172,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 		
 	}
 
-	@Override
+	
 	public double buscarSalario(IFuncionario funcionario) {
 		
 		ResultSet salario = null;
