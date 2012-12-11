@@ -544,7 +544,7 @@ public class Main {
 			while (!valido) {
 				System.out.println("Digite o tamanho da mercadoria:");
 				tamanho = in.next();
-				if (!(tamanho.equals(""))) {
+				if ((tamanho.equalsIgnoreCase("P")) || (tamanho.equalsIgnoreCase("M")) || (tamanho.equalsIgnoreCase("G")) || (tamanho.equalsIgnoreCase("GG"))) {
 					valido = true;
 				}
 

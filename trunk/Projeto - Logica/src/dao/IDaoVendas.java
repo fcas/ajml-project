@@ -12,7 +12,7 @@ public interface IDaoVendas {
 	
 	public void apagarVenda(int  id);
 	
-	public List<IVenda> listarVendas();
+	public List listarVendas();
 	
 	public IVenda buscarVenda(int ID);
 

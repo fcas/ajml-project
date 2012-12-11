@@ -93,10 +93,10 @@ public class DAOFuncionario implements IDaoFuncionario {
 		}
 	}
 	
-	public List<IFuncionario> listarFuncionario() {
+	public List listarFuncionario() {
 
 		conectar();
-		List<IFuncionario> list_funcionario = new ArrayList<IFuncionario>();
+		List list_funcionario = new ArrayList();
 		ResultSet result;
 
 		try {
@@ -149,7 +149,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 		return le;
 	}
 
-	@Override
+	
 	public int quantidadeVendas(IFuncionario funcionario) {
 		
 		ResultSet qtdVenda = null;

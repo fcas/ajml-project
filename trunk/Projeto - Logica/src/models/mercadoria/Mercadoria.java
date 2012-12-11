@@ -2,82 +2,106 @@ package models.mercadoria;
 
 public class Mercadoria implements IMercadoria {
  
-	private double preco; //@ in ipreco;
+	private /*@ spec_public @*/ double preco; //@ in ipreco;
 	/*@ protected represents
 	 @ ipreco = preco; @*/
 
-	private int ID; //@ in iID;
+	private /*@ spec_public @*/ int ID; //@ in iID;
 	/*@ protected represents
 	 @ iID = ID; @*/
 
-	private String nome; //@ in inome;
+	private /*@ spec_public @*/ String nome; //@ in inome;
 	/*@ protected represents
 	 @ inome = nome; @*/
 	
-	private String cor; //@ in icor;
+	private /*@ spec_public @*/ String cor; //@ in icor;
 	/*@ protected represents
-	 @ icor = nome; @*/
+	 @ icor = cor; @*/
 	
-	
-	private String tamanho; //@ in itamanho;
+	private /*@ spec_public @*/ String tamanho; //@ in itamanho;
 	/*@ protected represents
-	 @ itamanho = nome; @*/
+	 @ itamanho = tamanho; @*/
 	
-	private String produto;
-	
-	
-	public String getProduto() {
-		return produto;
-	}
+	private /*@ spec_public @*/ String produto;//@ in iproduto;
+	/*@ protected represents
+	 @ iproduto = produto; @*/
 
-	//@ ensures \result == preco;
+	/*@ \also
+	  @ ensures \result == preco; @*/
 	public /*@ pure @*/ double getPreco() {
 		return preco;
 	}
 
-	//@ ensures \result == ID;
+	/*@ \also
+  	  @ ensures \result == ID;@*/
 	public int getID() {
 		return ID;
 	}
 	
-	//@ ensures \result == nome;
+	/*@ \also
+	  @ ensures \result == nome;@*/
 	public String getNome() {
 		return nome;
 	}
 	
+	/*@ \also
+	  @ ensures \result == cor;@*/
 	public String getCor() {
 		return cor;
 	}
 
+	/*@ \also
+	  @ ensures \result == tamanho;@*/
 	public String getTamanho() {
 		return tamanho;
 	}
-
-	//@ ensures ID == novoID;
-	public void setID(int novoID) {
-		this.ID = novoID;
+	
+	/*@ \also
+	  @ ensures \result == produto;@*/
+	public String getProduto() {
+		return produto;
 	}
 	
-	//@ ensures preco == novoPreco;
+	
+	/*@ \also
+	  @ requires novoPreco != null;
+	  @ assignable preco;
+	  @ ensures preco == novoPreco; @*/
 	public void setPreco(double novoPreco) {
 		this.preco = novoPreco;	
 	}
 	
-	//@ ensures nome == novoNome
+	/*@ \also
+	  @ requires novoNome != null;
+	  @ assignable nome;
+	  @ ensures nome == novoNome; @*/
 	public void setNome(String novoNome) {
 		this.nome = novoNome;
 	}
 
-	//@ ensures cor == novaCor
+	/*@ \also
+	  @ requires novaCor != null;
+	  @ assignable cor;
+	  @ ensures cor == novaCor; @*/
 	public void setCor(String novaCor) {
 		this.cor = novaCor;
 	}
 
-	//@ ensures tamanho == novoTamanho
+	/*@ \also
+	  @ requires novoTamanho.equalsIgnoreCase("P")
+	  @           || novoTamanho.equalsIgnoreCase("M")
+	  @           || novoTamanho.equalsIgnoreCase("G")
+	  @           || novoTamanho.equalsIgnoreCase("GG");
+	  @ assignable tamanho;
+	  @ ensures tamanho == novoTamanho; @*/
 	public void setTamanho(String novoTamanho) {
 		this.tamanho = novoTamanho;
 	}
 
+	/*@ \also
+	  @ requires novoProduto != null;
+	  @ assignable produto;
+	  @ ensures produto == novoProduto; @*/
 	public void setProduto(String produto) {
 		this.produto = produto;
 	}

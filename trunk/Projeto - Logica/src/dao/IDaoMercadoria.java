@@ -10,6 +10,6 @@ public interface IDaoMercadoria {
 	public void editarMercadoria(IMercadoria mercadoria);
 	public void apagarMercadoria(int ID);
 	public IMercadoria buscarMercadoria_ID(String ID);
-	public List<IMercadoria> listarMercadorias();
+	public List listarMercadorias();
 
 }
