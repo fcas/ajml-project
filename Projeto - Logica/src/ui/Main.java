@@ -1,5 +1,7 @@
 package ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import models.funcionario.Funcionario;
@@ -368,6 +370,7 @@ public class Main {
 			System.out.println("2 - Atualizar salário");
 			System.out.println("3 - Calcular bonificacao");
 			System.out.println("4 - Remover funcionario");
+			System.out.println("5 - Listar funcionarios");
 			
 			opcao = in.nextInt();
 			switch (opcao) {
@@ -386,6 +389,9 @@ public class Main {
 			case 4:
 				RemoverFuncionario();
 				break;
+			case 5: 
+				ListarFuncionarios();
+				break;
 			default:
 				System.out.println("Opcao nao reconhecida.");
 				break;
@@ -393,6 +399,27 @@ public class Main {
 		}
 
 		in.close();
+	}
+
+	private void ListarFuncionarios() {
+		
+		List listFuncionarios = new ArrayList();
+		Funcionario aux;
+		
+		listFuncionarios = facade.listarFuncionarios();
+		
+		System.out.printf("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
+		
+		for (int i = 0; i < listFuncionarios.size(); i++) {
+			aux = (Funcionario) listFuncionarios.get(i);
+			System.out.printf(aux.getNome() + "   ");
+			System.out.printf(aux.getRg()+ "   ");
+			System.out.printf(aux.getCpf()+ "   ");
+			System.out.printf(aux.getDataNascimento()+ "   ");
+			System.out.printf(aux.getCargo()+ "   ");
+			System.out.printf("%f \n \n",aux.getSalario());
+		}
+		
 	}
 
 	private void RemoverFuncionario() {
