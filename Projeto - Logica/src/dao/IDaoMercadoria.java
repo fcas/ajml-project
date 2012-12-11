@@ -9,7 +9,7 @@ public interface IDaoMercadoria {
 	public void criarMercadoria(IMercadoria mercadoria);
 	public void editarMercadoria(IMercadoria mercadoria);
 	public void apagarMercadoria(int ID);
-	public IMercadoria buscarMercadoria_ID(String ID);
+	public IMercadoria buscarMercadoria_ID(int ID);
 	public List listarMercadorias();
 
 }
