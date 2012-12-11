@@ -17,10 +17,15 @@ public class Main {
 	private /*@ nullable @*/ Facade facade;
 	private /*@ nullable @*/ Scanner in;
 
-	public Main() {
+	private Main() {
 		facade = new Facade(0);
 	}
 
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	/*
+	 * PARTE RELACIONADA A FUNCIONARIO
+	 */
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private void CadastrarFuncionario() {
 
 		System.out.println("Carregando tela Cadastro Funcionario:");
@@ -31,7 +36,7 @@ public class Main {
 		String nome = funcionarioNome();
 		String rg = setRg();
 		String cpf = setCPF();
-		String dataNascimento = setarData();
+		String dataNascimento = setData();
 		String cargo = funcionarioCargo();
 		double salario = funcionarioSalario();
 
@@ -46,10 +51,165 @@ public class Main {
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto tentamos cadastrar.");
 		facade.criarFuncionario(funcionario);
-
 	}
 
-	// TODO TESTAR
+	private void MenuFuncionarios() throws OpcaoIlegalException {
+	
+		int opcao = -1;
+		boolean voltar = false;
+	
+		in = new Scanner(System.in);
+	
+		while (!voltar) {
+			System.out.println("~~~~~ Menu Funcionarios ~~~~~");
+			System.out.println("O que gostaria de fazer?");
+			System.out.println("0 - Voltar");
+			System.out.println("1 - Cadastrar Novo Funcionario");
+			System.out.println("2 - Atualizar Salario");
+			System.out.println("3 - Calcular Bonificacao");
+			System.out.println("4 - Remover Funcionario");
+			System.out.println("5 - Listar Funcionarios");
+			System.out.println("6 - Buscar Funcionario");
+	
+			opcao = in.nextInt();
+			switch (opcao) {
+			case 0:
+				MenuPrincipal();
+				break;
+			case 1:
+				CadastrarFuncionario();
+				break;
+			case 2:
+				AtualizarSalario();
+				break;
+			case 3:
+				System.out.println(CalcularBonificacao());
+				break;
+			case 4:
+				RemoverFuncionario();
+				break;
+			case 5:
+				ListarFuncionarios();
+				break;
+			case 6:
+				BuscarFuncionario();
+				break;
+			default:
+				throw new OpcaoIlegalException();
+			}
+		}
+	
+		in.close();
+	}
+
+	private void BuscarFuncionario() {
+	
+		IFuncionario funcionario = new Funcionario();
+		Funcionario aux;
+		String rg = setRg();
+	
+		// seta o funcionario
+		funcionario.setRg(rg);
+	
+		aux = (Funcionario) facade.buscarFuncionario(rg);
+	
+		System.out.println("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
+	
+		System.out.print(aux.getNome() + "   ");
+		System.out.print(aux.getRg() + "   ");
+		System.out.print(aux.getCpf() + "   ");
+		System.out.print(aux.getDataNascimento() + "   ");
+		System.out.print(aux.getCargo() + "   ");
+		System.out.print(aux.getSalario() + "\n");
+	
+	}
+
+	private void ListarFuncionarios() {
+	
+		List listFuncionarios = new ArrayList();
+		Funcionario aux;
+	
+		listFuncionarios = facade.listarFuncionarios();
+	
+		System.out.println("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
+	
+		for (int i = 0; i < listFuncionarios.size(); i++) {
+			aux = (Funcionario) listFuncionarios.get(i);
+			System.out.print(aux.getNome() + "   ");
+			System.out.print(aux.getRg() + "   ");
+			System.out.print(aux.getCpf() + "   ");
+			System.out.print(aux.getDataNascimento() + "   ");
+			System.out.print(aux.getCargo() + "   ");
+			System.out.println(aux.getSalario() + "\n");
+		}
+	
+	}
+
+	private void RemoverFuncionario() {
+	
+		System.out.println("Carregando tela Remover Funcionario:");
+	
+		IFuncionario funcionario = new Funcionario();
+	
+		// coleta dados
+		String rg = setRg();
+	
+		// seta o funcionario
+	
+		funcionario.setRg(rg);
+	
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto removemos o usuario do sistema.");
+		facade.apagarFuncionario(funcionario);
+	
+	}
+
+	private double CalcularBonificacao() {
+	
+		double salario;
+		double bonificacao = -1;
+	
+		System.out.println("Carregando tela Calcular Bonificacao:");
+	
+		IFuncionario funcionario = new Funcionario();
+	
+		// coleta dados
+		String rg = setRg();
+		// seta o funcionario;
+		funcionario.setRg(rg);
+	
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto tentamos calcular a bonificacao.");
+	
+		salario = facade.buscarSalario(funcionario);
+	
+		bonificacao = salario + salario
+				* (0.01 * facade.quantidadeVendas(funcionario));
+	
+		return bonificacao;
+	
+	}
+
+	private void AtualizarSalario() {
+	
+		System.out.println("Carregando tela Atualizar Salario:");
+	
+		IFuncionario funcionario = new Funcionario();
+	
+		// coleta dados
+		String rg = setRg();
+		double salario = funcionarioSalario();
+	
+		// seta o funcionario;
+		funcionario.setRg(rg);
+		funcionario.setSalario(salario);
+	
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto tentamos atualizar o salario.");
+		facade.atualizarSalario(funcionario);
+	
+	}
+
 	private String funcionarioNome() {
 
 		String Nome = null;
@@ -87,7 +247,6 @@ public class Main {
 		return Nome;
 	}
 
-	// TODO TESTAR
 	private String setRg() {
 		String RG = null;
 		boolean confirma = false;
@@ -122,7 +281,6 @@ public class Main {
 		return RG;
 	}
 
-	// TODO TESTAR
 	private String setCPF() {
 		String CPF = null;
 		boolean confirma = false;
@@ -156,8 +314,7 @@ public class Main {
 		return CPF;
 	}
 
-	// TODO TESTAR
-	private String setarData() {
+	private String setData() {
 		String dataString = null;
 		boolean confirma = false;
 		boolean valido = false;
@@ -224,7 +381,7 @@ public class Main {
 																			// bissexto
 				bissexto = true;
 			}
-
+			
 			if (mes >= 1 && mes <= 12) { // se for um mes valido
 
 				if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8
@@ -263,7 +420,6 @@ public class Main {
 		return false;
 	}
 
-	// TODO TESTAR
 	private String funcionarioCargo() {
 		String cargo = null;
 		int opcao = 0;
@@ -274,7 +430,7 @@ public class Main {
 		in = new Scanner(System.in);
 
 		while (!confirma) { // enquanto o usuario nao confirmar
-			System.out.println("Selecione Cargo do funcionario:");
+			System.out.println("Selecione cargo do funcionario:");
 			while (!valido) { // enquanto o Cargo nao for valido
 				System.out.println("1-Caixa");
 				System.out.println("2-Estoquista");
@@ -321,7 +477,6 @@ public class Main {
 		return cargo;
 	}
 
-	// TODO Implementar
 	private double funcionarioSalario() {
 
 		double salario = -1;
@@ -333,7 +488,7 @@ public class Main {
 
 		while (!confirma) { // enquanto o usuario nao confirmar
 			while (!valido) { // enquanto o Salario nao for valido
-				System.out.println("Digite Salario do funcionario:");
+				System.out.println("Digite salario do funcionario:");
 				salario = in.nextDouble();
 				if (salario > 0) {
 					valido = true;
@@ -355,165 +510,12 @@ public class Main {
 		return salario;
 	}
 
-	public void MenuFuncionarios() {
-
-		int opcao = -1;
-		boolean voltar = false;
-
-		in = new Scanner(System.in);
-
-		while (!voltar) {
-			System.out.println("~~~~~ Menu Funcionarios ~~~~~");
-			System.out.println("O que gostaria de fazer?");
-			System.out.println("0 - Voltar");
-			System.out.println("1 - Cadastrar novo Funcionario");
-			System.out.println("2 - Atualizar salÃ¡rio");
-			System.out.println("3 - Calcular bonificacao");
-			System.out.println("4 - Remover funcionario");
-			System.out.println("5 - Listar funcionarios");
-			System.out.println("6 - Buscar funcionario");
-
-			opcao = in.nextInt();
-			switch (opcao) {
-			case 0:
-				Main.main(null);
-				break;
-			case 1:
-				CadastrarFuncionario();
-				break;
-			case 2:
-				AtualizarSalario();
-				break;
-			case 3:
-				System.out.println(CalcularBonificacao());
-				break;
-			case 4:
-				RemoverFuncionario();
-				break;
-			case 5:
-				ListarFuncionarios();
-				break;
-			case 6:
-				BuscarFuncionario();
-				break;
-			default:
-				System.out.println("Opcao nao reconhecida.");
-				break;
-			}
-		}
-
-		in.close();
-	}
-
-	private void BuscarFuncionario() {
-
-		IFuncionario funcionario = new Funcionario();
-		Funcionario aux;
-		String rg = setRg();
-
-		// seta o funcionario
-		funcionario.setRg(rg);
-
-		aux = (Funcionario) facade.buscarFuncionario(rg);
-
-		System.out.printf("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
-
-		System.out.printf(aux.getNome() + "   ");
-		System.out.printf(aux.getRg() + "   ");
-		System.out.printf(aux.getCpf() + "   ");
-		System.out.printf(aux.getDataNascimento() + "   ");
-		System.out.printf(aux.getCargo() + "   ");
-		System.out.printf("%f \n \n", aux.getSalario());
-
-	}
-
-	private void ListarFuncionarios() {
-
-		List listFuncionarios = new ArrayList();
-		Funcionario aux;
-
-		listFuncionarios = facade.listarFuncionarios();
-
-		System.out.printf("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
-
-		for (int i = 0; i < listFuncionarios.size(); i++) {
-			aux = (Funcionario) listFuncionarios.get(i);
-			System.out.printf(aux.getNome() + "   ");
-			System.out.printf(aux.getRg() + "   ");
-			System.out.printf(aux.getCpf() + "   ");
-			System.out.printf(aux.getDataNascimento() + "   ");
-			System.out.printf(aux.getCargo() + "   ");
-			System.out.printf("%f \n \n", aux.getSalario());
-		}
-
-	}
-
-	private void RemoverFuncionario() {
-
-		System.out.println("Carregando tela Remover Funcionario:");
-
-		IFuncionario funcionario = new Funcionario();
-
-		// coleta dados
-		String rg = setRg();
-
-		// seta o funcionario
-
-		funcionario.setRg(rg);
-
-		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto removemos o usuÃ¡rio do sistema.");
-		facade.apagarFuncionario(funcionario);
-
-	}
-
-	private double CalcularBonificacao() {
-
-		double salario;
-		double bonificacao = -1;
-
-		System.out.println("Carregando tela Calcular bonificacao:");
-
-		IFuncionario funcionario = new Funcionario();
-
-		// coleta dados
-		String rg = setRg();
-		// seta o funcionario;
-		funcionario.setRg(rg);
-
-		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto tentamos calcular a bonificacao.");
-
-		salario = facade.buscarSalario(funcionario);
-
-		bonificacao = salario + salario
-				* (0.01 * facade.quantidadeVendas(funcionario));
-
-		return bonificacao;
-
-	}
-
-	private void AtualizarSalario() {
-
-		System.out.println("Carregando tela Atualizar salÃ¡rio:");
-
-		IFuncionario funcionario = new Funcionario();
-
-		// coleta dados
-		String rg = setRg();
-		double salario = funcionarioSalario();
-
-		// seta o funcionario;
-		funcionario.setRg(rg);
-		funcionario.setSalario(salario);
-
-		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto tentamos atualizar o salario.");
-		facade.atualizarSalario(funcionario);
-
-	}
-
-	public void MenuMercadoria() {
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	/*
+	 * PARTE RELACIONADA A MERCADORIA
+	 */
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	private void MenuMercadoria() throws OpcaoIlegalException {
 
 		int opcao = -1;
 		boolean voltar = false;
@@ -524,19 +526,18 @@ public class Main {
 			System.out.println("~~~~~ Menu Mercadorias ~~~~~");
 			System.out.println("O que gostaria de fazer?");
 			System.out.println("0 - Voltar");
-			System.out.println("1 - Cadastrar nova Mercadoria");
+			System.out.println("1 - Cadastrar Nova Mercadoria");
 
 			opcao = in.nextInt();
 			switch (opcao) {
 			case 0:
-				Main.main(null);
+				MenuPrincipal();
 				break;
 			case 1:
 				CadastrarMercadoria();
 				break;
 			default:
-				System.out.println("Opcao nao reconhecida.");
-				break;
+				throw new OpcaoIlegalException();
 			}
 		}
 
@@ -755,108 +756,16 @@ public class Main {
 
 		return Nome;
 	}
-
-	public static void main(String[] args) {
-		System.out.println("iniciando...");
-		Scanner local = new Scanner(System.in);
-		Main main = new Main();
-		int opcao = -1;
-		boolean sair = false;
-
-		while (!sair) {
-			System.out.println("~~~~~ Menu Principal ~~~~~");
-			System.out
-					.println("Digite o numero correspondente a opcao desejada.");
-			System.out.println("1- Menu Funcionarios");
-			System.out.println("2- Menu Mercadorias");
-			System.out.println("3- Menu Vendas");
-			opcao = local.nextInt();
-			switch (opcao) {
-
-			case 1:
-				main.MenuFuncionarios();
-				break;
-			case 2:
-				main.MenuMercadoria();
-				break;
-			case 3:
-				main.MenuVendas();
-				break;
-			default:
-				System.out
-						.println("Opcao nao reconhecida. Finalizando programa.");
-				sair = true;
-				break;
-			}
-		}
-
-		local.close();
-
-	}
-
-	private void MenuVendas() {
-
-		int opcao = -1;
-		boolean voltar = false;
-
-		in = new Scanner(System.in);
-
-		while (!voltar) {
-			System.out.println("~~~~~ Menu Vendas ~~~~~");
-			System.out.println("O que gostaria de fazer?");
-			System.out.println("0 - Voltar");
-			System.out.println("1 - Efetuar venda");
-
-			opcao = in.nextInt();
-			switch (opcao) {
-			case 0:
-				Main.main(null);
-				break;
-			case 1:
-				CadastrarVenda();
-				break;
-			default:
-				System.out.println("Opcao nao reconhecida.");
-				break;
-			}
-		}
-
-		in.close();
-	}
-
-	private void CadastrarVenda() {
-
-		System.out.println("Carregando tela Cadastro Venda:");
-
-		IVenda venda = new Venda();
-
-		// coleta dados
-		double subtotal = mercadoriaSubtotal();
-		String vendedorRg = setRg();
-		String dataVenda = setarData();
-		int qtdVenda = mercadoriaQtdVenda();
-
-		// seta a mercadoria
-		venda.setSubtotal(subtotal);
-		venda.setVendedorRG(vendedorRg);
-		venda.setDataVenda(dataVenda);
-		venda.setQtdVendas(qtdVenda);
-
-		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto tentamos cadastrar.");
-		facade.criarVenda(venda);
-
-	}
-
+	
 	private int mercadoriaQtdVenda() {
 		int qtdVenda = -1;
 		boolean confirma = false;
 		boolean valido = false;
-
+	
 		in = new Scanner(System.in);
-
+	
 		String resposta;
-
+	
 		while (!confirma) {
 			while (!valido) {
 				System.out.println("Digite a quantidade da venda:");
@@ -864,37 +773,37 @@ public class Main {
 				if (qtdVenda > 0) {
 					valido = true;
 				}
-
+	
 				System.out.println("Quantidade = " + qtdVenda
 						+ "\nTem certeza? (s/n)");
 				resposta = in.next();
-
+	
 				if (resposta.equalsIgnoreCase("s")) {
 					confirma = true;
-					System.out.println("Quantidade confirmads.");
+					System.out.println("Quantidade confirmada.");
 					return qtdVenda;
 				} else {
 					break;
 				}
 			}
 		}
-
+	
 		in.close();
-
+	
 		return qtdVenda;
-
+	
 	}
 
 	private double mercadoriaSubtotal() {
-
+	
 		double subtotal = -1.0;
 		boolean confirma = false;
 		boolean valido = false;
-
+	
 		in = new Scanner(System.in);
-
+	
 		String resposta;
-
+	
 		while (!confirma) {
 			while (!valido) {
 				System.out.println("Digite o subtotal:");
@@ -902,11 +811,11 @@ public class Main {
 				if (subtotal > 0.0) {
 					valido = true;
 				}
-
+	
 				System.out.println("Nome = " + subtotal
 						+ "\nTem certeza? (s/n)");
 				resposta = in.next();
-
+	
 				if (resposta.equalsIgnoreCase("s")) {
 					confirma = true;
 					System.out.println("Subtotal confirmado.");
@@ -916,10 +825,164 @@ public class Main {
 				}
 			}
 		}
-
+	
 		in.close();
-
+	
 		return subtotal;
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	/*
+	 * PARTE RELACIONADA A VENDAS
+	 */
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	private void MenuVendas() throws OpcaoIlegalException {
+	
+		int opcao = -1;
+		boolean voltar = false;
+	
+		in = new Scanner(System.in);
+	
+		while (!voltar) {
+			System.out.println("~~~~~ Menu Vendas ~~~~~");
+			System.out.println("O que gostaria de fazer?");
+			System.out.println("0 - Voltar");
+			System.out.println("1 - Efetuar Venda");
+	
+			opcao = in.nextInt();
+			switch (opcao) {
+			case 0:
+				MenuPrincipal();
+				break;
+			case 1:
+				CadastrarVenda();
+				break;
+			default:
+				throw new OpcaoIlegalException();
+			}
+		}
+	
+		in.close();
+	}
+
+	private void CadastrarVenda() {
+	
+		System.out.println("Carregando tela Cadastro Venda:");
+	
+		IVenda venda = new Venda();
+	
+		// coleta dados
+		double subtotal = mercadoriaSubtotal();
+		String vendedorRg = setRg();
+		String dataVenda = setData();
+		int qtdVenda = mercadoriaQtdVenda();
+	
+		// seta a mercadoria
+		venda.setSubtotal(subtotal);
+		venda.setVendedorRG(vendedorRg);
+		venda.setDataVenda(dataVenda);
+		venda.setQtdVendas(qtdVenda);
+	
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto tentamos cadastrar.");
+		facade.criarVenda(venda);
+	
+	}
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	/*
+	 * PARTE RELACIONADA AO MENU PRINCIPAL
+	 */
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	private void MenuPrincipal() throws OpcaoIlegalException {
+		int opcao = -1;
+		boolean sair = false;
+		in = new Scanner (System.in);
+	
+		while (!sair) {
+			System.out.println("~~~~~ Menu Principal ~~~~~");
+			System.out
+					.println("Digite o numero correspondente a opcao desejada.");
+			System.out.println("0- Sair do Programa");
+			System.out.println("1- Menu Funcionarios");
+			System.out.println("2- Menu Mercadorias");
+			System.out.println("3- Menu Vendas");
+			opcao = in.nextInt();
+			switch (opcao) {
+	
+			case 0:
+				sair = true;
+				System.out.println("Até a próxima ;)");
+				break;
+			case 1: //funcionario
+				boolean capturouFuncionario = false;
+				do {
+					try {
+						capturouFuncionario = false;
+						MenuFuncionarios();
+					} catch (OpcaoIlegalException e){
+						capturouFuncionario = true;
+						System.out.println("Opcao Invalida.");
+						
+					}
+				}while (capturouFuncionario);
+				break;
+			case 2: //mercadoria
+				boolean capturouMercadoria = false;
+				do{
+					try{
+						capturouMercadoria= false;
+						MenuMercadoria();
+					}catch (OpcaoIlegalException e){
+						capturouMercadoria = true;
+						System.out.println("Opcao Invalida.");
+						
+					}
+				}while (capturouMercadoria);
+				
+				break;
+			case 3: //venda
+				boolean capturouVenda = false;
+				do{
+					try{
+						capturouVenda = false;
+						MenuVendas();
+					}catch (OpcaoIlegalException e){
+						capturouVenda = true;
+						System.out.println("Opcao Invalida.");
+						
+					}
+				}while (capturouVenda);
+				break;
+			default:
+				throw new OpcaoIlegalException();
+			}
+		}
+		in.close();
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	/*
+	 * METODO MAIN
+	 */
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	public static void main(String[] args) {
+		System.out.println("iniciando...");
+		Scanner local = new Scanner(System.in);
+		Main main = new Main();
+		boolean capturouPrincipal;
+		
+		do { //continua tentando rodar o menu enquanto alguma excecao for capturada
+			try {
+				capturouPrincipal = false;
+				main.MenuPrincipal();
+			} catch (OpcaoIlegalException e) {
+				capturouPrincipal = true;
+				System.out.println("Opcao Invalida.");
+				
+			}
+		} while (capturouPrincipal);
+
+		local.close();
+
 	}
 
 }

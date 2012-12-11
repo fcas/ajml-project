@@ -1,6 +1,12 @@
 package models.funcionario;
 
 public interface IFuncionario {
+	//@ public model instance String nome;
+	//@ public model instance String rg;
+	//@ public model instance String cpf;
+	//@ public model instance String dataNascimento;
+	//@ public model instance String cargo;
+	//@ public model instance double salario;
  
 	public String getNome();
 	
