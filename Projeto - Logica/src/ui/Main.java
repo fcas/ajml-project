@@ -70,6 +70,7 @@ public class Main {
 			System.out.println("4 - Remover Funcionario");
 			System.out.println("5 - Listar Funcionarios");
 			System.out.println("6 - Buscar Funcionario");
+			System.out.println("7 - Editar funcionario");
 	
 			opcao = in.nextInt();
 			switch (opcao) {
@@ -94,12 +95,43 @@ public class Main {
 			case 6:
 				BuscarFuncionario();
 				break;
+			case 7:
+				EditarFuncionario(); 
+				break;
 			default:
 				throw new OpcaoIlegalException();
 			}
 		}
 	
 		in.close();
+	}
+
+	private void EditarFuncionario() {
+		
+		System.out.println("Carregando tela Editar Funcionario:");
+		IFuncionario funcionario = new Funcionario();
+
+		// coleta dados
+		String nome = funcionarioNome();
+		System.out.println("O rg deve ser o mesmo cadastrado no sistema");
+		String rg = setRg();
+		String cpf = setCPF();
+		String dataNascimento = setData();
+		String cargo = funcionarioCargo();
+		double salario = funcionarioSalario();
+
+		// seta o funcionario
+		funcionario.setNome(nome);
+		funcionario.setRg(rg);
+		funcionario.setCpf(cpf);
+		funcionario.setDataNascimento(dataNascimento);
+		funcionario.setCargo(cargo);
+		funcionario.setSalario(salario);
+
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto editamos funcionario.");
+		facade.editarFuncionario(funcionario);
+		
 	}
 
 	private void BuscarFuncionario() {
@@ -955,7 +987,7 @@ public class Main {
 	
 			case 0:
 				sair = true;
-				System.out.println("Até a próxima ;)");
+				System.out.println("Atï¿½ a prï¿½xima ;)");
 				break;
 			case 1: //funcionario
 				boolean capturouFuncionario = false;
