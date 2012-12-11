@@ -31,26 +31,35 @@ public class Main {
 		System.out.println("Carregando tela Cadastro Funcionario:");
 
 		IFuncionario funcionario = new Funcionario();
+		String buscaRg;
 
 		// coleta dados
-		String nome = funcionarioNome();
+		
 		String rg = setRg();
-		String cpf = setCPF();
-		String dataNascimento = setData();
-		String cargo = funcionarioCargo();
-		double salario = funcionarioSalario();
 
-		// seta o funcionario
-		funcionario.setNome(nome);
-		funcionario.setRg(rg);
-		funcionario.setCpf(cpf);
-		funcionario.setDataNascimento(dataNascimento);
-		funcionario.setCargo(cargo);
-		funcionario.setSalario(salario);
+		buscaRg = facade.buscarRg(rg);
 
-		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto tentamos cadastrar.");
-		facade.criarFuncionario(funcionario);
+		if (buscaRg == null || buscaRg.equals("")) {
+			String nome = funcionarioNome();
+			String cpf = setCPF();
+			String dataNascimento = setData();
+			String cargo = funcionarioCargo();
+			double salario = funcionarioSalario();
+
+			// seta o funcionario
+			funcionario.setNome(nome);
+			funcionario.setRg(rg);
+			funcionario.setCpf(cpf);
+			funcionario.setDataNascimento(dataNascimento);
+			funcionario.setCargo(cargo);
+			funcionario.setSalario(salario);
+
+			// tenta adicionar ao banco
+			System.out.println("Aguarde enquanto tentamos cadastrar.");
+			facade.criarFuncionario(funcionario);
+		} else {
+			System.out.println("O Rg já existe no banco de dados");
+		}
 	}
 
 	private void MenuFuncionarios() throws OpcaoIlegalException {
