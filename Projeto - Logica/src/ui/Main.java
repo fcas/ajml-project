@@ -71,6 +71,7 @@ public class Main {
 			System.out.println("5 - Listar Funcionarios");
 			System.out.println("6 - Buscar Funcionario");
 			System.out.println("7 - Editar funcionario");
+			System.out.println("8 - Reajuste salarial");
 	
 			opcao = in.nextInt();
 			switch (opcao) {
@@ -98,12 +99,57 @@ public class Main {
 			case 7:
 				EditarFuncionario(); 
 				break;
+			case 8:
+				ReajusteSalarial();
+				break;
 			default:
 				throw new OpcaoIlegalException();
 			}
 		}
 	
 		in.close();
+	}
+
+	private void ReajusteSalarial() {
+		
+		double pCaixa = 0.05; 
+		double pEstoquista = 0.05; 
+		double pGerente = 0.09;
+		double pVendedor = 0.07;
+		double novoSalario;
+		
+		List listFuncionarios = new ArrayList();
+		Funcionario aux;
+	
+		listFuncionarios = facade.listarFuncionarios();
+	
+		for (int i = 0; i < listFuncionarios.size(); i++) {
+			aux = (Funcionario) listFuncionarios.get(i);
+			if (aux.getCargo().equals("Caixa")){
+				novoSalario = aux.getSalario() + aux.getSalario()*pCaixa;
+				aux.setSalario(novoSalario);
+				facade.atualizarSalario(aux);
+			} else 
+				
+			if(aux.getCargo().equals("Estoquista")){
+				novoSalario = aux.getSalario() + aux.getSalario()*pEstoquista;
+				aux.setSalario(novoSalario);
+				facade.atualizarSalario(aux);
+			}
+			
+			else
+				
+			if(aux.getCargo().equals("Gerente")){
+				novoSalario = aux.getSalario() + aux.getSalario()*pGerente;
+				aux.setSalario(novoSalario);
+				facade.atualizarSalario(aux);
+			} else {
+				novoSalario = aux.getSalario() + aux.getSalario()*pVendedor;
+				aux.setSalario(novoSalario);
+				facade.atualizarSalario(aux);
+			}
+		}
+		
 	}
 
 	private void EditarFuncionario() {
