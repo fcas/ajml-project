@@ -72,6 +72,7 @@ public class Main {
 				if (resposta.equalsIgnoreCase("s")) {
 					confirma = true;
 					System.out.println("Nome confirmado.");
+
 					return Nome;
 				} else {
 					break;
@@ -320,7 +321,7 @@ public class Main {
 
 	// TODO Implementar
 	private double funcionarioSalario() {
-		
+
 		double salario = -1;
 		boolean confirma = false;
 		boolean valido = false;
@@ -375,10 +376,12 @@ public class Main {
 			case 1:
 				CadastrarFuncionario();
 				break;
-			case 2: 
+			case 2:
 				AtualizarSalario();
+				break;
 			case 3:
-				CalcularBonificacao();
+				System.out.println(CalcularBonificacao());
+				break;
 			default:
 				System.out.println("Opcao nao reconhecida.");
 				break;
@@ -388,28 +391,34 @@ public class Main {
 		in.close();
 	}
 
-	private void CalcularBonificacao() {
-		
+	private double CalcularBonificacao() {
+
+		double salario;
 		double bonificacao = -1;
-		
+
 		System.out.println("Carregando tela Calcular bonificacao:");
-		
+
 		IFuncionario funcionario = new Funcionario();
 
 		// coleta dados
 		String rg = setRg();
 		// seta o funcionario;
 		funcionario.setRg(rg);
-		
+
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto tentamos calcular a bonificacao.");
+
+		salario = facade.buscarSalario(funcionario);
 		
-		System.out.println(facade.calcularBonificacao(funcionario));
-		
+		bonificacao = salario + salario
+				* (0.01 * facade.quantidadeVendas(funcionario));
+
+		return bonificacao;
+
 	}
 
 	private void AtualizarSalario() {
-		
+
 		System.out.println("Carregando tela Atualizar salário:");
 
 		IFuncionario funcionario = new Funcionario();
@@ -425,7 +434,7 @@ public class Main {
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto tentamos atualizar o salario.");
 		facade.atualizarSalario(funcionario);
-		
+
 	}
 
 	public void MenuMercadoria() {
@@ -691,7 +700,7 @@ public class Main {
 			case 2:
 				main.MenuMercadoria();
 				break;
-			case 3: 
+			case 3:
 				main.MenuVendas();
 				break;
 			default:
@@ -707,7 +716,7 @@ public class Main {
 	}
 
 	private void MenuVendas() {
-		
+
 		int opcao = -1;
 		boolean voltar = false;
 
@@ -737,7 +746,7 @@ public class Main {
 	}
 
 	private void CadastrarVenda() {
-		
+
 		System.out.println("Carregando tela Cadastro Venda:");
 
 		IVenda venda = new Venda();
@@ -757,7 +766,7 @@ public class Main {
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto tentamos cadastrar.");
 		facade.criarVenda(venda);
-		
+
 	}
 
 	private int mercadoriaQtdVenda() {
@@ -777,7 +786,8 @@ public class Main {
 					valido = true;
 				}
 
-				System.out.println("Quantidade = " + qtdVenda + "\nTem certeza? (s/n)");
+				System.out.println("Quantidade = " + qtdVenda
+						+ "\nTem certeza? (s/n)");
 				resposta = in.next();
 
 				if (resposta.equalsIgnoreCase("s")) {
@@ -793,11 +803,11 @@ public class Main {
 		in.close();
 
 		return qtdVenda;
-		
+
 	}
 
 	private double mercadoriaSubtotal() {
-		
+
 		double subtotal = -1.0;
 		boolean confirma = false;
 		boolean valido = false;
@@ -810,11 +820,12 @@ public class Main {
 			while (!valido) {
 				System.out.println("Digite o subtotal:");
 				subtotal = in.nextDouble();
-				if ( subtotal > 0.0) {
+				if (subtotal > 0.0) {
 					valido = true;
 				}
 
-				System.out.println("Nome = " + subtotal + "\nTem certeza? (s/n)");
+				System.out.println("Nome = " + subtotal
+						+ "\nTem certeza? (s/n)");
 				resposta = in.next();
 
 				if (resposta.equalsIgnoreCase("s")) {

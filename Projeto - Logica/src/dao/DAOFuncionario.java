@@ -150,7 +150,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 	}
 
 	@Override
-	public int calcularBonificacao(IFuncionario funcionario) {
+	public int quantidadeVendas(IFuncionario funcionario) {
 		
 		ResultSet qtdVenda = null;
 		
@@ -170,6 +170,28 @@ public class DAOFuncionario implements IDaoFuncionario {
 
 		return -1;
 		
+	}
+
+	@Override
+	public double buscarSalario(IFuncionario funcionario) {
+		
+		ResultSet salario = null;
+		
+		String buscar_salario = "SELECT  salario FROM funcionario"
+				+ " WHERE rg='" + funcionario.getRg() + "'";
+		try {	
+			conectar();
+			salario = comando.executeQuery(buscar_salario);
+			
+			if (salario.next()) {
+				return Double.parseDouble(salario.getString("salario"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+		
+		return -1; 
 	}
 	
 }
