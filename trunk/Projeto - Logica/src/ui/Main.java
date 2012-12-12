@@ -994,7 +994,23 @@ public class Main {
 	}
 
 	private void ListarVendas() {
-		// TODO Auto-generated method stub
+
+		List listVendas = new ArrayList();
+		Venda aux;
+
+		listVendas = facade.listarVendas();
+
+		System.out.println("ID|Subtotal|VendedorRg|DataVenda|Qtd Vendas \n \n");
+
+		for (int i = 0; i < listVendas.size(); i++) {
+			aux = (Venda) listVendas.get(i);
+			System.out.print(aux.getID() + "   ");
+			System.out.print(aux.getSubtotal() + "   ");
+			System.out.print(aux.getVendedorRG() + "   ");
+			System.out.print(aux.getDataVenda() + "   ");
+			System.out.print(aux.getQtdVendas() + "   " + "\n");
+		}
+
 		
 	}
 
