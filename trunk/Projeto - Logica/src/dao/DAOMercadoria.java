@@ -140,6 +140,28 @@ public class DAOMercadoria implements IDaoMercadoria{
 			
 		}
 		
+		public int buscarIdMercadoria (int id) {
+			
+			ResultSet buscarId = null;
+			
+			try {
+				conectar();
+				buscarId = comando
+						.executeQuery("SELECT id" 
+								+ " FROM mercadoria" 
+								+ " WHERE id=" + id);
+				if (buscarId.next()) {
+					return Integer.parseInt(buscarId.getString("id"));
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return -1;
+			
+		}
+		
 		
 }
  
