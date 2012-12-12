@@ -25,6 +25,40 @@ public class Mercadoria implements IMercadoria {
 	private /*@ spec_public @*/ String produto;//@ in iproduto;
 	/*@ protected represents
 	  @ iproduto = produto; @*/
+	
+	/*@
+	  @ public initially preco == 0
+	  @ 			&& ID == 0
+	  @ 			&& nome.equals("")
+	  @ 			&& cor.equals("")
+	  @ 			&& tamanho.equals("")
+	  @ 			&& produto.equals("");
+	  @
+	  @ public invariant preco >= 0
+	  @ 			&& ID >= 0
+	  @ 			&& nome!= null
+	  @ 			&& cor != null
+	  @ 			&& tamanho != null
+	  @ 			&& produto != null;
+	  @ public invariant tamanho.length() <= 2;@*/
+	
+	
+	/*@
+	  @ ensures preco == 0
+	  @ 		&& ID == 0
+	  @ 		&& nome.equals("")
+	  @ 		&& cor.equals("")
+	  @ 		&& tamanho.equals("")
+	  @ 		&& produto.equals(""); @*/
+	public Mercadoria() {
+		this.preco = 0;
+		this.ID = 0;
+		this.nome ="";
+		this.cor = ""; 
+		this.tamanho = ""; 
+		this.produto = "";
+	}
+	
 
 	/*@ also
 	  @ ensures \result == preco; @*/

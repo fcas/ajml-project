@@ -5,9 +5,28 @@ public class Vendedor extends Funcionario {
 	
 		private /*@ spec_public @*/ int quantidadeVendas; 
 		
-		/*@	also
+		/*@
+		  @ public initially cargo.equals("")
+		  @ 			&& cpf.equals("")
+		  @ 			&& dataNascimento.equals("")
+		  @ 			&& nome.equals("")
+		  @ 			&& rg.equals("")
+		  @ 			&& salario == 0;
+		  @
+		  @ public invariant cargo != null
+		  @ 			&& cpf != null
+		  @ 			&& dataNascimento != null
+		  @ 			&& nome != null
+		  @ 			&& rg != null
+		  @ 			&& salario >= 0;
+		  @ public invariant cpf.length() <= 11;
+		  @ public invariant rg.length() <= 9;
+		  @ public invariant quantidadeVendas >= 0;
 		  @ public initially quantidadeVendas == 0;
-		  @ public invariant quantidadeVendas >= 0; @*/
+		  @
+		  @ public constraint
+		  @ \old(salario) <= salario;
+		  @*/
 		
 		
 		/*@

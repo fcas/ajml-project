@@ -22,6 +22,35 @@ public class Venda implements IVenda {
 	/*@ protected represents
 	  @ iqtdVendas = qtdVendas; @*/
 
+	/*@
+	  @ public initially ID == 0
+	  @ 			&& subtotal == 0
+	  @ 			&& vendedorRG.equals("")
+	  @ 			&& dataVenda.equals("")
+	  @ 			&& qtdVendas == 0;
+	  @
+	  @ public invariant ID >= 0
+	  @ 			&& subtotal >= 0
+	  @ 			&& vendedorRG != null
+	  @ 			&& dataVenda != null
+	  @ 			&& qtdVendas >= 0;
+	  @ public invariant vendedorRG.length() <= 9;@*/
+	
+	
+	/*@
+	  @ ensures ID == 0
+	  @ 			&& subtotal == 0
+	  @ 			&& vendedorRG.equals("")
+	  @ 			&& dataVenda.equals("")
+	  @ 			&& qtdVendas == 0; @*/
+	public Venda() {
+		this.ID = 0;
+		this.subtotal = 0;
+		this.vendedorRG = ""; 
+		this.dataVenda = ""; 
+		this.qtdVendas = 0;
+	}
+	
 	
 	public /*@ pure @*/ int getID() {
 		return ID;
