@@ -15,5 +15,7 @@ public interface IDaoVendas {
 	public List listarVendas();
 	
 	public IVenda buscarVenda(int ID);
+	
+	public int buscarId (int id);
 
 }

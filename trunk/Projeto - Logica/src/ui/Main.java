@@ -960,6 +960,7 @@ public class Main {
 			System.out.println("O que gostaria de fazer?");
 			System.out.println("0 - Voltar");
 			System.out.println("1 - Efetuar Venda");
+			System.out.println("2 - Editar Venda");
 
 			opcao = in.nextInt();
 			switch (opcao) {
@@ -969,12 +970,53 @@ public class Main {
 			case 1:
 				CadastrarVenda();
 				break;
+			case 2: 
+				EditarVenda();
 			default:
 				throw new OpcaoIlegalException();
 			}
 		}
 
 		in.close();
+	}
+
+	private void EditarVenda() {
+		
+		System.out.println("Carregando tela Editar Venda:");
+		IVenda venda = new Venda();
+		int buscarId, id, qtdVendas = -1; String dataVenda = null,vendedorRg = null;  
+		double subtotal = -1;
+
+		in = new Scanner(System.in);
+		
+		System.out.println("Informe o id da mercadoria");
+		id = in.nextInt();
+		buscarId = facade.buscarId(id);
+
+		if (buscarId  > 0) {
+			// coleta dados
+			System.out.println("Informe o novo subtotal");
+			subtotal = mercadoriaSubtotal();
+			System.out.println("Informe o RG do vendedor");
+			vendedorRg = setRg();
+			System.out.println("Informe a data da venda");
+			dataVenda = setData();
+			System.out.println("Informe a quantidade da venda");
+			qtdVendas = mercadoriaQtdVenda();
+		} else {
+			System.out.println("Venda nao cadastrada no sistema");
+		}
+
+		// seta o funcionario
+		venda.setSubtotal(subtotal);
+		venda.setVendedorRG(vendedorRg);
+		venda.setDataVenda(dataVenda);
+		venda.setQtdVendas(qtdVendas);
+
+		// tenta adicionar ao banco
+		System.out.println("Aguarde enquanto editamos funcionario.");
+		facade.editarVenda(venda);
+		
 	}
 
 	private void CadastrarVenda() {
