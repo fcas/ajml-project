@@ -41,7 +41,10 @@ public class Vendedor extends Funcionario {
 		public void setDataNascimento(String dataNascimento) {
 			super.setDataNascimento(dataNascimento);
 		}
-
+		
+		/*@
+		 @ also
+		 @ ensures cargo.equals("Vendedor"); @*/
 		public void setCargo(String cargo) {
 			super.setCargo(cargo);
 		}

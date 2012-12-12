@@ -32,12 +32,12 @@ public class Gerente extends Funcionario {
 
 		
 		public void setSalario(double salario) {
-			
+			super.setSalario(salario);
 		}
 
 		
 		public double getSalario() {
-			
+			super.getSalario();
 			return 0;
 		}
 	 
