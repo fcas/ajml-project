@@ -29,8 +29,8 @@ public class MainArquivo {
 	MainArquivo() throws FileNotFoundException {
 		facade = new Facade(0);
 		menuFuncionario = new BufferedReader(new FileReader(caminhoArquivo + "menuFuncionario.txt"));	
-		menuMercadoria = new BufferedReader(new FileReader(caminhoArquivo + "menuMercadoria.txt"));
-		menuVendas = new BufferedReader(new FileReader(caminhoArquivo + "menuVendas.txt"));
+//		menuMercadoria = new BufferedReader(new FileReader(caminhoArquivo + "menuMercadoria.txt"));
+//		menuVendas = new BufferedReader(new FileReader(caminhoArquivo + "menuVendas.txt"));
 	}
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1375,7 +1375,7 @@ public class MainArquivo {
 		int opcao = -1;
 		boolean sair = false;
 		in = new Scanner(System.in);
-		BufferedReader menuPrincipal = new BufferedReader(new FileReader("/home/felipe/menuPrincipal.txt"));	
+		BufferedReader menuPrincipal = new BufferedReader(new FileReader(caminhoArquivo + "menuPrincipal.txt"));	
 
 		while (!sair) {
 			System.out.println("~~~~~ Menu Principal ~~~~~");
