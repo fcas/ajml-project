@@ -401,26 +401,35 @@ public class Main {
 		IFuncionario funcionario = new Funcionario();
 		double salarioAtual = -1;
 		boolean aumento = false;
+		boolean rgValido = false;
 
 		// coleta dados
-		String rg = setRg();
-		funcionario.setRg(rg);
-
-		salarioAtual = facade.buscarSalario(funcionario);
-
-		do {
-			double novoSalario = funcionarioSalario();
-			if (novoSalario > salarioAtual) {
-				funcionario.setSalario(novoSalario);
-				System.out
-						.println("Aguarde enquanto tentamos atualizar o salario.");
-				facade.atualizarSalario(funcionario);
-				aumento = true;
-			} else {
-				System.out.println("O novo salário deve ser maior que o atual");
+		do{
+			String rg = setRg();
+			String buscaRg = facade.buscarRg(rg);
+	
+			if (buscaRg == null || buscaRg.equals("")) {
+				System.out.println("RG invalido. Digite o RG de um funcionario ja cadastrado.");
+			} else{
+				rgValido = true;
 			}
-		} while (!aumento);
-
+			} while (!rgValido);
+		
+			salarioAtual = facade.buscarSalario(funcionario);
+	
+			do {
+				double novoSalario = funcionarioSalario();
+				if (novoSalario > salarioAtual) {
+					funcionario.setSalario(novoSalario);
+					System.out
+							.println("Aguarde enquanto tentamos atualizar o salario.");
+					facade.atualizarSalario(funcionario);
+					aumento = true;
+				} else {
+					System.out.println("O novo salario deve ser maior que o atual");
+				}
+			} while (!aumento);
+		
 	}
 
 	private String funcionarioNome() {

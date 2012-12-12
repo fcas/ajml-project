@@ -19,12 +19,12 @@ import facade.Facade;
 public class MainArquivo {
 	
 	
-	BufferedReader menuFuncionario;
-	BufferedReader menuMercadoria;
-	BufferedReader menuVendas;
-	private final String caminhoArquivo = System.getProperty("user.dir") + System.getProperty("file.separator");
-	private/*@ nullable @*/Facade facade;
-	private/*@ nullable @*/Scanner in;
+	private /*@ nullable spec_public @*/ BufferedReader menuFuncionario;
+	private /*@ nullable spec_public @*/ BufferedReader menuMercadoria;
+	private /*@ nullable spec_public @*/ BufferedReader menuVendas;
+	private /*@ nullable spec_public @*/ final String caminhoArquivo = System.getProperty("user.dir") + System.getProperty("file.separator");
+	private /*@ nullable spec_public @*/ Facade facade;
+	private /*@ nullable spec_public @*/ Scanner in;
 
 	MainArquivo() throws FileNotFoundException {
 		facade = new Facade(0);
@@ -361,39 +361,56 @@ public class MainArquivo {
 
 		System.out.println("Carregando tela Calcular Bonificacao:");
 
-		IFuncionario funcionario = new Funcionario();
+		IFuncionario funcionario = null;
 
 		do {
-			// coleta dados
-			String rg = setRg();
-			// seta o funcionario;
-			funcionario.setRg(rg);
-			buscaRg = facade.buscarRg(rg);
-
-			if (buscaRg != null || buscaRg.equals("")) {
-
+			do{
+				// coleta dados
+				String rg = setRg();
+				funcionario = facade.buscarFuncionario(rg);
+				if (funcionario == null){
+					System.out.println("RG invalido ou Funcionario nao eh Vendedor.");
+				}
+			}while (funcionario == null || !ehVendedor(funcionario));
+			
 				// tenta adicionar ao banco
 				System.out
 						.println("Aguarde enquanto tentamos calcular a bonificacao.");
-
-				salario = facade.buscarSalario(funcionario);
-
+				salario = funcionario.getSalario();
 				bonificacao = salario + salario
 						* (0.01 * facade.quantidadeVendas(funcionario));
-			} else {
-				System.out.println("RG invalido");
-			}
+			
 		} while (!calculou);
 
 		return bonificacao;
 
 	}
 	
+	/*@ 	behavior
+	  @ requires funcionario != null;
+	  @ requires funcionario.getCargo().equals("Vendedor");
+	  @ ensures \result == true;
+	  @
+	  @ also
+	  @
+	  @		behavior
+   	  @ requires funcionario == null
+  	  @ 		|| !funcionario.getCargo().equals("Vendedor");
+   	  @ ensures \result == false; @*/
+	public boolean ehVendedor(IFuncionario funcionario){
+		if (funcionario == null){
+			return false;
+		}
+		if (funcionario.getCargo().equals("Vendedor")){
+			return true;
+		}
+		return false;
+	}
 	
 	/*@ 
 	  @ requires rg != null;
 	  @ ensures \result >= 0; @*/
-	private double CalcularReajuste(String rg) {
+	private double CalcularReajusteRg(String rg) {
 
 		double novoSalario = 0;
 
@@ -407,6 +424,7 @@ public class MainArquivo {
 
 	}
 
+	
 	private void AtualizarSalario() throws IOException {
 
 		System.out.println("Carregando tela Atualizar Salario:");
@@ -423,19 +441,42 @@ public class MainArquivo {
 
 		do {
 			double novoSalario = funcionarioSalario();
-			if (novoSalario > salarioAtual) {
+			if (salarioAtualizavel(salarioAtual, novoSalario)) {
 				funcionario.setSalario(novoSalario);
 				System.out
 						.println("Aguarde enquanto tentamos atualizar o salario.");
 				facade.atualizarSalario(funcionario);
 				aumento = true;
 			} else {
-				System.out.println("O novo salário deve ser maior que o atual");
+				System.out.println("O novo salario deve ser maior que o atual");
 			}
 		} while (!aumento);
 
 	}
 
+	/*@
+	  @ 	behavior
+	  @ requires salarioAtual <= novoSalario;
+	  @ ensures \result == true;
+	  @
+	  @ also
+	  @
+	  @ 	behavior
+	  @ requires salarioAtual > novoSalario;
+	  @ ensures \result == false; @*/
+	public /*@ pure @*/ boolean salarioAtualizavel(double salarioAtual, double novoSalario) throws IOException {
+		
+		if (salarioAtual <= novoSalario){
+			return true;
+		}
+		return false;
+
+	}
+	
+
+	/*@
+	  @ ensures \result != null;
+	  @ ensures !(\result.equals("")); @*/
 	private String funcionarioNome() throws IOException {
 
 		String Nome = null;
@@ -475,6 +516,9 @@ public class MainArquivo {
 		return Nome;
 	}
 
+	/*@
+	  @ ensures \result != null;
+	  @ ensures \result.length() == 9; @*/
 	private String setRg() throws IOException {
 		String RG = null;
 		boolean confirma = false;
@@ -511,6 +555,9 @@ public class MainArquivo {
 		return RG;
 	}
 
+	/*@
+	  @ ensures \result != null;
+	  @ ensures \result.length() == 11; @*/
 	private String setCPF() throws IOException {
 		String CPF = null;
 		boolean confirma = false;
@@ -545,6 +592,8 @@ public class MainArquivo {
 		return CPF;
 	}
 
+	/*@
+	  @  @*/
 	private String setData() throws IOException {
 		String dataString = null;
 		boolean confirma = false;
@@ -591,7 +640,8 @@ public class MainArquivo {
 
 		return dataString;
 	}
-
+	
+	
 	private int[] quebraData(String dataString) {
 		String[] aux = dataString.split("/");
 		int[] dataInt = new int[3];
@@ -601,13 +651,83 @@ public class MainArquivo {
 		}
 		return dataInt;
 	}
-
-	private boolean checaData(int[] dataInt) {
+	
+	/*@
+	  @ 	behavior
+	  @ requires dataInt[2] >= 1896 && dataInt[2] <= 2020;
+	  @ requires ((dataInt[2]%4 == 0) && (dataInt[2]%100 != 0)) || dataInt[2] == 0;
+	  @ requires dataInt[1] == 2;
+	  @ requires dataInt[0] >= 1 && dataInt[0] <= 29;
+	  @ ensures \result == true; 
+	  @
+	  @ also
+	  @
+	  @		behavior
+	  @ requires dataInt[2] >= 1896 && dataInt[2] <= 2020; 
+	  @ requires dataInt[1] == 1 
+	  @		|| dataInt[1] == 3 
+	  @		|| dataInt[1] == 5 
+	  @		|| dataInt[1] == 7 
+	  @		|| dataInt[1] == 8 
+	  @		|| dataInt[1] == 10 
+	  @		|| dataInt[1] == 12;
+	  @ requires dataInt[0] >= 1 && dataInt[0] <= 31;
+	  @ ensures \result == true;
+	  @
+	  @ also
+	  @
+	  @		behavior
+	  @ requires dataInt[2] >= 1896 && dataInt[2] <= 2020; 
+	  @ requires dataInt[1] == 4 
+	  @		|| dataInt[1] == 6 
+	  @		|| dataInt[1] == 9 
+	  @		|| dataInt[1] == 11;
+	  @ requires dataInt[0] >= 1 && dataInt[0] <= 30;
+	  @ ensures \result == true;
+	  @ 
+	  @ also
+	  @
+	  @ 	behavior
+	  @ requires dataInt[2] >= 1896 && dataInt[2] <= 2020; 
+	  @ requires dataInt[1] == 2;
+	  @ requires dataInt[0] >= 1 && dataInt[0] <= 28;
+	  @ ensures \result == true;
+	  @
+	  @ also
+	  @
+	  @		behavior
+	  @ requires dataInt[2] < 1896 || dataInt[2] > 2020
+	  @ 				|| dataInt[1] < 1
+	  @ 				|| dataInt[1] > 12
+	  @ 				|| dataInt[0] < 1 && dataInt[0] > 31;
+	  @ ensures \result == false; 
+	  @
+	  @ also
+	  @
+	  @ 	behavior
+	  @ requires dataInt[2] >= 1896 && dataInt[2] <= 2020;
+	  @ requires ((dataInt[2]%4 != 0) || (dataInt[2]%100 == 0)) & dataInt[2] != 0;
+	  @ requires dataInt[1] == 2;
+	  @ requires dataInt[0] >= 29;
+	  @ ensures \result == false; 
+	  @
+	  @ also
+	  @
+	  @		behavior
+	  @ requires dataInt[2] >= 1896 && dataInt[2] <= 2020; 
+	  @ requires dataInt[1] == 4 
+	  @		|| dataInt[1] == 6 
+	  @		|| dataInt[1] == 9 
+	  @		|| dataInt[1] == 11;
+	  @ requires dataInt[0] == 31;
+	  @ ensures \result == false;
+	  @*/
+	public boolean checaData(int[] dataInt) {
 		int dia = dataInt[0];
 		int mes = dataInt[1];
 		int ano = dataInt[2];
 		boolean bissexto = false;
-		if (ano >= 1896 && ano <= 2020) { // se for um ano v�lido
+		if (ano >= 1896 && ano <= 2020) { // se for um ano valido
 			if (((ano % 4 == 0) && (ano % 100 != 0)) || (ano % 400 == 0)) { // se
 																			// for
 																			// bissexto
@@ -652,6 +772,12 @@ public class MainArquivo {
 		return false;
 	}
 
+	/*@
+	  @ ensures \result.equals("Vendedor")
+	  @		|| \result.equals("Caixa")
+	  @		|| \result.equals("Estoquista")
+	  @		|| \result.equals("Gerente");
+	  @ ensures_redundantly \result != null; @*/
 	private String funcionarioCargo() throws NumberFormatException, IOException {
 		String cargo = null;
 		int opcao = 0;
@@ -710,6 +836,8 @@ public class MainArquivo {
 		return cargo;
 	}
 
+	/*@
+	  @ ensures \result > 0; @*/
 	private double funcionarioSalario() throws NumberFormatException, IOException {
 
 		double salario = -1;
@@ -896,7 +1024,9 @@ public class MainArquivo {
 		facade.criarMercadoria(mercadoria);
 
 	}
-
+	
+	//@ ensures \result != null;
+	//@ ensures !(\result.equals(""));
 	private String mercadoriaProduto() {
 
 		String produto = null;
@@ -935,6 +1065,11 @@ public class MainArquivo {
 		return produto;
 	}
 
+	/*@
+	  @ ensures \result.equalsIgnoreCase("P")
+	  @			|| \result.equalsIgnoreCase("M")
+	  @			|| \result.equalsIgnoreCase("G")
+	  @			|| \result.equalsIgnoreCase("GG"); @*/
 	private String mercadoriaTamanho() {
 
 		String tamanho = null;
@@ -977,6 +1112,8 @@ public class MainArquivo {
 
 	}
 
+	//@ ensures \result != null;
+	//@ ensures !(\result.equals(""));
 	private String mercadoriaCor() {
 
 		String cor = null;
@@ -1014,6 +1151,7 @@ public class MainArquivo {
 		return cor;
 	}
 
+	//@ ensures \result > 0;
 	private double mercadoriaPreco() {
 
 		double preco = -1.0;
@@ -1052,6 +1190,8 @@ public class MainArquivo {
 
 	}
 
+	//@ ensures \result != null;
+	//@ ensures !(\result.equals(""));
 	private String mercadoriaNome() {
 
 		String Nome = null;
@@ -1290,6 +1430,8 @@ public class MainArquivo {
 
 	}
 
+	/*@
+	  @ ensures \result > 0; @*/
 	private int mercadoriaQtdVenda() {
 		int qtdVenda = -1;
 		boolean confirma = false;
@@ -1328,6 +1470,8 @@ public class MainArquivo {
 
 	}
 
+	/*@
+	  @ ensures \result > 0; @*/
 	private double mercadoriaSubtotal() {
 
 		double subtotal = -1.0;
@@ -1343,7 +1487,7 @@ public class MainArquivo {
 			while (!valido) {
 				System.out.println("Digite o subtotal:");
 				subtotal = in.nextDouble();
-				if (subtotal > 0.0) {
+				if (subtotal > 0) {
 					valido = true;
 				}
 
