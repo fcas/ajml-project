@@ -197,6 +197,33 @@ public class DAOFuncionario implements IDaoFuncionario {
 		return null;
 		
 	}
+	
+	
+	public boolean checaRg (String rg) {
+		
+		ResultSet buscarRg = null;
+		String result = null;
+		
+		try {
+			conectar();
+			buscarRg = comando
+					.executeQuery("SELECT rg" 
+							+ " FROM funcionario" 
+							+ " WHERE rg=" + rg);
+			if (buscarRg.next()) {
+				result = buscarRg.getString("rg");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (result.equals("") || result == null){
+			return false;
+		}else{
+			return true;
+		}
+		
+	}
 
 	
 	public double buscarSalario(IFuncionario funcionario) {
