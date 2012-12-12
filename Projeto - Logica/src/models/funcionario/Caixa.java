@@ -24,6 +24,7 @@ public class Caixa extends Funcionario {
 	  @ \old(salario) <= salario; @*/
 	
 	/*@
+	  @ assignable ID, subtotal, vendedorRG, dataVenda, qtdVendas;
 	  @ ensures cargo.equals("")
 	  @ 		&& cpf.equals("")
 	  @ 		&& dataNascimento.equals("")

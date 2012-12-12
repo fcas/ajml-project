@@ -44,6 +44,7 @@ public class Mercadoria implements IMercadoria {
 	
 	
 	/*@
+	  @ assignable ID, subtotal, vendedorRG, dataVenda, qtdVendas;
 	  @ ensures preco == 0
 	  @ 		&& ID == 0
 	  @ 		&& nome.equals("")

@@ -38,6 +38,7 @@ public class Venda implements IVenda {
 	
 	
 	/*@
+	  @ assignable ID, subtotal, vendedorRG, dataVenda, qtdVendas;
 	  @ ensures ID == 0
 	  @ 			&& subtotal == 0
 	  @ 			&& vendedorRG.equals("")
