@@ -301,18 +301,25 @@ public class Main {
 		System.out.println("Carregando tela Atualizar Salario:");
 
 		IFuncionario funcionario = new Funcionario();
-
+		double salarioAtual = -1; boolean aumento = false; 
+		
 		// coleta dados
 		String rg = setRg();
-		double salario = funcionarioSalario();
-
-		// seta o funcionario;
 		funcionario.setRg(rg);
-		funcionario.setSalario(salario);
-
-		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto tentamos atualizar o salario.");
-		facade.atualizarSalario(funcionario);
+		
+		salarioAtual = facade.buscarSalario(funcionario);
+		
+		do {	
+			double novoSalario = funcionarioSalario();
+			if (novoSalario > salarioAtual){
+				funcionario.setSalario(novoSalario);
+				System.out.println("Aguarde enquanto tentamos atualizar o salario.");
+				facade.atualizarSalario(funcionario);
+				aumento = true; 
+			} else { 
+				System.out.println("O novo salário deve ser maior que o atual");
+			}
+		}while(!aumento); 
 
 	}
 
