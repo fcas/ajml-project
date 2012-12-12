@@ -61,7 +61,6 @@ public class DAOVendas implements IDaoVendas {
 				+ " WHERE id=" + venda.getID() + ";";
 		try {	
 			conectar();
-			System.out.println(insert_venda);
 			comando.executeUpdate(insert_venda);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +69,7 @@ public class DAOVendas implements IDaoVendas {
 	
 	public void apagarVenda(int  id) {
 		
-		String remove_venda = "DELETE FROM funcionario WHERE id = "
+		String remove_venda = "DELETE FROM vendas WHERE id = "
 				+ id + 	 ";";
 		try {	
 			conectar();
