@@ -37,11 +37,7 @@ public interface IDaoFuncionario {
 	public IFuncionario buscarFuncionario(String rg);
 	
 	/*@ requires funcionario != null;
-	  @ requires funcionario.getNome() != null;
-	  @ requires funcionario.getRg() != null; 
-	  @ requires funcionario.getCpf() != null; 
-	  @ requires funcionario.getDataNascimento() != null; 
-	  @ requires funcionario.getCargo() != null; 
+	  @ requires funcionario.getRg() != null;
 	  @ requires funcionario.getSalario() >= 0; @*/
 	public void atualizarSalario(IFuncionario funcionario);
 	
