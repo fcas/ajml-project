@@ -102,7 +102,7 @@ public privileged aspect AspectJMLRac_IDaoVendas {
    * method buscarVenda. */
   after (final dao.IDaoVendas object$rac, final int ID) returning (models.venda.IVenda rac$result) :
      execution(models.venda.IVenda dao.IDaoVendas.buscarVenda(int)) && this(object$rac) && args(ID) {
-       boolean rac$b = (!true || ((rac$result != null) && (rac$result != null)));
+       boolean rac$b = (!(ID > 0) || ((rac$result != null) && (rac$result != null)));
        String nPostErrorMsg =  "by method dao.IDaoVendas.buscarVenda regarding specifications at \nFile \"dao.IDaoVendas.java\", [spec-case]: line 31, character 31 (dao.IDaoVendas.java:31)";
        String evalErrorMsg = "Invalid expression in \"dao.IDaoVendas.java\" by method dao.IDaoVendas.buscarVenda regarding specifications at \n[spec-case]: line 31, character 31 (dao.IDaoVendas.java:31)\nCaused by: ";
        JMLChecker.checkNormalPostcondition(rac$b, nPostErrorMsg, evalErrorMsg, -1, false, "dao.IDaoVendas.buscarVenda(int ID)");
@@ -117,7 +117,7 @@ public privileged aspect AspectJMLRac_IDaoVendas {
            boolean rac$b = true;
            String rac$ErrorMsg = "";
 
-  		   if (rac$b && true) {
+  		   if (rac$b && (ID > 0)) {
   		     if (rac$e instanceof java.lang.Exception) {
   			   java.lang.Exception jml$e = (java.lang.Exception) rac$e;
   			   boolean rac$b0 = true;
@@ -230,10 +230,10 @@ public privileged aspect AspectJMLRac_IDaoVendas {
   before (final dao.IDaoVendas object$rac, final int ID) :
      execution(models.venda.IVenda dao.IDaoVendas.buscarVenda(int)) && 
      this(object$rac) && args(ID) {
-       boolean rac$b = (true);
+       boolean rac$b = (ID > 0);
        boolean canThrow = false;
-       String preErrorMsg = ", [spec-case]: line 30, character 27 (dao.IDaoVendas.java:30), and \nby method dao.IDaoVendas.buscarVenda regarding code at \nFile \"dao.IDaoVendas.java\"by method dao.IDaoVendas.buscarVenda regarding specifications at \nFile \"dao.IDaoVendas.java\"";
-       String evalErrorMsg = "Invalid expression in \"dao.IDaoVendas.java\" by method dao.IDaoVendas.buscarVenda regarding specifications at \n[spec-case]: line 30, character 27 (dao.IDaoVendas.java:30)\nCaused by: ";
+       String preErrorMsg = ", [spec-case]: line 30, character 26 (dao.IDaoVendas.java:30), and \nby method dao.IDaoVendas.buscarVenda regarding code at \nFile \"dao.IDaoVendas.java\"by method dao.IDaoVendas.buscarVenda regarding specifications at \nFile \"dao.IDaoVendas.java\", when \n\t\'ID\' is "+ID;
+       String evalErrorMsg = "Invalid expression in \"dao.IDaoVendas.java\" by method dao.IDaoVendas.buscarVenda regarding specifications at \n[spec-case]: line 30, character 26 (dao.IDaoVendas.java:30)"+", when \n"+"\t\'ID\' is "+ID+"\nCaused by: ";
        JMLChecker.checkPrecondition(rac$b, canThrow, preErrorMsg, evalErrorMsg, -1, false, "dao.IDaoVendas.buscarVenda(int ID)");
 
      }

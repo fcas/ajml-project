@@ -9,8 +9,8 @@ public privileged aspect AspectJMLRac_ConnectMySql {
    after (final java.lang.String url, final java.lang.String nome, final java.lang.String senha, final int banco) returning (java.sql.Connection rac$result) :
      execution(static java.sql.Connection dao.ConnectMySql.conexao(java.lang.String, java.lang.String, java.lang.String, int)) && args(url, nome, senha, banco) {
        boolean rac$b = ((!((((url != null) && (nome != null)) && (senha != null)) && ((((url != null) && (nome != null)) && (senha != null)) && (banco == 0))) || ((rac$result != null) && true)) && (!((((url != null) && (nome != null)) && (senha != null)) && (banco == 0)) || ((rac$result != null) && false)));
-       String nPostErrorMsg =  "by method dao.ConnectMySql.conexao regarding specifications at \nFile \"dao.ConnectMySql.java\", [spec-case]: line 20, character 29 (dao.ConnectMySql.java:20), and \nby method dao.ConnectMySql.conexao regarding code at \nFile \"dao.ConnectMySql.java\", line 35 (dao.ConnectMySql.java:35)";
-       String evalErrorMsg = "Invalid expression in \"dao.ConnectMySql.java\" by method dao.ConnectMySql.conexao regarding specifications at \n[spec-case]: line 20, character 29 (dao.ConnectMySql.java:20)\nCaused by: ";
+       String nPostErrorMsg =  "by method dao.ConnectMySql.conexao regarding specifications at \nFile \"dao.ConnectMySql.java\", [spec-case]: line 20, character 41 (dao.ConnectMySql.java:20), and \nby method dao.ConnectMySql.conexao regarding code at \nFile \"dao.ConnectMySql.java\", line 35 (dao.ConnectMySql.java:35)";
+       String evalErrorMsg = "Invalid expression in \"dao.ConnectMySql.java\" by method dao.ConnectMySql.conexao regarding specifications at \n[spec-case]: line 20, character 41 (dao.ConnectMySql.java:20)\nCaused by: ";
        JMLChecker.checkNormalPostcondition(rac$b, nPostErrorMsg, evalErrorMsg, -1, false, "dao.ConnectMySql.conexao(java.lang.String url, java.lang.String nome, java.lang.String senha, int banco)");
 
      }

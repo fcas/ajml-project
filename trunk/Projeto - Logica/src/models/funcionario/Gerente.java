@@ -3,7 +3,6 @@ package models.funcionario;
 
 public class Gerente extends Funcionario {
 	 
-		
 		public void setNome(String nome) {
 			super.setNome(nome);
 		}
@@ -24,6 +23,9 @@ public class Gerente extends Funcionario {
 		}
 
 		
+		/*@
+		 @ also
+		 @ ensures cargo.equals("Gerente"); @*/
 		public void setCargo(String cargo) {
 			super.setCargo(cargo);
 		}
