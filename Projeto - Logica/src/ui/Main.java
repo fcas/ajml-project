@@ -136,31 +136,40 @@ public class Main {
 
 		listFuncionarios = facade.listarFuncionarios();
 
-		for (int i = 0; i < listFuncionarios.size(); i++) {
-			aux = (Funcionario) listFuncionarios.get(i);
-			if (aux.getCargo().equals("Caixa")) {
-				novoSalario = aux.getSalario() + aux.getSalario() * pCaixa;
-				aux.setSalario(novoSalario);
-				facade.atualizarSalario(aux);
-			} else
+		if (listFuncionarios.size() > 0) {
 
-			if (aux.getCargo().equals("Estoquista")) {
-				novoSalario = aux.getSalario() + aux.getSalario() * pEstoquista;
-				aux.setSalario(novoSalario);
-				facade.atualizarSalario(aux);
+			for (int i = 0; i < listFuncionarios.size(); i++) {
+				aux = (Funcionario) listFuncionarios.get(i);
+				if (aux.getCargo().equals("Caixa")) {
+					novoSalario = aux.getSalario() + aux.getSalario() * pCaixa;
+					aux.setSalario(novoSalario);
+					facade.atualizarSalario(aux);
+				} else
+
+				if (aux.getCargo().equals("Estoquista")) {
+					novoSalario = aux.getSalario() + aux.getSalario()
+							* pEstoquista;
+					aux.setSalario(novoSalario);
+					facade.atualizarSalario(aux);
+				}
+
+				else
+
+				if (aux.getCargo().equals("Gerente")) {
+					novoSalario = aux.getSalario() + aux.getSalario()
+							* pGerente;
+					aux.setSalario(novoSalario);
+					facade.atualizarSalario(aux);
+				} else {
+					novoSalario = aux.getSalario() + aux.getSalario()
+							* pVendedor;
+					aux.setSalario(novoSalario);
+					facade.atualizarSalario(aux);
+				}
+
 			}
-
-			else
-
-			if (aux.getCargo().equals("Gerente")) {
-				novoSalario = aux.getSalario() + aux.getSalario() * pGerente;
-				aux.setSalario(novoSalario);
-				facade.atualizarSalario(aux);
-			} else {
-				novoSalario = aux.getSalario() + aux.getSalario() * pVendedor;
-				aux.setSalario(novoSalario);
-				facade.atualizarSalario(aux);
-			}
+		} else {
+			System.out.println("Nao ha funcionarios cadastrados no sistema");
 		}
 
 	}
@@ -171,28 +180,33 @@ public class Main {
 		IFuncionario funcionario = new Funcionario();
 		String buscaRg, nome = null, rg = null, cpf = null, cargo = null, dataNascimento = null;
 		double salario = -1;
+		boolean editado = false;
 
-		System.out.println("Informe o rg do funcionario");
-		rg = setRg();
-		buscaRg = facade.buscarRg(rg);
-
-		if (buscaRg != null || buscaRg.equals("")) {
-			// coleta dados
-			System.out.println("Informe o novo nome");
-			nome = funcionarioNome();
-			System.out.println("Informe o novo rg");
+		do {
+			System.out.println("Informe o rg do funcionario");
 			rg = setRg();
-			System.out.println("Informe o novo cpf");
-			cpf = setCPF();
-			System.out.println("Informe a nova data de nascimento");
-			dataNascimento = setData();
-			System.out.println("Informe o novo cargo");
-			cargo = funcionarioCargo();
-			System.out.println("Informe o novo salário");
-			salario = funcionarioSalario();
-		} else {
-			System.out.println("Usuário não cadastrado no sistema");
-		}
+			buscaRg = facade.buscarRg(rg);
+
+			if (buscaRg != null || buscaRg.equals("")) {
+				// coleta dados
+				System.out.println("Informe o novo nome");
+				nome = funcionarioNome();
+				System.out.println("Informe o novo rg");
+				rg = setRg();
+				System.out.println("Informe o novo cpf");
+				cpf = setCPF();
+				System.out.println("Informe a nova data de nascimento");
+				dataNascimento = setData();
+				System.out.println("Informe o novo cargo");
+				cargo = funcionarioCargo();
+				System.out.println("Informe o novo salário");
+				salario = funcionarioSalario();
+				editado = true;
+			} else {
+				System.out
+						.println("Usuário não cadastrado no sistema, informa outro RG");
+			}
+		} while (!editado);
 
 		// seta o funcionario
 		funcionario.setNome(nome);
@@ -212,22 +226,32 @@ public class Main {
 
 		IFuncionario funcionario = new Funcionario();
 		Funcionario aux;
-		String rg = setRg();
+		String buscaRg = null;
+		boolean achouFuncionario = false;
+		do {
+			String rg = setRg();
+			buscaRg = facade.buscarRg(rg);
 
-		// seta o funcionario
-		funcionario.setRg(rg);
+			if (buscaRg != null || buscaRg.equals("")) {
+				// seta o funcionario
+				funcionario.setRg(rg);
 
-		aux = (Funcionario) facade.buscarFuncionario(rg);
+				aux = (Funcionario) facade.buscarFuncionario(rg);
 
-		System.out.println("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
+				System.out
+						.println("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
 
-		System.out.print(aux.getNome() + "   ");
-		System.out.print(aux.getRg() + "   ");
-		System.out.print(aux.getCpf() + "   ");
-		System.out.print(aux.getDataNascimento() + "   ");
-		System.out.print(aux.getCargo() + "   ");
-		System.out.print(aux.getSalario() + "\n");
-
+				System.out.print(aux.getNome() + "   ");
+				System.out.print(aux.getRg() + "   ");
+				System.out.print(aux.getCpf() + "   ");
+				System.out.print(aux.getDataNascimento() + "   ");
+				System.out.print(aux.getCargo() + "   ");
+				System.out.print(aux.getSalario() + "\n");
+			} else {
+				System.out
+						.println("Funcionario nao encontrado, tente outro RG");
+			}
+		} while (!achouFuncionario);
 	}
 
 	private void ListarFuncionarios() {
@@ -237,16 +261,22 @@ public class Main {
 
 		listFuncionarios = facade.listarFuncionarios();
 
-		System.out.println("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
+		if (listFuncionarios.size() > 0) {
 
-		for (int i = 0; i < listFuncionarios.size(); i++) {
-			aux = (Funcionario) listFuncionarios.get(i);
-			System.out.print(aux.getNome() + "   ");
-			System.out.print(aux.getRg() + "   ");
-			System.out.print(aux.getCpf() + "   ");
-			System.out.print(aux.getDataNascimento() + "   ");
-			System.out.print(aux.getCargo() + "   ");
-			System.out.println(aux.getSalario() + "\n");
+			System.out
+					.println("Nome|RG|CPF|DataNascimento|Cargo|Salario \n \n");
+
+			for (int i = 0; i < listFuncionarios.size(); i++) {
+				aux = (Funcionario) listFuncionarios.get(i);
+				System.out.print(aux.getNome() + "   ");
+				System.out.print(aux.getRg() + "   ");
+				System.out.print(aux.getCpf() + "   ");
+				System.out.print(aux.getDataNascimento() + "   ");
+				System.out.print(aux.getCargo() + "   ");
+				System.out.println(aux.getSalario() + "\n");
+			}
+		} else {
+			System.out.println("Nao ha funcionarios cadastrados no sistema");
 		}
 
 	}
@@ -256,41 +286,60 @@ public class Main {
 		System.out.println("Carregando tela Remover Funcionario:");
 
 		IFuncionario funcionario = new Funcionario();
+		String buscaRg = null;
+		boolean removido = false;
 
-		// coleta dados
-		String rg = setRg();
+		do {
+			// coleta dados
+			String rg = setRg();
+			buscaRg = facade.buscarRg(rg);
 
-		// seta o funcionario
+			if (buscaRg != null || buscaRg.equals("")) {
 
-		funcionario.setRg(rg);
+				// seta o funcionario
+				funcionario.setRg(rg);
 
-		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto removemos o usuario do sistema.");
-		facade.apagarFuncionario(funcionario);
-
+				// tenta adicionar ao banco
+				System.out
+						.println("Aguarde enquanto removemos o usuario do sistema.");
+				facade.apagarFuncionario(funcionario);
+				removido = true;
+			}
+		} while (!removido);
 	}
 
 	private double CalcularBonificacao() {
 
 		double salario;
 		double bonificacao = -1;
+		String buscaRg = null;
+		boolean calculou = false;
 
 		System.out.println("Carregando tela Calcular Bonificacao:");
 
 		IFuncionario funcionario = new Funcionario();
 
-		// coleta dados
-		String rg = setRg();
-		// seta o funcionario;
-		funcionario.setRg(rg);
+		do {
+			// coleta dados
+			String rg = setRg();
+			// seta o funcionario;
+			funcionario.setRg(rg);
+			buscaRg = facade.buscarRg(rg);
 
-		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto tentamos calcular a bonificacao.");
+			if (buscaRg != null || buscaRg.equals("")) {
 
-		salario = facade.buscarSalario(funcionario);
+				// tenta adicionar ao banco
+				System.out
+						.println("Aguarde enquanto tentamos calcular a bonificacao.");
 
-		bonificacao = salario + salario
-				* (0.01 * facade.quantidadeVendas(funcionario));
+				salario = facade.buscarSalario(funcionario);
+
+				bonificacao = salario + salario
+						* (0.01 * facade.quantidadeVendas(funcionario));
+			} else {
+				System.out.println("RG invalido");
+			}
+		} while (!calculou);
 
 		return bonificacao;
 
@@ -301,25 +350,27 @@ public class Main {
 		System.out.println("Carregando tela Atualizar Salario:");
 
 		IFuncionario funcionario = new Funcionario();
-		double salarioAtual = -1; boolean aumento = false; 
-		
+		double salarioAtual = -1;
+		boolean aumento = false;
+
 		// coleta dados
 		String rg = setRg();
 		funcionario.setRg(rg);
-		
+
 		salarioAtual = facade.buscarSalario(funcionario);
-		
-		do {	
+
+		do {
 			double novoSalario = funcionarioSalario();
-			if (novoSalario > salarioAtual){
+			if (novoSalario > salarioAtual) {
 				funcionario.setSalario(novoSalario);
-				System.out.println("Aguarde enquanto tentamos atualizar o salario.");
+				System.out
+						.println("Aguarde enquanto tentamos atualizar o salario.");
 				facade.atualizarSalario(funcionario);
-				aumento = true; 
-			} else { 
+				aumento = true;
+			} else {
 				System.out.println("O novo salário deve ser maior que o atual");
 			}
-		}while(!aumento); 
+		} while (!aumento);
 
 	}
 
@@ -681,16 +732,21 @@ public class Main {
 
 		listMercadorias = facade.listarMercadorias();
 
-		System.out.println("ID|Nome|Preco|Cor|Tamanho|Produto \n \n");
+		if (listMercadorias.size() > 0) {
 
-		for (int i = 0; i < listMercadorias.size(); i++) {
-			aux = (Mercadoria) listMercadorias.get(i);
-			System.out.print(aux.getID() + "   ");
-			System.out.print(aux.getNome() + "   ");
-			System.out.print(aux.getPreco() + "   ");
-			System.out.print(aux.getCor() + "   ");
-			System.out.print(aux.getTamanho() + "   ");
-			System.out.println(aux.getProduto() + "\n");
+			System.out.println("ID|Nome|Preco|Cor|Tamanho|Produto \n \n");
+
+			for (int i = 0; i < listMercadorias.size(); i++) {
+				aux = (Mercadoria) listMercadorias.get(i);
+				System.out.print(aux.getID() + "   ");
+				System.out.print(aux.getNome() + "   ");
+				System.out.print(aux.getPreco() + "   ");
+				System.out.print(aux.getCor() + "   ");
+				System.out.print(aux.getTamanho() + "   ");
+				System.out.println(aux.getProduto() + "\n");
+			}
+		} else {
+			System.out.println("Nao ha mercadorias cadastradas");
 		}
 
 	}
@@ -699,19 +755,27 @@ public class Main {
 
 		Mercadoria aux;
 		in = new Scanner(System.in);
+		int buscarId = -1;
+		boolean achou = false;
 
-		System.out.println("Informe o id da mercadoria");
-		int id = in.nextInt();
+		do {
+			System.out.println("Informe o id da mercadoria");
+			int id = in.nextInt();
+			buscarId = facade.buscarIdMercadoria(id);
 
-		aux = (Mercadoria) facade.buscarMercadoria(id);
-
-		System.out.println("ID|Nome|Preco|Cor|Tamanho|Produto \n");
-
-		System.out.print(aux.getID() + "   ");
-		System.out.print(aux.getNome() + "   ");
-		System.out.print(aux.getPreco() + "   ");
-		System.out.print(aux.getCor() + "   ");
-		System.out.print(aux.getProduto() + "   ");
+			if (buscarId == id) {
+				aux = (Mercadoria) facade.buscarMercadoria(id);
+				System.out.println("ID|Nome|Preco|Cor|Tamanho|Produto \n");
+				System.out.print(aux.getID() + "   ");
+				System.out.print(aux.getNome() + "   ");
+				System.out.print(aux.getPreco() + "   ");
+				System.out.print(aux.getCor() + "   ");
+				System.out.print(aux.getProduto() + "   ");
+				achou = true;
+			} else {
+				System.out.println("Mercadoria nao cadastrada");
+			}
+		} while (!achou);
 
 	}
 
@@ -720,15 +784,26 @@ public class Main {
 		System.out.println("Carregando tela Apagar mercadoria:");
 
 		in = new Scanner(System.in);
+		int buscarId = -1;
+		boolean apagou = false;
 
-		// coleta dados
-		System.out.println("Informe o id da mercadoria");
-		int id = in.nextInt();
+		do {
+			// coleta dados
+			System.out.println("Informe o id da mercadoria");
+			int id = in.nextInt();
 
-		// tenta adicionar ao banco
-		System.out
-				.println("Aguarde enquanto removemos a mercadoria do sistema.");
-		facade.apagarMercadoria(id);
+			buscarId = facade.buscarIdMercadoria(id);
+
+			if (buscarId == id) {
+				// tenta apagar do banco
+				System.out
+						.println("Aguarde enquanto removemos a mercadoria do sistema.");
+				facade.apagarMercadoria(id);
+				apagou = true;
+			} else {
+				System.out.println("Mercadoria nao encontrada");
+			}
+		} while (!apagou);
 
 	}
 
@@ -989,7 +1064,7 @@ public class Main {
 			case 4:
 				BuscarVenda();
 				break;
-			case 5: 
+			case 5:
 				ListarVendas();
 				break;
 			default:
@@ -1007,22 +1082,26 @@ public class Main {
 
 		listVendas = facade.listarVendas();
 
-		System.out.println("ID|Subtotal|VendedorRg|DataVenda|Qtd Vendas \n \n");
+		if (listVendas.size() > 0) {
+			System.out
+					.println("ID|Subtotal|VendedorRg|DataVenda|Qtd Vendas \n \n");
 
-		for (int i = 0; i < listVendas.size(); i++) {
-			aux = (Venda) listVendas.get(i);
-			System.out.print(aux.getID() + "   ");
-			System.out.print(aux.getSubtotal() + "   ");
-			System.out.print(aux.getVendedorRG() + "   ");
-			System.out.print(aux.getDataVenda() + "   ");
-			System.out.print(aux.getQtdVendas() + "   " + "\n");
+			for (int i = 0; i < listVendas.size(); i++) {
+				aux = (Venda) listVendas.get(i);
+				System.out.print(aux.getID() + "   ");
+				System.out.print(aux.getSubtotal() + "   ");
+				System.out.print(aux.getVendedorRG() + "   ");
+				System.out.print(aux.getDataVenda() + "   ");
+				System.out.print(aux.getQtdVendas() + "   " + "\n");
+			}
+		} else {
+			System.out.println("Nao ha mercadorias cadastradas");
 		}
 
-		
 	}
 
 	private void BuscarVenda() {
-		
+
 		Venda aux;
 		int buscarId = -1;
 		int id;
@@ -1085,38 +1164,41 @@ public class Main {
 		int buscarId, id, qtdVendas = -1;
 		String dataVenda = null, vendedorRg = null;
 		double subtotal = -1;
+		boolean editada = false;
 
 		in = new Scanner(System.in);
 
-		id = in.nextInt();
-		buscarId = facade.buscarIdVenda(id);
+		do {
+			id = in.nextInt();
+			buscarId = facade.buscarIdVenda(id);
 
-		if (buscarId == id) {
-			// coleta dados
-			System.out.println("Informe o novo subtotal");
-			subtotal = mercadoriaSubtotal();
-			System.out.println("Informe o RG do funcionario");
-			vendedorRg = setRg();
-			System.out.println("Informe a data da venda");
-			dataVenda = setData();
-			System.out.println("Informe a quantidade da venda");
-			qtdVendas = mercadoriaQtdVenda();
+			if (buscarId == id) {
+				// coleta dados
+				System.out.println("Informe o novo subtotal");
+				subtotal = mercadoriaSubtotal();
+				System.out.println("Informe o RG do funcionario");
+				vendedorRg = setRg();
+				System.out.println("Informe a data da venda");
+				dataVenda = setData();
+				System.out.println("Informe a quantidade da venda");
+				qtdVendas = mercadoriaQtdVenda();
 
-			// seta a venda
-			venda.setID(buscarId);
-			venda.setSubtotal(subtotal);
-			venda.setVendedorRG(vendedorRg);
-			venda.setDataVenda(dataVenda);
-			venda.setQtdVendas(qtdVendas);
+				// seta a venda
+				venda.setID(buscarId);
+				venda.setSubtotal(subtotal);
+				venda.setVendedorRG(vendedorRg);
+				venda.setDataVenda(dataVenda);
+				venda.setQtdVendas(qtdVendas);
 
-			facade.editarVenda(venda);
+				// tenta editar
+				System.out.println("Aguarde enquanto editamos a venda.");
 
-		} else {
-			System.out.println("Venda nao cadastrada no sistema");
-		}
-
-		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto editamos a venda.");
+				facade.editarVenda(venda);
+				editada = true;
+			} else {
+				System.out.println("Venda nao cadastrada no sistema");
+			}
+		} while (!editada);
 
 	}
 

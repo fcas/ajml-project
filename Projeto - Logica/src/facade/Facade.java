@@ -218,6 +218,10 @@ public class Facade {
 	public IVenda buscarVenda(int ID) {
 		return iDaoVendas.buscarVenda(ID);
 	}
+	
+	public int buscarIdMercadoria (int id) {
+		return iDaoMercadoria.buscarIdMercadoria(id);
+	}
 
 }
  

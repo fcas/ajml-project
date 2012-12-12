@@ -34,4 +34,5 @@ public interface IDaoMercadoria {
 	  @ ensures \result != null; @*/
 	public List listarMercadorias();
 
+	public int buscarIdMercadoria (int id);
 }
