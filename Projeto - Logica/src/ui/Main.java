@@ -14,8 +14,8 @@ import facade.Facade;
 
 public class Main {
 
-	private /*@ nullable @*/ Facade facade;
-	private /*@ nullable @*/ Scanner in;
+	private/*@ nullable @*/Facade facade;
+	private/*@ nullable @*/Scanner in;
 
 	private Main() {
 		facade = new Facade(0);
@@ -304,15 +304,7 @@ public class Main {
 
 		// coleta dados
 		String rg = setRg();
-
-		// verifica RG
-
-		//
-		double salario = funcionarioSalario(); // <----- nova funcao para pegar
-												// salario. nao alterar a que ja
-												// existe
-
-		// compara novosalario salarioantigo
+		double salario = funcionarioSalario();
 
 		// seta o funcionario;
 		funcionario.setRg(rg);
@@ -335,8 +327,8 @@ public class Main {
 		String resposta;
 
 		while (!confirma) {
+			valido = false;
 			while (!valido) {
-				valido = false;
 				System.out.println("Digite nome do funcionario:");
 				Nome = in.next();
 				if (!(Nome.equals(""))) {
@@ -969,6 +961,9 @@ public class Main {
 			System.out.println("0 - Voltar");
 			System.out.println("1 - Efetuar Venda");
 			System.out.println("2 - Editar Venda");
+			System.out.println("3 - Apagar Venda");
+			System.out.println("4 - Buscar Venda");
+			System.out.println("5 - Listar Vendas");
 
 			opcao = in.nextInt();
 			switch (opcao) {
@@ -981,12 +976,83 @@ public class Main {
 			case 2:
 				EditarVenda();
 				break;
+			case 3:
+				ApagarVenda();
+				break;
+			case 4:
+				BuscarVenda();
+				break;
+			case 5: 
+				ListarVendas();
+				break;
 			default:
 				throw new OpcaoIlegalException();
 			}
 		}
 
 		in.close();
+	}
+
+	private void ListarVendas() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void BuscarVenda() {
+		
+		Venda aux;
+		int buscarId = -1;
+		int id;
+		boolean idValido = false;
+
+		do {
+			in = new Scanner(System.in);
+			System.out.println("Informe o id da venda");
+			id = in.nextInt();
+			buscarId = facade.buscarIdVenda(id);
+			if (id == buscarId) {
+				aux = (Venda) facade.buscarVenda(id);
+				System.out
+						.println("ID|Subtotal|VendedorRg|DataVenda|Qtd Vendas \n \n");
+				System.out.print(aux.getID() + "   ");
+				System.out.print(aux.getSubtotal() + "   ");
+				System.out.print(aux.getVendedorRG() + "   ");
+				System.out.print(aux.getDataVenda() + "   ");
+				System.out.print(aux.getQtdVendas() + "   ");
+				idValido = true;
+			} else {
+				System.out.println("Id inválido");
+			}
+		} while (!idValido);
+	}
+
+	private void ApagarVenda() {
+
+		System.out.println("Carregando tela Remover Venda:");
+
+		boolean removida = false;
+		int id, buscarId = -1;
+
+		do {
+			in = new Scanner(System.in);
+			System.out.println("Informe o id da mercadoria a ser removida");
+			id = in.nextInt();
+
+			buscarId = facade.buscarIdVenda(id);
+
+			if (buscarId == id) {
+				// coleta dados
+				// seta o funcionario
+				// tenta adicionar ao banco
+				System.out
+						.println("Aguarde enquanto removemos o usuario do sistema.");
+				facade.apagarVenda(buscarId);
+				removida = true;
+			} else {
+				System.out.println("Id não encontrado");
+			}
+		} while (!removida);
+
 	}
 
 	private void EditarVenda() {
@@ -1000,7 +1066,7 @@ public class Main {
 		in = new Scanner(System.in);
 
 		id = in.nextInt();
-		buscarId = facade.buscarIdVendas(id);
+		buscarId = facade.buscarIdVenda(id);
 
 		if (buscarId == id) {
 			// coleta dados

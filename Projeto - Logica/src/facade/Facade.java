@@ -99,7 +99,7 @@ public class Facade {
 	  @ requires id > 0;
 	  @ ensures \result > 0 
 	  @ 	|| \result == -1;@*/
-	public int buscarIdVendas (int id) {
+	public int buscarIdVenda (int id) {
 		return iDaoVendas.buscarIdVenda(id);
 	}
 	
