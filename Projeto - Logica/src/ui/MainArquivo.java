@@ -17,12 +17,19 @@ import models.venda.Venda;
 import facade.Facade;
 
 public class MainArquivo {
-
+	
+	
+	BufferedReader menuFuncionario;
+	BufferedReader menuMercadoria;
+	BufferedReader menuVendas;
 	private/*@ nullable @*/Facade facade;
 	private/*@ nullable @*/Scanner in;
 
-	private MainArquivo() {
+	MainArquivo() throws FileNotFoundException {
 		facade = new Facade(0);
+		 menuFuncionario = new BufferedReader(new FileReader("/home/felipe/menuFuncionario.txt"));	
+		 menuMercadoria = new BufferedReader(new FileReader("/home/felipe/menuMercadoria.txt"));
+		 menuVendas = new BufferedReader(new FileReader("/home/felipe/menuVendas.txt"));
 	}
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,7 +37,8 @@ public class MainArquivo {
 	 * PARTE RELACIONADA A FUNCIONARIO
 	 */
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	private void CadastrarFuncionario() {
+	
+	private void CadastrarFuncionario() throws IOException {
 
 		System.out.println("Carregando tela Cadastro Funcionario:");
 
@@ -74,8 +82,10 @@ public class MainArquivo {
 
 		int opcao = -1;
 		boolean voltar = false;
-		BufferedReader menuFuncionario= new BufferedReader(new FileReader("/home/felipe/menuFuncionario.txt"));
+
 		in = new Scanner(System.in);
+		BufferedReader menuFuncionario = new BufferedReader(new FileReader("/home/felipe/menuFuncionario.txt"));	
+
 
 		while (!voltar) {
 			System.out.println("~~~~~ Menu Funcionarios ~~~~~");
@@ -144,33 +154,8 @@ public class MainArquivo {
 
 			for (int i = 0; i < listFuncionarios.size(); i++) {
 				aux = (Funcionario) listFuncionarios.get(i);
-				if (aux.getCargo().equals("Caixa")) {
-					novoSalario = aux.getSalario() + aux.getSalario() * pCaixa;
-					aux.setSalario(novoSalario);
-					facade.atualizarSalario(aux);
-				} else
-
-				if (aux.getCargo().equals("Estoquista")) {
-					novoSalario = aux.getSalario() + aux.getSalario()
-							* pEstoquista;
-					aux.setSalario(novoSalario);
-					facade.atualizarSalario(aux);
-				}
-
-				else
-
-				if (aux.getCargo().equals("Gerente")) {
-					novoSalario = aux.getSalario() + aux.getSalario()
-							* pGerente;
-					aux.setSalario(novoSalario);
-					facade.atualizarSalario(aux);
-				} else {
-					novoSalario = aux.getSalario() + aux.getSalario()
-							* pVendedor;
-					aux.setSalario(novoSalario);
-					facade.atualizarSalario(aux);
-				}
-
+				aux.setSalario(QuantificarReajuste(aux));
+				facade.atualizarSalario(aux);
 			}
 		} else {
 			System.out.println("Nao ha funcionarios cadastrados no sistema");
@@ -178,7 +163,62 @@ public class MainArquivo {
 
 	}
 
-	private void EditarFuncionario() {
+	/*@		normal_behavior
+	  @ requires funcionario != null;
+	  @ requires funcionario.getSalario() > 0;
+	  @ requires funcionario.getCargo().equals("Caixa");
+	  @ ensures \result == funcionario.getSalario()+funcionario.getSalario()*0.05;
+	  @
+	  @ also
+	  @
+	  @ 	normal_behavior
+	  @ requires funcionario != null;
+	  @ requires funcionario.getSalario() > 0;
+	  @ requires funcionario.getCargo().equals("Estoquista");
+	  @ ensures \result == funcionario.getSalario()+funcionario.getSalario()*0.05;
+	  @
+	  @ also
+	  @
+	  @ 	normal_behavior
+	  @ requires funcionario != null;
+	  @ requires funcionario.getSalario() > 0;
+	  @ requires funcionario.getCargo().equals("Vendedor");
+	  @ ensures \result == funcionario.getSalario()+funcionario.getSalario()*0.07;
+	  @
+	  @ also
+	  @
+	  @ 	normal_behavior
+	  @ requires funcionario != null;
+	  @ requires funcionario.getSalario() > 0;
+	  @ requires funcionario.getCargo().equals("Gerente");
+	  @ ensures \result == funcionario.getSalario()+funcionario.getSalario()*0.09;*/
+	public double QuantificarReajuste(IFuncionario funcionario){
+		double pCaixa = 0.05;
+		double pEstoquista = 0.05;
+		double pGerente = 0.09;
+		double pVendedor = 0.07;
+		double novoSalario = 0;
+		
+		if (funcionario.getCargo().equals("Caixa")) {
+			novoSalario = funcionario.getSalario() + funcionario.getSalario() * pCaixa;
+		}
+		else if (funcionario.getCargo().equals("Estoquista")) {
+			novoSalario = funcionario.getSalario() + funcionario.getSalario()
+					* pEstoquista;
+		}
+		else if (funcionario.getCargo().equals("Gerente")) {
+			novoSalario = funcionario.getSalario() + funcionario.getSalario()
+					* pGerente;
+		}
+		else {
+			novoSalario = funcionario.getSalario() + funcionario.getSalario()
+					* pVendedor;
+		}
+		
+		return novoSalario;
+	}
+
+	private void EditarFuncionario() throws IOException {
 
 		System.out.println("Carregando tela Editar Funcionario:");
 		IFuncionario funcionario = new Funcionario();
@@ -226,7 +266,7 @@ public class MainArquivo {
 
 	}
 
-	private void BuscarFuncionario() {
+	private void BuscarFuncionario() throws IOException {
 
 		IFuncionario funcionario = new Funcionario();
 		Funcionario aux;
@@ -285,7 +325,7 @@ public class MainArquivo {
 
 	}
 
-	private void RemoverFuncionario() {
+	private void RemoverFuncionario() throws IOException {
 
 		System.out.println("Carregando tela Remover Funcionario:");
 
@@ -312,7 +352,7 @@ public class MainArquivo {
 		} while (!removido);
 	}
 
-	private double CalcularBonificacao() {
+	private double CalcularBonificacao() throws IOException {
 
 		double salario;
 		double bonificacao = -1;
@@ -348,8 +388,26 @@ public class MainArquivo {
 		return bonificacao;
 
 	}
+	
+	
+	/*@ 
+	  @ requires rg != null;
+	  @ ensures \result >= 0; @*/
+	private double CalcularReajuste(String rg) {
 
-	private void AtualizarSalario() {
+		double novoSalario = 0;
+
+		IFuncionario funcionario = new Funcionario();
+
+		funcionario = facade.buscarFuncionario(rg);
+		if (funcionario != null){
+			novoSalario = QuantificarReajuste(funcionario);
+		}
+		return novoSalario;
+
+	}
+
+	private void AtualizarSalario() throws IOException {
 
 		System.out.println("Carregando tela Atualizar Salario:");
 
@@ -378,13 +436,14 @@ public class MainArquivo {
 
 	}
 
-	private String funcionarioNome() {
+	private String funcionarioNome() throws IOException {
 
 		String Nome = null;
 		boolean confirma = false;
 		boolean valido = false;
 
 		in = new Scanner(System.in);
+		
 
 		String resposta;
 
@@ -392,13 +451,13 @@ public class MainArquivo {
 			valido = false;
 			while (!valido) {
 				System.out.println("Digite nome do funcionario:");
-				Nome = in.next();
+				Nome = menuFuncionario.readLine();
 				if (!(Nome.equals(""))) {
 					valido = true;
 				}
 
 				System.out.println("Nome = " + Nome + "\nTem certeza? (s/n)");
-				resposta = in.next();
+				resposta = menuFuncionario.readLine();
 
 				if (resposta.equalsIgnoreCase("s")) {
 					confirma = true;
@@ -416,7 +475,7 @@ public class MainArquivo {
 		return Nome;
 	}
 
-	private String setRg() {
+	private String setRg() throws IOException {
 		String RG = null;
 		boolean confirma = false;
 		boolean valido = false;
@@ -424,20 +483,21 @@ public class MainArquivo {
 		String resposta;
 
 		in = new Scanner(System.in);
-
+		
+		
 		while (!confirma) { // enquanto o usuario nao confirmar
 			valido = false;
 			while (!valido) { // enquanto o RG nao for valido
 				System.out
 						.println("Digite RG do funcionario (nove digitos sem ponto):");
-				RG = in.next();
+				RG = menuFuncionario.readLine();
 				if (RG.length() == 9) {
 					valido = true;
 				}
 			}
 
 			System.out.println("RG = " + RG + "\nTem certeza? (s/n)");
-			resposta = in.next();
+			resposta = menuFuncionario.readLine();
 			if (resposta.equals("s") || resposta.equals("S")) {
 				confirma = true;
 				return RG;
@@ -1161,7 +1221,7 @@ public class MainArquivo {
 
 	}
 
-	private void EditarVenda() {
+	private void EditarVenda() throws IOException {
 
 		System.out.println("Carregando tela Editar Venda:");
 		IVenda venda = new Venda();
@@ -1206,7 +1266,7 @@ public class MainArquivo {
 
 	}
 
-	private void CadastrarVenda() {
+	private void CadastrarVenda() throws IOException {
 
 		System.out.println("Carregando tela Cadastro Venda:");
 
@@ -1315,7 +1375,7 @@ public class MainArquivo {
 		int opcao = -1;
 		boolean sair = false;
 		in = new Scanner(System.in);
-		BufferedReader menuPrincipal = new BufferedReader(new FileReader("/home/felipe/menuPrincipal.txt"));
+		BufferedReader menuPrincipal = new BufferedReader(new FileReader("/home/felipe/menuPrincipal.txt"));	
 
 		while (!sair) {
 			System.out.println("~~~~~ Menu Principal ~~~~~");
@@ -1326,7 +1386,6 @@ public class MainArquivo {
 			System.out.println("2- Menu Mercadorias");
 			System.out.println("3- Menu Vendas");
 			opcao = Integer.parseInt(menuPrincipal.readLine());
-			
 			switch (opcao) {
 
 			case 0:
@@ -1385,15 +1444,22 @@ public class MainArquivo {
 	 * METODO MAIN
 	 */
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public static void main(String[] args) throws OpcaoIlegalException, NumberFormatException, IOException {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		System.out.println("iniciando...");
 		Scanner local = new Scanner(System.in);
 		MainArquivo main = new MainArquivo();
 		boolean capturouPrincipal;
 
 		do { // continua tentando rodar o menu enquanto alguma excecao for
+				// capturada
+			try {
 				capturouPrincipal = false;
-			main.MenuPrincipal();
+				main.MenuPrincipal();
+			} catch (OpcaoIlegalException e) {
+				capturouPrincipal = true;
+				System.out.println("Opcao Invalida.");
+
+			}
 		} while (capturouPrincipal);
 
 		local.close();
