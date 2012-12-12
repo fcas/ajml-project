@@ -49,6 +49,10 @@ public class Facade {
 		return iDaoFuncionario.buscarRg(rg);
 	}
 	
+	public int buscarId (int id) {
+		return iDaoVendas.buscarId(id);
+	}
+	
 	public void apagarFuncionario(String rg){
 		iDaoFuncionario.apagarFuncionario(rg);
 	}
