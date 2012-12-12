@@ -2,11 +2,31 @@ package models.funcionario;
 
 
 public class Vendedor extends Funcionario {
-	 
-		private /*@ spec_public @*/ int quantidadeVendas = 0; 
+	
+		private /*@ spec_public @*/ int quantidadeVendas; 
+		
+		/*@	also
+		  @ public initially quantidadeVendas == 0;
+		  @ public invariant quantidadeVendas >= 0; @*/
+		
 		
 		/*@
-		  @ public invariant quantidadeVendas >= 0; @*/
+		  @ ensures cargo.equals("")
+		  @ 		&& cpf.equals("")
+		  @ 		&& dataNascimento.equals("")
+		  @ 		&& nome.equals("")
+		  @ 		&& rg.equals("")
+		  @ 		&& salario == 0
+		  @ 		&& quantidadeVendas == 0; @*/
+		public Vendedor() {
+			this.cargo = "";
+			this.cpf = "";
+			this.dataNascimento ="";
+			this.nome = ""; 
+			this.rg = ""; 
+			this.salario = 0; 
+			this.quantidadeVendas = 0;
+		}
 		
 		/*@
 		  @ ensures \result == quantidadeVendas; @*/
