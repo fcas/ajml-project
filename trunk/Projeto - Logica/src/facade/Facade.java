@@ -37,7 +37,6 @@ public class Facade {
 	
 	
 	//Metodos CRUD Funcionario:
-	
 	/*@ requires funcionario != null;
 	  @ requires funcionario.getNome() != null;
 	  @ requires funcionario.getRg() != null; 
@@ -89,14 +88,22 @@ public class Facade {
 		iDaoFuncionario.atualizarSalario(funcionario);
 	}
 	
+	/*@ 
+	  @ requires rg != null;
+	  @ ensures \result != null; @*/
 	public String buscarRg (String rg){
 		return iDaoFuncionario.buscarRg(rg);
 	}
 	
-	public int buscarId (int id) {
-		return iDaoVendas.buscarId(id);
+	/*@
+	  @ requires id > 0;
+	  @ ensures \result > 0 
+	  @ 	|| \result == -1;@*/
+	public int buscarIdVendas (int id) {
+		return iDaoVendas.buscarIdVenda(id);
 	}
 	
+	/*@ requires rg != null; @*/
 	public void apagarFuncionario(String rg){
 		iDaoFuncionario.apagarFuncionario(rg);
 	}
@@ -107,61 +114,107 @@ public class Facade {
 		iDaoFuncionario.apagarFuncionario(funcionario.getRg());
 	}
 	
+	/*@ requires true;
+	  @ ensures \result != null; @*/
 	public List listarFuncionarios(){
 		return iDaoFuncionario.listarFuncionario();
 	}
 	
+	/*@ requires rg != null;
+	  @ ensures \result != null; @*/
 	public IFuncionario buscarFuncionario(String rg){
 		return iDaoFuncionario.buscarFuncionario(rg);
 	}
 	
 	
 	//Metodos CRUD Mercadorias
+	/*@ requires mercadoria != null;
+	  @ requires mercadoria.getNome() != null;
+	  @ requires mercadoria.getPreco() >= 0; 
+	  @ requires mercadoria.getCor() != null; 
+	  @ requires mercadoria.getTamanho() != null; 
+	  @ requires mercadoria.getProduto() != null; @*/
 	public void criarMercadoria(IMercadoria mercadoria){
 		iDaoMercadoria.criarMercadoria(mercadoria);
 	}
 	
+	/*@ requires mercadoria != null;
+	  @ requires mercadoria.getID() > 0;
+	  @ requires mercadoria.getNome() != null;
+	  @ requires mercadoria.getPreco() >= 0; 
+	  @ requires mercadoria.getCor() != null; 
+	  @ requires mercadoria.getTamanho() != null; 
+	  @ requires mercadoria.getProduto() != null; @*/
 	public void editarMercadoria(IMercadoria mercadoria){
 		iDaoMercadoria.editarMercadoria(mercadoria);
 	}
 	
+	/*@ requires ID > 0; @*/
 	public void apagarMercadoria(int ID){
 		iDaoMercadoria.apagarMercadoria(ID);
 	}
 	
+	/*@ requires mercadoria != null;
+	  @ requires mercadoria.getID() > 0; @*/
 	public void apagarMercadoria(IMercadoria mercadoria){
 		iDaoMercadoria.apagarMercadoria(mercadoria.getID());
 	}
 	
+	/*@ requires true;
+	  @ ensures \result != null; @*/
 	public List listarMercadorias(){
 		return iDaoMercadoria.listarMercadorias();
 	}
 	
+	/*@ requires ID > 0;
+	  @ ensures \result != null; @*/
 	public IMercadoria buscarMercadoria(int ID){
 		return iDaoMercadoria.buscarMercadoria_ID(ID);
 	}
 	
 	//Metodos CRUD Vendas
+	/*@ requires venda != null;
+	  @ requires venda.getSubtotal() >= 0;
+	  @ requires venda.getVendedorRG() != null; 
+	  @ requires venda.getDataVenda() != null;
+	  @ requires venda.getQtdVendas() >= 0; @*/
 	public void criarVenda (IVenda venda) {
 		iDaoVendas.criarVenda(venda);
 	}
 	
+	/*@ requires venda != null;
+	  @ requires venda.getID() > 0;
+	  @ requires venda.getSubtotal() >= 0;
+	  @ requires venda.getVendedorRG() != null; 
+	  @ requires venda.getDataVenda() != null;
+	  @ requires venda.getQtdVendas() >= 0; @*/
 	public void editarVenda(IVenda venda) {
 		iDaoVendas.editarVenda(venda);
 	}
 	
+	/*@
+	  @ requires id > 0; @*/
 	public void apagarVenda(int  id) {
 		iDaoVendas.apagarVenda(id);
 	}
 	
+	/*@
+	  @ requires venda != null; 
+	  @ requires venda.getID() > 0; @*/
 	public void apagarVenda(IVenda venda) {
 		iDaoVendas.apagarVenda(venda.getID());
 	}
 	
+	/*@ 
+	  @ requires true;
+	  @ ensures \result != null; @*/
 	public List listarVendas() {
 		return iDaoVendas.listarVendas();
 	}
 	
+	/*@ 
+	  @ requires ID > 0;
+	  @ ensures \result != null; @*/
 	public IVenda buscarVenda(int ID) {
 		return iDaoVendas.buscarVenda(ID);
 	}

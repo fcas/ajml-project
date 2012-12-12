@@ -14,8 +14,8 @@ import facade.Facade;
 
 public class Main {
 
-	private/* @ nullable @ */Facade facade;
-	private/* @ nullable @ */Scanner in;
+	private /*@ nullable @*/ Facade facade;
+	private /*@ nullable @*/ Scanner in;
 
 	private Main() {
 		facade = new Facade(0);
@@ -40,7 +40,7 @@ public class Main {
 		do {
 			String rg = setRg();
 			buscaRg = facade.buscarRg(rg);
-			
+
 			if (buscaRg == null || buscaRg.equals("")) {
 				String nome = funcionarioNome();
 				String cpf = setCPF();
@@ -304,13 +304,15 @@ public class Main {
 
 		// coleta dados
 		String rg = setRg();
-		
-		//verifica RG
-		
+
+		// verifica RG
+
 		//
-		double salario = funcionarioSalario(); //<----- nova funcao para pegar salario. nao alterar a que ja existe
-		
-		//compara novosalario salarioantigo
+		double salario = funcionarioSalario(); // <----- nova funcao para pegar
+												// salario. nao alterar a que ja
+												// existe
+
+		// compara novosalario salarioantigo
 
 		// seta o funcionario;
 		funcionario.setRg(rg);
@@ -976,7 +978,7 @@ public class Main {
 			case 1:
 				CadastrarVenda();
 				break;
-			case 2: 
+			case 2:
 				EditarVenda();
 				break;
 			default:
@@ -988,18 +990,19 @@ public class Main {
 	}
 
 	private void EditarVenda() {
-		
+
 		System.out.println("Carregando tela Editar Venda:");
 		IVenda venda = new Venda();
-		int buscarId, id, qtdVendas = -1; String dataVenda = null,vendedorRg = null;  
+		int buscarId, id, qtdVendas = -1;
+		String dataVenda = null, vendedorRg = null;
 		double subtotal = -1;
 
 		in = new Scanner(System.in);
-		
+
 		id = in.nextInt();
-		buscarId = facade.buscarId(id);
-		
-		if (buscarId  == id) {
+		buscarId = facade.buscarIdVendas(id);
+
+		if (buscarId == id) {
 			// coleta dados
 			System.out.println("Informe o novo subtotal");
 			subtotal = mercadoriaSubtotal();
@@ -1009,7 +1012,7 @@ public class Main {
 			dataVenda = setData();
 			System.out.println("Informe a quantidade da venda");
 			qtdVendas = mercadoriaQtdVenda();
-			
+
 			// seta a venda
 			venda.setID(buscarId);
 			venda.setSubtotal(subtotal);
@@ -1025,7 +1028,7 @@ public class Main {
 
 		// tenta adicionar ao banco
 		System.out.println("Aguarde enquanto editamos a venda.");
-		
+
 	}
 
 	private void CadastrarVenda() {

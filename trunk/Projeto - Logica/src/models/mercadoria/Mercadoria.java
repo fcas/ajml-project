@@ -34,31 +34,31 @@ public class Mercadoria implements IMercadoria {
 
 	/*@ also
   	  @ ensures \result == ID;@*/
-	public int getID() {
+	public /*@ pure @*/ int getID() {
 		return ID;
 	}
 	
 	/*@ also
 	  @ ensures \result == nome;@*/
-	public String getNome() {
+	public /*@ pure @*/ String getNome() {
 		return nome;
 	}
 	
 	/*@ also
 	  @ ensures \result == cor;@*/
-	public String getCor() {
+	public /*@ pure @*/ String getCor() {
 		return cor;
 	}
 
 	/*@ also
 	  @ ensures \result == tamanho;@*/
-	public String getTamanho() {
+	public /*@ pure @*/ String getTamanho() {
 		return tamanho;
 	}
 	
 	/*@  also
 	  @ ensures \result == produto;@*/
-	public String getProduto() {
+	public /*@ pure @*/ String getProduto() {
 		return produto;
 	}
 	

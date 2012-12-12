@@ -27,10 +27,14 @@ public interface IDaoVendas {
 	  @ ensures \result != null; @*/
 	public List listarVendas();
 	
-	/*@ requires true; 
+	/*@ requires ID > 0; 
 	  @ ensures \result != null; @*/
 	public IVenda buscarVenda(int ID);
 	
-	public int buscarId (int id);
+	/*@
+	  @ requires id > 0;
+	  @ ensures \result > 0 
+	  @ 	|| \result == -1;@*/
+	public int buscarIdVenda (int id);
 
 }
