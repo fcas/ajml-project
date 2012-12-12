@@ -26,6 +26,7 @@ public class Main {
 	 * PARTE RELACIONADA A FUNCIONARIO
 	 */
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
 	private void CadastrarFuncionario() {
 
 		System.out.println("Carregando tela Cadastro Funcionario:");
@@ -140,38 +141,68 @@ public class Main {
 
 			for (int i = 0; i < listFuncionarios.size(); i++) {
 				aux = (Funcionario) listFuncionarios.get(i);
-				if (aux.getCargo().equals("Caixa")) {
-					novoSalario = aux.getSalario() + aux.getSalario() * pCaixa;
-					aux.setSalario(novoSalario);
-					facade.atualizarSalario(aux);
-				} else
-
-				if (aux.getCargo().equals("Estoquista")) {
-					novoSalario = aux.getSalario() + aux.getSalario()
-							* pEstoquista;
-					aux.setSalario(novoSalario);
-					facade.atualizarSalario(aux);
-				}
-
-				else
-
-				if (aux.getCargo().equals("Gerente")) {
-					novoSalario = aux.getSalario() + aux.getSalario()
-							* pGerente;
-					aux.setSalario(novoSalario);
-					facade.atualizarSalario(aux);
-				} else {
-					novoSalario = aux.getSalario() + aux.getSalario()
-							* pVendedor;
-					aux.setSalario(novoSalario);
-					facade.atualizarSalario(aux);
-				}
-
+				aux.setSalario(QuantificarReajuste(aux));
+				facade.atualizarSalario(aux);
 			}
 		} else {
 			System.out.println("Nao ha funcionarios cadastrados no sistema");
 		}
 
+	}
+
+	/*@		normal_behavior
+	  @ requires funcionario != null;
+	  @ requires funcionario.getSalario() > 0;
+	  @ requires funcionario.getCargo().equals("Caixa");
+	  @ ensures \result == funcionario.getSalario()+funcionario.getSalario()*0.05;
+	  @
+	  @ also
+	  @
+	  @ 	normal_behavior
+	  @ requires funcionario != null;
+	  @ requires funcionario.getSalario() > 0;
+	  @ requires funcionario.getCargo().equals("Estoquista");
+	  @ ensures \result == funcionario.getSalario()+funcionario.getSalario()*0.05;
+	  @
+	  @ also
+	  @
+	  @ 	normal_behavior
+	  @ requires funcionario != null;
+	  @ requires funcionario.getSalario() > 0;
+	  @ requires funcionario.getCargo().equals("Vendedor");
+	  @ ensures \result == funcionario.getSalario()+funcionario.getSalario()*0.07;
+	  @
+	  @ also
+	  @
+	  @ 	normal_behavior
+	  @ requires funcionario != null;
+	  @ requires funcionario.getSalario() > 0;
+	  @ requires funcionario.getCargo().equals("Gerente");
+	  @ ensures \result == funcionario.getSalario()+funcionario.getSalario()*0.09;*/
+	public double QuantificarReajuste(IFuncionario funcionario){
+		double pCaixa = 0.05;
+		double pEstoquista = 0.05;
+		double pGerente = 0.09;
+		double pVendedor = 0.07;
+		double novoSalario = 0;
+		
+		if (funcionario.getCargo().equals("Caixa")) {
+			novoSalario = funcionario.getSalario() + funcionario.getSalario() * pCaixa;
+		}
+		else if (funcionario.getCargo().equals("Estoquista")) {
+			novoSalario = funcionario.getSalario() + funcionario.getSalario()
+					* pEstoquista;
+		}
+		else if (funcionario.getCargo().equals("Gerente")) {
+			novoSalario = funcionario.getSalario() + funcionario.getSalario()
+					* pGerente;
+		}
+		else {
+			novoSalario = funcionario.getSalario() + funcionario.getSalario()
+					* pVendedor;
+		}
+		
+		return novoSalario;
 	}
 
 	private void EditarFuncionario() {
@@ -342,6 +373,24 @@ public class Main {
 		} while (!calculou);
 
 		return bonificacao;
+
+	}
+	
+	
+	/*@ 
+	  @ requires rg != null;
+	  @ ensures \result >= 0; @*/
+	private double CalcularReajuste(String rg) {
+
+		double novoSalario = 0;
+
+		IFuncionario funcionario = new Funcionario();
+
+		funcionario = facade.buscarFuncionario(rg);
+		if (funcionario != null){
+			novoSalario = QuantificarReajuste(funcionario);
+		}
+		return novoSalario;
 
 	}
 

@@ -63,6 +63,8 @@ public interface IDaoFuncionario {
 	  @ ensures \result >= 0; @*/
 	public double buscarSalario(IFuncionario funcionario);
 	
+	public boolean checaRg (String rg);
+	
 	 
 }
  
