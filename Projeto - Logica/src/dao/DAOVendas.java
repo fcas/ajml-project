@@ -134,7 +134,8 @@ public class DAOVendas implements IDaoVendas {
 		return le;
 	}
 	
-	public int buscarId (int id) {
+	
+	public int buscarIdVenda (int id) {
 		
 		ResultSet buscarId = null;
 		
