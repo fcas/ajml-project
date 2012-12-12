@@ -31,7 +31,7 @@ public interface IDaoFuncionario {
 	/*@ requires true;
 	  @ ensures \result != null; @*/
 	
-	/*ensures (\forall int i; 0 <= i && i < \result.size(); \result.get(i) != null);*/ 
+	/* ensures (\forall int i; 0 <= i && i < \result.size(); \result.get(i) != null);*/
 	public List listarFuncionario();
 	
 	/*@ requires funcionario != null;
