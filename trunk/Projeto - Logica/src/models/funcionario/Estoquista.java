@@ -23,7 +23,9 @@ public class Estoquista extends Funcionario {
 		super.setDataNascimento(dataNascimento);
 	}
 
-	
+	/*@
+	 @ also
+	 @ ensures cargo.equals("Estoquista"); @*/
 	public void setCargo(String cargo) {
 		super.setCargo(cargo);
 	}
