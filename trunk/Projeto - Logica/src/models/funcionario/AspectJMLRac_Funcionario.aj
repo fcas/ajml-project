@@ -75,7 +75,7 @@ public privileged aspect AspectJMLRac_Funcionario {
            JMLChecker.rethrowJMLAssertionError(rac$e, "models.funcionario.Funcionario.getRg()");
            boolean rac$b = true;
            String rac$ErrorMsg = "";
-           String xPostErrorMsg =  "by method models.funcionario.Funcionario.getRg regarding code at \nFile \"models.funcionario.Funcionario.java\", line 50 (models.funcionario.Funcionario.java:50)";
+           String xPostErrorMsg =  "by method models.funcionario.Funcionario.getRg regarding code at \nFile \"models.funcionario.Funcionario.java\", line 46 (models.funcionario.Funcionario.java:46)";
            if(rac$ErrorMsg.indexOf("and") >= 0){
              rac$ErrorMsg += " are ";
            }
@@ -92,7 +92,7 @@ public privileged aspect AspectJMLRac_Funcionario {
            JMLChecker.rethrowJMLAssertionError(rac$e, "models.funcionario.Funcionario.getCpf()");
            boolean rac$b = true;
            String rac$ErrorMsg = "";
-           String xPostErrorMsg =  "by method models.funcionario.Funcionario.getCpf regarding code at \nFile \"models.funcionario.Funcionario.java\", line 58 (models.funcionario.Funcionario.java:58)";
+           String xPostErrorMsg =  "by method models.funcionario.Funcionario.getCpf regarding code at \nFile \"models.funcionario.Funcionario.java\", line 50 (models.funcionario.Funcionario.java:50)";
            if(rac$ErrorMsg.indexOf("and") >= 0){
              rac$ErrorMsg += " are ";
            }
@@ -109,7 +109,7 @@ public privileged aspect AspectJMLRac_Funcionario {
            JMLChecker.rethrowJMLAssertionError(rac$e, "models.funcionario.Funcionario.getDataNascimento()");
            boolean rac$b = true;
            String rac$ErrorMsg = "";
-           String xPostErrorMsg =  "by method models.funcionario.Funcionario.getDataNascimento regarding code at \nFile \"models.funcionario.Funcionario.java\", line 66 (models.funcionario.Funcionario.java:66)";
+           String xPostErrorMsg =  "by method models.funcionario.Funcionario.getDataNascimento regarding code at \nFile \"models.funcionario.Funcionario.java\", line 54 (models.funcionario.Funcionario.java:54)";
            if(rac$ErrorMsg.indexOf("and") >= 0){
              rac$ErrorMsg += " are ";
            }
@@ -126,7 +126,7 @@ public privileged aspect AspectJMLRac_Funcionario {
            JMLChecker.rethrowJMLAssertionError(rac$e, "models.funcionario.Funcionario.getCargo()");
            boolean rac$b = true;
            String rac$ErrorMsg = "";
-           String xPostErrorMsg =  "by method models.funcionario.Funcionario.getCargo regarding code at \nFile \"models.funcionario.Funcionario.java\", line 74 (models.funcionario.Funcionario.java:74)";
+           String xPostErrorMsg =  "by method models.funcionario.Funcionario.getCargo regarding code at \nFile \"models.funcionario.Funcionario.java\", line 58 (models.funcionario.Funcionario.java:58)";
            if(rac$ErrorMsg.indexOf("and") >= 0){
              rac$ErrorMsg += " are ";
            }
@@ -156,7 +156,7 @@ public privileged aspect AspectJMLRac_Funcionario {
      this(object$rac) && args(nome) {
        boolean rac$b = (nome != null);
        boolean canThrow = false;
-       String preErrorMsg = "by method models.funcionario.Funcionario.setNome regarding code at \nFile \"models.funcionario.Funcionario.java\", line 46 (models.funcionario.Funcionario.java:46)"+", when \n"+"\t\'nome\' is "+nome;
+       String preErrorMsg = "by method models.funcionario.Funcionario.setNome regarding code at \nFile \"models.funcionario.Funcionario.java\", line 66 (models.funcionario.Funcionario.java:66)"+", when \n"+"\t\'nome\' is "+nome;
        String evalErrorMsg = "Invalid expression in \"models.funcionario.Funcionario.java\"\nCaused by: ";
        JMLChecker.checkPrecondition(rac$b, canThrow, preErrorMsg, evalErrorMsg, -1, false, "models.funcionario.Funcionario.setNome(java.lang.String nome)");
 
@@ -169,7 +169,7 @@ public privileged aspect AspectJMLRac_Funcionario {
      this(object$rac) && args(rg) {
        boolean rac$b = (rg != null);
        boolean canThrow = false;
-       String preErrorMsg = "by method models.funcionario.Funcionario.setRg regarding code at \nFile \"models.funcionario.Funcionario.java\", line 54 (models.funcionario.Funcionario.java:54)"+", when \n"+"\t\'rg\' is "+rg;
+       String preErrorMsg = "by method models.funcionario.Funcionario.setRg regarding code at \nFile \"models.funcionario.Funcionario.java\", line 70 (models.funcionario.Funcionario.java:70)"+", when \n"+"\t\'rg\' is "+rg;
        String evalErrorMsg = "Invalid expression in \"models.funcionario.Funcionario.java\"\nCaused by: ";
        JMLChecker.checkPrecondition(rac$b, canThrow, preErrorMsg, evalErrorMsg, -1, false, "models.funcionario.Funcionario.setRg(java.lang.String rg)");
 
@@ -182,7 +182,7 @@ public privileged aspect AspectJMLRac_Funcionario {
      this(object$rac) && args(cpf) {
        boolean rac$b = (cpf != null);
        boolean canThrow = false;
-       String preErrorMsg = "by method models.funcionario.Funcionario.setCpf regarding code at \nFile \"models.funcionario.Funcionario.java\", line 62 (models.funcionario.Funcionario.java:62)"+", when \n"+"\t\'cpf\' is "+cpf;
+       String preErrorMsg = "by method models.funcionario.Funcionario.setCpf regarding code at \nFile \"models.funcionario.Funcionario.java\", line 74 (models.funcionario.Funcionario.java:74)"+", when \n"+"\t\'cpf\' is "+cpf;
        String evalErrorMsg = "Invalid expression in \"models.funcionario.Funcionario.java\"\nCaused by: ";
        JMLChecker.checkPrecondition(rac$b, canThrow, preErrorMsg, evalErrorMsg, -1, false, "models.funcionario.Funcionario.setCpf(java.lang.String cpf)");
 
@@ -195,7 +195,7 @@ public privileged aspect AspectJMLRac_Funcionario {
      this(object$rac) && args(dataNascimento) {
        boolean rac$b = (dataNascimento != null);
        boolean canThrow = false;
-       String preErrorMsg = "by method models.funcionario.Funcionario.setDataNascimento regarding code at \nFile \"models.funcionario.Funcionario.java\", line 70 (models.funcionario.Funcionario.java:70)"+", when \n"+"\t\'dataNascimento\' is "+dataNascimento;
+       String preErrorMsg = "by method models.funcionario.Funcionario.setDataNascimento regarding code at \nFile \"models.funcionario.Funcionario.java\", line 78 (models.funcionario.Funcionario.java:78)"+", when \n"+"\t\'dataNascimento\' is "+dataNascimento;
        String evalErrorMsg = "Invalid expression in \"models.funcionario.Funcionario.java\"\nCaused by: ";
        JMLChecker.checkPrecondition(rac$b, canThrow, preErrorMsg, evalErrorMsg, -1, false, "models.funcionario.Funcionario.setDataNascimento(java.lang.String dataNascimento)");
 
@@ -208,7 +208,7 @@ public privileged aspect AspectJMLRac_Funcionario {
      this(object$rac) && args(cargo) {
        boolean rac$b = (cargo != null);
        boolean canThrow = false;
-       String preErrorMsg = "by method models.funcionario.Funcionario.setCargo regarding code at \nFile \"models.funcionario.Funcionario.java\", line 78 (models.funcionario.Funcionario.java:78)"+", when \n"+"\t\'cargo\' is "+cargo;
+       String preErrorMsg = "by method models.funcionario.Funcionario.setCargo regarding code at \nFile \"models.funcionario.Funcionario.java\", line 82 (models.funcionario.Funcionario.java:82)"+", when \n"+"\t\'cargo\' is "+cargo;
        String evalErrorMsg = "Invalid expression in \"models.funcionario.Funcionario.java\"\nCaused by: ";
        JMLChecker.checkPrecondition(rac$b, canThrow, preErrorMsg, evalErrorMsg, -1, false, "models.funcionario.Funcionario.setCargo(java.lang.String cargo)");
 
@@ -225,10 +225,10 @@ public privileged aspect AspectJMLRac_Funcionario {
         // saving all old values
   		rac$old0 = object$rac.salario;
        } catch (Throwable rac$cause) {
-             throw new JMLEvaluationError("Invalid expression in \"models.funcionario.Funcionario.java\" by method models.funcionario.Funcionario.setSalario regarding specifications at \n[spec-case]: line 83, character 31 (models.funcionario.Funcionario.java:83), line 84, character 38 (models.funcionario.Funcionario.java:84)"+", when \n"+"\t\'this.salario\' is "+object$rac.salario+"\n\t\'novoSalario\' is "+novoSalario+"\nCaused by: "+rac$cause);
+             throw new JMLEvaluationError("Invalid expression in \"models.funcionario.Funcionario.java\" by method models.funcionario.Funcionario.setSalario regarding specifications at \n[spec-case]: line 87, character 31 (models.funcionario.Funcionario.java:87), line 88, character 38 (models.funcionario.Funcionario.java:88)"+", when \n"+"\t\'this.salario\' is "+object$rac.salario+"\n\t\'novoSalario\' is "+novoSalario+"\nCaused by: "+rac$cause);
        }
-      String preErrorMsg = "by method models.funcionario.Funcionario.setSalario regarding specifications at \nFile \"models.funcionario.Funcionario.java\", [spec-case]: line 82, character 36 (models.funcionario.Funcionario.java:82), and \nby method models.funcionario.Funcionario.setSalario regarding code at \nFile \"models.funcionario.Funcionario.java\", line 86 (models.funcionario.Funcionario.java:86)"+", when \n"+"\t\'novoSalario\' is "+novoSalario;
-      String evalPreErrorMsg = "Invalid expression in \"models.funcionario.Funcionario.java\" by method models.funcionario.Funcionario.setSalario regarding specifications at \n[spec-case]: line 82, character 36 (models.funcionario.Funcionario.java:82)"+", when \n"+"\t\'novoSalario\' is "+novoSalario+"\nCaused by: ";
+      String preErrorMsg = "by method models.funcionario.Funcionario.setSalario regarding specifications at \nFile \"models.funcionario.Funcionario.java\", [spec-case]: line 86, character 36 (models.funcionario.Funcionario.java:86), and \nby method models.funcionario.Funcionario.setSalario regarding code at \nFile \"models.funcionario.Funcionario.java\", line 90 (models.funcionario.Funcionario.java:90)"+", when \n"+"\t\'novoSalario\' is "+novoSalario;
+      String evalPreErrorMsg = "Invalid expression in \"models.funcionario.Funcionario.java\" by method models.funcionario.Funcionario.setSalario regarding specifications at \n[spec-case]: line 86, character 36 (models.funcionario.Funcionario.java:86)"+", when \n"+"\t\'novoSalario\' is "+novoSalario+"\nCaused by: ";
       try {
         rac$b = (novoSalario >= +0.0D);
        } catch (Throwable rac$cause) {
@@ -239,8 +239,8 @@ public privileged aspect AspectJMLRac_Funcionario {
       try {
         proceed(object$rac, novoSalario);//executing the method
         rac$b = (!(novoSalario >= +0.0D) || ((object$rac.salario == novoSalario) && (rac$old0 <= object$rac.salario)));
-        String nPostErrorMsg =  "by method models.funcionario.Funcionario.setSalario regarding specifications at \nFile \"models.funcionario.Funcionario.java\", [spec-case]: line 83, character 31 (models.funcionario.Funcionario.java:83), line 84, character 38 (models.funcionario.Funcionario.java:84), and \nby method models.funcionario.Funcionario.setSalario regarding code at \nFile \"models.funcionario.Funcionario.java\", line 86 (models.funcionario.Funcionario.java:86)"+", when \n"+"\t\'this.salario\' is "+object$rac.salario+"\n\t\'novoSalario\' is "+novoSalario;
-        String evalErrorMsg = "Invalid expression in \"models.funcionario.Funcionario.java\" by method models.funcionario.Funcionario.setSalario regarding specifications at \n[spec-case]: line 83, character 31 (models.funcionario.Funcionario.java:83), line 84, character 38 (models.funcionario.Funcionario.java:84)"+", when \n"+"\t\'this.salario\' is "+object$rac.salario+"\n\t\'novoSalario\' is "+novoSalario+"\nCaused by: ";
+        String nPostErrorMsg =  "by method models.funcionario.Funcionario.setSalario regarding specifications at \nFile \"models.funcionario.Funcionario.java\", [spec-case]: line 87, character 31 (models.funcionario.Funcionario.java:87), line 88, character 38 (models.funcionario.Funcionario.java:88), and \nby method models.funcionario.Funcionario.setSalario regarding code at \nFile \"models.funcionario.Funcionario.java\", line 90 (models.funcionario.Funcionario.java:90)"+", when \n"+"\t\'this.salario\' is "+object$rac.salario+"\n\t\'novoSalario\' is "+novoSalario;
+        String evalErrorMsg = "Invalid expression in \"models.funcionario.Funcionario.java\" by method models.funcionario.Funcionario.setSalario regarding specifications at \n[spec-case]: line 87, character 31 (models.funcionario.Funcionario.java:87), line 88, character 38 (models.funcionario.Funcionario.java:88)"+", when \n"+"\t\'this.salario\' is "+object$rac.salario+"\n\t\'novoSalario\' is "+novoSalario+"\nCaused by: ";
         JMLChecker.checkNormalPostcondition(rac$b, nPostErrorMsg, evalErrorMsg, -1, false, "models.funcionario.Funcionario.setSalario(double novoSalario)");
       } catch (Throwable rac$e) {
            JMLChecker.rethrowJMLAssertionError(rac$e, "models.funcionario.Funcionario.setSalario(double novoSalario)");
@@ -268,7 +268,7 @@ public privileged aspect AspectJMLRac_Funcionario {
   			   rac$b = rac$b && rac$b0;
   		     }
   		   }
-           String xPostErrorMsg =  "by method models.funcionario.Funcionario.setSalario regarding code at \nFile \"models.funcionario.Funcionario.java\", line 86 (models.funcionario.Funcionario.java:86)";
+           String xPostErrorMsg =  "by method models.funcionario.Funcionario.setSalario regarding code at \nFile \"models.funcionario.Funcionario.java\", line 90 (models.funcionario.Funcionario.java:90)";
            if(rac$ErrorMsg.indexOf("and") >= 0 ){
              rac$ErrorMsg += " are ";
            }

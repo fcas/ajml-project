@@ -12,9 +12,13 @@ import models.funcionario.IFuncionario;
 
 public class DAOFuncionario implements IDaoFuncionario {
 	
-	private /*@ nullable @*/ static Connection con;
-	private /*@ nullable @*/ static Statement comando;
+	private /*@ spec_public nullable @*/ static Connection con;
+	private /*@ spec_public nullable @*/ static Statement comando;
 
+	/*@ 
+	  @ assignable con, comando;
+	  @ ensures con != null;
+	  @ ensures comando != null; @*/
 	private void conectar() {
 		
 		try {
@@ -28,6 +32,7 @@ public class DAOFuncionario implements IDaoFuncionario {
 		}
 	}
 
+	
 	public void criarFuncionario (IFuncionario funcionario) {
 	
 			String insert_funcionario = "INSERT INTO funcionario VALUES ("
@@ -98,7 +103,6 @@ public class DAOFuncionario implements IDaoFuncionario {
 		conectar();
 		List list_funcionario = new ArrayList();
 		ResultSet result;
-
 		try {
 			result = comando
 					.executeQuery("SELECT * FROM funcionario ORDER BY cargo");

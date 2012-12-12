@@ -10,27 +10,27 @@ public interface IFuncionario {
  
 	/*@
 	  @ ensures \result == inome; @*/
-	public String getNome();
+	public /*@ pure @*/ String getNome();
 	
 	/*@
 	  @ ensures \result == irg; @*/
-	public String getRg();
+	public /*@ pure @*/ String getRg();
 
 	/*@
 	  @ ensures \result == icpf; @*/
-	public String getCpf();
+	public /*@ pure @*/ String getCpf();
 
 	/*@
 	  @ ensures \result == idataNascimento; @*/
-	public String getDataNascimento();
+	public /*@ pure @*/ String getDataNascimento();
 
 	/*@
 	  @ ensures \result == icargo; @*/
-	public String getCargo();
+	public /*@ pure @*/ String getCargo();
 
 	/*@
 	  @ ensures \result == isalario; @*/
-	public double getSalario();
+	public /*@ pure @*/ double getSalario();
 
 	
 	/*@

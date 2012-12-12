@@ -12,9 +12,13 @@ import models.venda.Venda;
 
 public class DAOVendas implements IDaoVendas {
 	
-	private /*@ nullable @*/ static Connection con;
-	private /*@ nullable @*/ static Statement comando;
+	private /*@ spec_public nullable @*/ static Connection con;
+	private /*@ spec_public nullable @*/ static Statement comando;
 
+	/*@ 
+	  @ assignable con, comando;
+	  @ ensures con != null;
+	  @ ensures comando != null;@*/
 	private void conectar() {
 		
 		try {

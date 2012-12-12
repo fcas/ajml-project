@@ -9,23 +9,23 @@ public interface IVenda {
 	
 	/*@
 	  @ ensures \result == iID; @*/
-	public int getID();
+	public /*@ pure @*/ int getID();
 	
 	/*@
 	  @ ensures \result == isubtotal; @*/
-	public double getSubtotal();
+	public /*@ pure @*/ double getSubtotal();
 
 	/*@
 	  @ ensures \result == ivendedorRG; @*/
-	public String getVendedorRG();
+	public /*@ pure @*/ String getVendedorRG();
 
 	/*@
 	  @ ensures \result == idataVenda; @*/
-	public String getDataVenda();
+	public /*@ pure @*/ String getDataVenda();
 
 	/*@
 	  @ ensures \result == iqtdVendas; @*/
-	public int getQtdVendas();
+	public /*@ pure @*/ int getQtdVendas();
 
 	/*@
 	  @ requires iD >= 0;

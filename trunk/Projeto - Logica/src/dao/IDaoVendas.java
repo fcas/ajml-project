@@ -6,14 +6,29 @@ import models.venda.IVenda;
 
 public interface IDaoVendas {
 	
+	/*@ requires venda != null;
+	  @ requires venda.getSubtotal() >= 0;
+	  @ requires venda.getVendedorRG() != null; 
+	  @ requires venda.getDataVenda() != null;
+	  @ requires venda.getQtdVendas() >= 0; @*/
 	public void criarVenda (IVenda venda);
-
+	
+	/*@ requires venda != null;
+	  @ requires venda.getSubtotal() >= 0;
+	  @ requires venda.getVendedorRG() != null; 
+	  @ requires venda.getDataVenda() != null;
+	  @ requires venda.getQtdVendas() >= 0; @*/
 	public void editarVenda(IVenda venda);
 	
+	/*@ requires id > 0; @*/
 	public void apagarVenda(int  id);
 	
+	/*@ requires true; 
+	  @ ensures \result != null; @*/
 	public List listarVendas();
 	
+	/*@ requires true; 
+	  @ ensures \result != null; @*/
 	public IVenda buscarVenda(int ID);
 	
 	public int buscarId (int id);

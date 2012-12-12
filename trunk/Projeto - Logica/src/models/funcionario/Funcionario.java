@@ -38,40 +38,44 @@ public class Funcionario implements IFuncionario {
 	  @ \old(salario) <= salario; @*/
 	
 	
-	public String getNome() {
+	public /*@ pure @*/ String getNome() {
 		return nome;
+	}
+
+	public /*@ pure @*/ String getRg() {
+		return rg;
+	}
+
+	public /*@ pure @*/ String getCpf() {
+		return cpf;
+	}
+
+	public /*@ pure @*/ String getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public /*@ pure @*/ String getCargo() {
+		return cargo;
+	}
+
+	public /*@ pure @*/ double getSalario() {
+		return salario;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public String getRg() {
-		return rg;
-	}
-
 	public void setRg(String rg) {
 		this.rg = rg;
-	}
-
-	public String getCpf() {
-		return cpf;
 	}
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-	public String getDataNascimento() {
-		return dataNascimento;
-	}
-
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}
-
-	public String getCargo() {
-		return cargo;
 	}
 
 	public void setCargo(String cargo) {
@@ -84,10 +88,6 @@ public class Funcionario implements IFuncionario {
 	  @ ensures_redundantly \old(salario) <= salario; @*/
 	public void setSalario(double novoSalario) {
 		this.salario = novoSalario;	
-	}
-
-	public double getSalario() {
-		return salario;
 	}
 
 }

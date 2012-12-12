@@ -23,27 +23,27 @@ public class Venda implements IVenda {
 	  @ iqtdVendas = qtdVendas; @*/
 
 	
-	public int getID() {
+	public /*@ pure @*/ int getID() {
 		return ID;
 	}
 	
 	
-	public double getSubtotal() {
+	public /*@ pure @*/ double getSubtotal() {
 		return subtotal;
 	}
 
 	
-	public String getVendedorRG() {
+	public /*@ pure @*/ String getVendedorRG() {
 		return vendedorRG;
 	}
 
 	
-	public String getDataVenda() {
+	public /*@ pure @*/ String getDataVenda() {
 		return dataVenda;
 	}
 
 	
-	public int getQtdVendas() {
+	public /*@ pure @*/ int getQtdVendas() {
 		return qtdVendas;
 	}
 	
