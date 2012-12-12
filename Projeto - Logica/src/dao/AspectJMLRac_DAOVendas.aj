@@ -67,7 +67,7 @@ public privileged aspect AspectJMLRac_DAOVendas {
            JMLChecker.rethrowJMLAssertionError(rac$e, "dao.DAOVendas.listarVendas()");
            boolean rac$b = true;
            String rac$ErrorMsg = "";
-           String xPostErrorMsg =  "by method dao.DAOVendas.listarVendas regarding code at \nFile \"dao.DAOVendas.java\", line 107 (dao.DAOVendas.java:107)";
+           String xPostErrorMsg =  "by method dao.DAOVendas.listarVendas regarding code at \nFile \"dao.DAOVendas.java\", line 106 (dao.DAOVendas.java:106)";
            if(rac$ErrorMsg.indexOf("and") >= 0){
              rac$ErrorMsg += " are ";
            }
@@ -84,7 +84,7 @@ public privileged aspect AspectJMLRac_DAOVendas {
            JMLChecker.rethrowJMLAssertionError(rac$e, "dao.DAOVendas.buscarVenda(int ID)");
            boolean rac$b = true;
            String rac$ErrorMsg = "";
-           String xPostErrorMsg =  "by method dao.DAOVendas.buscarVenda regarding code at \nFile \"dao.DAOVendas.java\", line 134 (dao.DAOVendas.java:134)";
+           String xPostErrorMsg =  "by method dao.DAOVendas.buscarVenda regarding code at \nFile \"dao.DAOVendas.java\", line 133 (dao.DAOVendas.java:133)";
            if(rac$ErrorMsg.indexOf("and") >= 0){
              rac$ErrorMsg += " are ";
            }
