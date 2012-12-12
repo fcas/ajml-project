@@ -22,14 +22,15 @@ public class MainArquivo {
 	BufferedReader menuFuncionario;
 	BufferedReader menuMercadoria;
 	BufferedReader menuVendas;
+	private final String caminhoArquivo = System.getProperty("user.dir") + System.getProperty("file.separator");
 	private/*@ nullable @*/Facade facade;
 	private/*@ nullable @*/Scanner in;
 
 	MainArquivo() throws FileNotFoundException {
 		facade = new Facade(0);
-		 menuFuncionario = new BufferedReader(new FileReader("/home/felipe/menuFuncionario.txt"));	
-		 menuMercadoria = new BufferedReader(new FileReader("/home/felipe/menuMercadoria.txt"));
-		 menuVendas = new BufferedReader(new FileReader("/home/felipe/menuVendas.txt"));
+		menuFuncionario = new BufferedReader(new FileReader(caminhoArquivo + "menuFuncionario.txt"));	
+		menuMercadoria = new BufferedReader(new FileReader(caminhoArquivo + "menuMercadoria.txt"));
+		menuVendas = new BufferedReader(new FileReader(caminhoArquivo + "menuVendas.txt"));
 	}
 
 	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,8 +84,7 @@ public class MainArquivo {
 		int opcao = -1;
 		boolean voltar = false;
 
-		in = new Scanner(System.in);
-		BufferedReader menuFuncionario = new BufferedReader(new FileReader("/home/felipe/menuFuncionario.txt"));	
+		in = new Scanner(System.in);	
 
 
 		while (!voltar) {
@@ -511,7 +511,7 @@ public class MainArquivo {
 		return RG;
 	}
 
-	private String setCPF() {
+	private String setCPF() throws IOException {
 		String CPF = null;
 		boolean confirma = false;
 		boolean valido = false;
@@ -524,14 +524,14 @@ public class MainArquivo {
 			while (!valido) { // enquanto o CPF nao for valido
 				System.out
 						.println("Digite CPF do funcionario (onze digitos sem ponto e sem hifen):");
-				CPF = in.next();
+				CPF = menuFuncionario.readLine();
 				if (CPF.length() == 11) {
 					valido = true;
 				}
 			}
 
 			System.out.println("CPF = " + CPF + "\nTem certeza? (s/n)");
-			resposta = in.next();
+			resposta = menuFuncionario.readLine();
 			if (resposta.equals("s") || resposta.equals("S")) {
 				confirma = true;
 				return CPF;
@@ -545,7 +545,7 @@ public class MainArquivo {
 		return CPF;
 	}
 
-	private String setData() {
+	private String setData() throws IOException {
 		String dataString = null;
 		boolean confirma = false;
 		boolean valido = false;
@@ -558,7 +558,7 @@ public class MainArquivo {
 			valido = false;
 			while (!valido) { // enquanto o CPF nao for valido
 				System.out.println("Informe a data (DD/MM/AAAA)");
-				dataString = in.next();
+				dataString = menuFuncionario.readLine();
 				if (dataString.length() == 10) { // se tem o tamanho certo
 					int[] dataInt = quebraData(dataString); // quebra a linha
 					if ((dataInt.length == 3) && (checaData(dataInt))) { // se
@@ -578,7 +578,7 @@ public class MainArquivo {
 
 			System.out.println("Data de Nascimento = " + dataString
 					+ "\nTem certeza? (s/n)");
-			resposta = in.next();
+			resposta = menuFuncionario.readLine();
 			if (resposta.equals("s") || resposta.equals("S")) {
 				confirma = true;
 				return dataString;
@@ -652,7 +652,7 @@ public class MainArquivo {
 		return false;
 	}
 
-	private String funcionarioCargo() {
+	private String funcionarioCargo() throws NumberFormatException, IOException {
 		String cargo = null;
 		int opcao = 0;
 		boolean confirma = false;
@@ -669,7 +669,7 @@ public class MainArquivo {
 				System.out.println("2-Estoquista");
 				System.out.println("3-Gerente");
 				System.out.println("4-Vendedor");
-				opcao = in.nextInt();
+				opcao = Integer.parseInt(menuFuncionario.readLine());
 				switch (opcao) {
 				case 1:
 					cargo = "Caixa";
@@ -696,7 +696,7 @@ public class MainArquivo {
 			}
 
 			System.out.println("Cargo = " + cargo + "\nTem certeza? (s/n)");
-			resposta = in.next();
+			resposta = menuFuncionario.readLine();
 			if (resposta.equals("s") || resposta.equals("S")) {
 				confirma = true;
 				return cargo;
@@ -710,7 +710,7 @@ public class MainArquivo {
 		return cargo;
 	}
 
-	private double funcionarioSalario() {
+	private double funcionarioSalario() throws NumberFormatException, IOException {
 
 		double salario = -1;
 		boolean confirma = false;
@@ -723,14 +723,14 @@ public class MainArquivo {
 			valido = false;
 			while (!valido) { // enquanto o Salario nao for valido
 				System.out.println("Digite salario do funcionario:");
-				salario = in.nextDouble();
+				salario = Double.parseDouble(menuFuncionario.readLine());
 				if (salario > 0) {
 					valido = true;
 				}
 			}
 
 			System.out.println("Salario = " + salario + "\nTem certeza? (s/n)");
-			resposta = in.next();
+			resposta = menuFuncionario.readLine();
 			if (resposta.equals("s") || resposta.equals("S")) {
 				confirma = true;
 				return salario;
@@ -765,7 +765,7 @@ public class MainArquivo {
 			System.out.println("3 - Buscar mercadoria");
 			System.out.println("4 - Listar mercadorias");
 
-			opcao = in.nextInt();
+			opcao = Integer.parseInt(menuMercadoria.readLine());
 			switch (opcao) {
 			case 0:
 				MenuPrincipal();
@@ -815,7 +815,7 @@ public class MainArquivo {
 
 	}
 
-	private void BuscarMercadoria() {
+	private void BuscarMercadoria() throws NumberFormatException, IOException {
 
 		Mercadoria aux;
 		in = new Scanner(System.in);
@@ -824,7 +824,7 @@ public class MainArquivo {
 
 		do {
 			System.out.println("Informe o id da mercadoria");
-			int id = in.nextInt();
+			int id = Integer.parseInt(menuMercadoria.readLine());
 			buscarId = facade.buscarIdMercadoria(id);
 
 			if (buscarId == id) {
