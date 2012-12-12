@@ -11,10 +11,16 @@ import models.venda.IVenda;
 
 public class Facade {
  
-	private IDaoFuncionario iDaoFuncionario;
-	private IDaoMercadoria iDaoMercadoria;
-	private IDaoVendas iDaoVendas;
-	private DAOFactory DaoFactory;
+	private /*@ spec_public nullable @*/ IDaoFuncionario iDaoFuncionario;
+	private /*@ spec_public nullable @*/ IDaoMercadoria iDaoMercadoria;
+	private /*@ spec_public nullable @*/ IDaoVendas iDaoVendas;
+	private /*@ spec_public nullable @*/ DAOFactory DaoFactory;
+	
+	/*@ requires whichFactory == 0;
+	  @ ensures DaoFactory != null;
+	  @ ensures iDaoMercadoria != null;
+	  @ ensures iDaoFuncionario != null;
+	  @ ensures iDaoVendas != null; @*/
 	
 	public Facade(int whichFactory) {
 		this.DaoFactory = DAOFactory.createDAOFactory(whichFactory);
@@ -23,24 +29,62 @@ public class Facade {
 		this.iDaoVendas = this.DaoFactory.createDAOVendas();
 	}
 	
+	/*@
+	  @ public initially DaoFactory != null;
+	  @ public initially iDaoMercadoria != null; 
+	  @ public initially iDaoFuncionario != null;
+	  @ public initially iDaoVendas != null; @*/
+	
 	
 	//Metodos CRUD Funcionario:
+	
+	/*@ requires funcionario != null;
+	  @ requires funcionario.getNome() != null;
+	  @ requires funcionario.getRg() != null; 
+	  @ requires funcionario.getCpf() != null; 
+	  @ requires funcionario.getDataNascimento() != null; 
+	  @ requires funcionario.getCargo() != null; 
+	  @ requires funcionario.getSalario() >= 0; @*/
 	public void criarFuncionario(IFuncionario funcionario){
 		iDaoFuncionario.criarFuncionario(funcionario);
 	}
 	
+	/*@ requires funcionario != null;
+	  @ requires funcionario.getNome() != null;
+	  @ requires funcionario.getRg() != null; 
+	  @ requires funcionario.getCpf() != null; 
+	  @ requires funcionario.getDataNascimento() != null; 
+	  @ requires funcionario.getCargo() != null; 
+	  @ requires funcionario.getSalario() >= 0; @*/
 	public void editarFuncionario(IFuncionario funcionario){
 		iDaoFuncionario.editarFuncionario(funcionario);
 	}
 	
+	/*@ requires funcionario != null;
+	  @ requires funcionario.getNome() != null;
+	  @ requires funcionario.getRg() != null; 
+	  @ requires funcionario.getCpf() != null; 
+	  @ requires funcionario.getDataNascimento() != null; 
+	  @ requires funcionario.getCargo() != null; 
+	  @ requires funcionario.getSalario() >= 0; @*/
 	public double buscarSalario(IFuncionario funcionario){
 		return iDaoFuncionario.buscarSalario(funcionario);
 	}
 	
+	/*@ requires funcionario != null;
+	  @ requires funcionario.getNome() != null;
+	  @ requires funcionario.getRg() != null; 
+	  @ requires funcionario.getCpf() != null; 
+	  @ requires funcionario.getDataNascimento() != null; 
+	  @ requires funcionario.getCargo() != null; 
+	  @ requires funcionario.getSalario() >= 0; @*/
 	public int quantidadeVendas(IFuncionario funcionario){
 		return iDaoFuncionario.quantidadeVendas(funcionario);
 	}
 	
+	/*@ requires funcionario != null;
+	  @ requires funcionario.getRg() != null;
+	  @ requires funcionario.getSalario() >= 0; @*/
 	public void atualizarSalario(IFuncionario funcionario){
 		iDaoFuncionario.atualizarSalario(funcionario);
 	}
@@ -57,6 +101,8 @@ public class Facade {
 		iDaoFuncionario.apagarFuncionario(rg);
 	}
 	
+	/*@ requires funcionario != null;
+	  @ requires funcionario.getRg() != null; @*/
 	public void apagarFuncionario(IFuncionario funcionario){
 		iDaoFuncionario.apagarFuncionario(funcionario.getRg());
 	}

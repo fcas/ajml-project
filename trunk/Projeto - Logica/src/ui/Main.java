@@ -304,7 +304,13 @@ public class Main {
 
 		// coleta dados
 		String rg = setRg();
-		double salario = funcionarioSalario();
+		
+		//verifica RG
+		
+		//
+		double salario = funcionarioSalario(); //<----- nova funcao para pegar salario. nao alterar a que ja existe
+		
+		//compara novosalario salarioantigo
 
 		// seta o funcionario;
 		funcionario.setRg(rg);
