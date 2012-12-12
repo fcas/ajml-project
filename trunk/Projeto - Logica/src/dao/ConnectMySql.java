@@ -17,7 +17,7 @@ public class ConnectMySql {
 	  @ requires nome != null;
 	  @ requires senha != null;
 	  @ requires banco == 0;
-	  @ ensures MYSQL == 0;
+	  @ ensures_redundantly MYSQL == 0;
 	  @ 
 	  @ also 
 	  @
