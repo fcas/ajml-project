@@ -4,6 +4,26 @@ package models.funcionario;
 public class Estoquista extends Funcionario {
 	
 	/*@
+	  @ public initially cargo.equals("")
+	  @ 			&& cpf.equals("")
+	  @ 			&& dataNascimento.equals("")
+	  @ 			&& nome.equals("")
+	  @ 			&& rg.equals("")
+	  @ 			&& salario == 0;
+	  @
+	  @ public invariant cargo != null
+	  @ 			&& cpf != null
+	  @ 			&& dataNascimento != null
+	  @ 			&& nome != null
+	  @ 			&& rg != null
+	  @ 			&& salario >= 0;
+	  @ public invariant cpf.length() <= 11;
+	  @ public invariant rg.length() <= 9;
+	  @
+	  @ public constraint
+	  @ \old(salario) <= salario; @*/
+	
+	/*@
 	  @ ensures cargo.equals("")
 	  @ 		&& cpf.equals("")
 	  @ 		&& dataNascimento.equals("")

@@ -79,6 +79,7 @@ public class MainArquivo {
 		} while (!cadastrado);
 	}
 
+	
 	private void MenuFuncionarios() throws OpcaoIlegalException, NumberFormatException, IOException {
 
 		int opcao = -1;

@@ -35,12 +35,14 @@ public class Funcionario implements IFuncionario {
 	  @ 			&& rg.equals("")
 	  @ 			&& salario == 0;
 	  @
-	  @ public invariant cargo != null;
-	  @ 			&& cpf != null;
-	  @ 			&& dataNascimento != null;
-	  @ 			&& nome != null;
-	  @ 			&& rg != null;
+	  @ public invariant cargo != null
+	  @ 			&& cpf != null
+	  @ 			&& dataNascimento != null
+	  @ 			&& nome != null
+	  @ 			&& rg != null
 	  @ 			&& salario >= 0;
+	  @ public invariant cpf.length() <= 11;
+	  @ public invariant rg.length() <= 9;
 	  @
 	  @ public constraint
 	  @ \old(salario) <= salario; @*/
