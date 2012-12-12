@@ -3,6 +3,23 @@ package models.funcionario;
 
 public class Gerente extends Funcionario {
 	 
+	
+	/*@
+	  @ ensures cargo.equals("")
+	  @ 		&& cpf.equals("")
+	  @ 		&& dataNascimento.equals("")
+	  @ 		&& nome.equals("")
+	  @ 		&& rg.equals("")
+	  @ 		&& salario == 0; @*/
+	public Gerente() {
+		this.cargo = "";
+		this.cpf = "";
+		this.dataNascimento ="";
+		this.nome = ""; 
+		this.rg = ""; 
+		this.salario = 0;  
+	}
+	
 		public void setNome(String nome) {
 			super.setNome(nome);
 		}

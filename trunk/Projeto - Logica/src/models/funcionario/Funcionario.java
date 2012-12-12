@@ -3,34 +3,64 @@ package models.funcionario;
 
 public class Funcionario implements IFuncionario {
 	
-	private /*@ nullable spec_public @*/ String nome;//@ in inome;
+	protected /*@ nullable spec_public @*/ String nome;//@ in inome;
 	/*@ protected represents
 	  @ inome = nome; @*/
 	
-	private /*@ nullable spec_public @*/ String rg; //@ in irg;
+	protected /*@ nullable spec_public @*/ String rg; //@ in irg;
 	/*@ protected represents
 	  @ irg = rg; @*/
 	
-	private /*@ nullable spec_public @*/ String cpf; //@ in icpf;
+	protected /*@ nullable spec_public @*/ String cpf; //@ in icpf;
 	/*@ protected represents
 	  @ icpf = cpf; @*/
 	
-	private /*@ nullable spec_public @*/ String dataNascimento; //@ in idataNascimento;
+	protected /*@ nullable spec_public @*/ String dataNascimento; //@ in idataNascimento;
 	/*@ protected represents
 	  @ idataNascimento = dataNascimento; @*/
 	
-	private /*@ nullable spec_public @*/ String cargo; //@ in icargo;
+	protected /*@ nullable spec_public @*/ String cargo; //@ in icargo;
 	/*@ protected represents
 	  @ icargo = cargo; @*/
 	
-	private /*@ spec_public @*/ double salario;//@ in isalario;
+	protected /*@ spec_public @*/ double salario;//@ in isalario;
 	/*@ protected represents
 	  @ isalario = salario; @*/
 	
 	/*@
+	  @ public initially cargo.equals("")
+	  @ 			&& cpf.equals("")
+	  @ 			&& dataNascimento.equals("")
+	  @ 			&& nome.equals("")
+	  @ 			&& rg.equals("")
+	  @ 			&& salario == 0;
+	  @
+	  @ public invariant cargo != null;
+	  @ 			&& cpf != null;
+	  @ 			&& dataNascimento != null;
+	  @ 			&& nome != null;
+	  @ 			&& rg != null;
+	  @ 			&& salario >= 0;
+	  @
 	  @ public constraint
 	  @ \old(salario) <= salario; @*/
 	
+	
+	/*@
+	  @ ensures cargo.equals("")
+	  @ 		&& cpf.equals("")
+	  @ 		&& dataNascimento.equals("")
+	  @ 		&& nome.equals("")
+	  @ 		&& rg.equals("")
+	  @ 		&& salario == 0; @*/
+	public Funcionario() {
+		this.cargo = "";
+		this.cpf = "";
+		this.dataNascimento ="";
+		this.nome = ""; 
+		this.rg = ""; 
+		this.salario = 0;  
+	}
 	
 	public /*@ pure @*/ String getNome() {
 		return nome;

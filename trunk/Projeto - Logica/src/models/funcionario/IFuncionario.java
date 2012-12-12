@@ -7,7 +7,7 @@ public interface IFuncionario {
 	//@ public model instance nullable String idataNascimento;
 	//@ public model instance nullable String icargo;
 	//@ public model instance double isalario;
- 
+	
 	/*@
 	  @ ensures \result == inome; @*/
 	public /*@ pure @*/ String getNome();
