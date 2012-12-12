@@ -49,6 +49,7 @@ public class Funcionario implements IFuncionario {
 	
 	
 	/*@
+	  @ assignable ID, subtotal, vendedorRG, dataVenda, qtdVendas;
 	  @ ensures cargo.equals("")
 	  @ 		&& cpf.equals("")
 	  @ 		&& dataNascimento.equals("")
