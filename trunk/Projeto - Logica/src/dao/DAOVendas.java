@@ -54,9 +54,10 @@ public class DAOVendas implements IDaoVendas {
 				+ ",vendedorRg='" + venda.getVendedorRG()
 				+ "',dataVenda='" + venda.getDataVenda()
 				+ "',qtdVendas=" + venda.getQtdVendas()
-				+ " WHERE ID=" + venda.getID() + ";";
+				+ " WHERE id=" + venda.getID() + ";";
 		try {	
 			conectar();
+			System.out.println(insert_venda);
 			comando.executeUpdate(insert_venda);
 		} catch (SQLException e) {
 			e.printStackTrace();

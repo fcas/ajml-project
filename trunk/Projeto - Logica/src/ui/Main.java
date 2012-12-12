@@ -972,6 +972,7 @@ public class Main {
 				break;
 			case 2: 
 				EditarVenda();
+				break;
 			default:
 				throw new OpcaoIlegalException();
 			}
@@ -989,33 +990,35 @@ public class Main {
 
 		in = new Scanner(System.in);
 		
-		System.out.println("Informe o id da mercadoria");
 		id = in.nextInt();
 		buscarId = facade.buscarId(id);
-
-		if (buscarId  > 0) {
+		
+		if (buscarId  == id) {
 			// coleta dados
 			System.out.println("Informe o novo subtotal");
 			subtotal = mercadoriaSubtotal();
-			System.out.println("Informe o RG do vendedor");
+			System.out.println("Informe o RG do funcionario");
 			vendedorRg = setRg();
 			System.out.println("Informe a data da venda");
 			dataVenda = setData();
 			System.out.println("Informe a quantidade da venda");
 			qtdVendas = mercadoriaQtdVenda();
+			
+			// seta a venda
+			venda.setID(buscarId);
+			venda.setSubtotal(subtotal);
+			venda.setVendedorRG(vendedorRg);
+			venda.setDataVenda(dataVenda);
+			venda.setQtdVendas(qtdVendas);
+
+			facade.editarVenda(venda);
+
 		} else {
 			System.out.println("Venda nao cadastrada no sistema");
 		}
 
-		// seta o funcionario
-		venda.setSubtotal(subtotal);
-		venda.setVendedorRG(vendedorRg);
-		venda.setDataVenda(dataVenda);
-		venda.setQtdVendas(qtdVendas);
-
 		// tenta adicionar ao banco
-		System.out.println("Aguarde enquanto editamos funcionario.");
-		facade.editarVenda(venda);
+		System.out.println("Aguarde enquanto editamos a venda.");
 		
 	}
 
