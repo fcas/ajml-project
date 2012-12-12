@@ -12,18 +12,6 @@ public class ConnectMySql {
 	/*@ public invariant MYSQL == 0;
 	  @ public invariant MySQLDriver.equals("com.mysql.jdbc.Driver"); @*/
 
-	/*@ 	normal_behavior
-	  @ requires url != null;
-	  @ requires nome != null;
-	  @ requires senha != null;
-	  @ requires banco == 0;
-	  @ ensures_redundantly MYSQL == 0;
-	  @ 
-	  @ also 
-	  @
-	  @ 	exceptional_behavior
-	  @ requires banco == 0;
-	  @ signals_only SQLException; @*/
 	public static Connection conexao(String url, String nome, String senha,
 			int banco)  throws ClassNotFoundException, SQLException {
 

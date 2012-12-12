@@ -3,23 +3,23 @@ package models.funcionario;
 
 public class Funcionario implements IFuncionario {
 	
-	private /*@ spec_public @*/ String nome;//@ in inome;
+	private /*@ nullable spec_public @*/ String nome;//@ in inome;
 	/*@ protected represents
 	  @ inome = nome; @*/
 	
-	private /*@ spec_public @*/ String rg; //@ in irg;
+	private /*@ nullable spec_public @*/ String rg; //@ in irg;
 	/*@ protected represents
 	  @ irg = rg; @*/
 	
-	private /*@ spec_public @*/ String cpf; //@ in icpf;
+	private /*@ nullable spec_public @*/ String cpf; //@ in icpf;
 	/*@ protected represents
 	  @ icpf = cpf; @*/
 	
-	private /*@ spec_public @*/ String dataNascimento; //@ in idataNascimento;
+	private /*@ nullable spec_public @*/ String dataNascimento; //@ in idataNascimento;
 	/*@ protected represents
 	  @ idataNascimento = dataNascimento; @*/
 	
-	private /*@ spec_public @*/ String cargo; //@ in icargo;
+	private /*@ nullable spec_public @*/ String cargo; //@ in icargo;
 	/*@ protected represents
 	  @ icargo = cargo; @*/
 	

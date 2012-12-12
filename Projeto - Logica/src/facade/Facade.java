@@ -219,6 +219,8 @@ public class Facade {
 		return iDaoVendas.buscarVenda(ID);
 	}
 	
+	/*@ requires id > 0;
+	  @ ensures true; @*/
 	public int buscarIdMercadoria (int id) {
 		return iDaoMercadoria.buscarIdMercadoria(id);
 	}

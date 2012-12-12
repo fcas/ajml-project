@@ -30,16 +30,18 @@ public interface IDaoFuncionario {
 	
 	/*@ requires true;
 	  @ ensures \result != null; @*/
-	public List listarFuncionario();
 	
-	/*@ requires rg != null;
-	  @ ensures \result != null; @*/
-	public IFuncionario buscarFuncionario(String rg);
+	/*ensures (\forall int i; 0 <= i && i < \result.size(); \result.get(i) != null);*/ 
+	public List listarFuncionario();
 	
 	/*@ requires funcionario != null;
 	  @ requires funcionario.getRg() != null;
 	  @ requires funcionario.getSalario() >= 0; @*/
 	public void atualizarSalario(IFuncionario funcionario);
+
+	/*@ requires rg != null;
+	  @ ensures \result != null; @*/
+	public IFuncionario buscarFuncionario(String rg);
 	
 	/*@ requires funcionario != null;
 	  @ requires funcionario.getNome() != null;
@@ -50,9 +52,15 @@ public interface IDaoFuncionario {
 	  @ requires funcionario.getSalario() >= 0; @*/
 	public int quantidadeVendas(IFuncionario funcionario);
 	
-	/*@ requires rg != null; @*/
+	/*@ requires rg != null; 
+	  @ ensures true;@*/
 	public String buscarRg (String rg);
 	
+	/*@
+	  @ requires rg != null;
+	  @ requires rg.length() == 9; @*/
+	public boolean checaRg (String rg);
+
 	/*@ requires funcionario != null;
 	  @ requires funcionario.getNome() != null;
 	  @ requires funcionario.getRg() != null; 
@@ -62,9 +70,6 @@ public interface IDaoFuncionario {
 	  @ requires funcionario.getSalario() >= 0;
 	  @ ensures \result >= 0; @*/
 	public double buscarSalario(IFuncionario funcionario);
-	
-	public boolean checaRg (String rg);
-	
 	 
 }
  

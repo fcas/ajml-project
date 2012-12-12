@@ -1,11 +1,11 @@
 package models.funcionario;
 
 public interface IFuncionario {
-	//@ public model instance String inome;
-	//@ public model instance String irg;
-	//@ public model instance String icpf;
-	//@ public model instance String idataNascimento;
-	//@ public model instance String icargo;
+	//@ public model instance nullable String inome;
+	//@ public model instance nullable String irg;
+	//@ public model instance nullable String icpf;
+	//@ public model instance nullable String idataNascimento;
+	//@ public model instance nullable String icargo;
 	//@ public model instance double isalario;
  
 	/*@

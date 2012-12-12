@@ -13,12 +13,8 @@ import models.funcionario.IFuncionario;
 public class DAOFuncionario implements IDaoFuncionario {
 	
 	private /*@ spec_public nullable @*/ static Connection con;
-	private /*@ spec_public nullable @*/ static Statement comando;
-
-	/*@ 
-	  @ assignable con, comando;
-	  @ ensures con != null;
-	  @ ensures comando != null; @*/
+	private /*@ spec_public nullable @*/ static Statement comando; 
+	
 	private void conectar() {
 		
 		try {
@@ -51,20 +47,6 @@ public class DAOFuncionario implements IDaoFuncionario {
 			e.printStackTrace();
 		}
 		System.out.println(insert_funcionario);
-		
-	}
-	
-	public void atualizarSalario(IFuncionario funcionario) {
-		
-		String insert_novoSalario = "UPDATE funcionario SET "
-				+ "salario=" + funcionario.getSalario()
-				+ " WHERE rg='" + funcionario.getRg() + "'";
-		try {	
-			conectar();
-			comando.executeUpdate(insert_novoSalario);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
 	}
 	
@@ -126,6 +108,21 @@ public class DAOFuncionario implements IDaoFuncionario {
 
 	}
 	
+	public void atualizarSalario(IFuncionario funcionario) {
+		
+		String insert_novoSalario = "UPDATE funcionario SET "
+				+ "salario=" + funcionario.getSalario()
+				+ " WHERE rg='" + funcionario.getRg() + "'";
+		try {	
+			conectar();
+			comando.executeUpdate(insert_novoSalario);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+
 	public IFuncionario buscarFuncionario(String rg) {
 		ResultSet result = null;
 		IFuncionario le = new Funcionario();
